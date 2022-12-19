@@ -10,7 +10,7 @@ import altair as alt
 deta = Deta(st.secrets["deta_key"])
 
 # Create a new database
-db = deta.Base("project_fietsklinik")
+db = deta.Base("project_fietskliniek")
 # -------------- FUNCTIONS --------------
 
 def insert_period(date, time_shift, name, e_mail, buurt, werkzaamheedeb, materiaal, opmerking):
@@ -63,8 +63,8 @@ if selected == "Make an appointment":
         opmerking = st.text_input("Opmerking", placeholder="Opmerking ...")
                
         "---"
+        
         submitted = st.form_submit_button("Save Data")
         if submitted:
             insert_period(date, time_shift, name, e_mail, buurt, werkzaamheedeb, materiaal, opmerking)
             st.success("You booked an appointment!")
-            
