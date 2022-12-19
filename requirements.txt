@@ -1,0 +1,5 @@
+streamlit
+deta
+pandas
+streamlit_option_menu
+altair
