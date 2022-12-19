@@ -28,6 +28,7 @@ page_icon = ":bike:"  # emojis: https://www.webfx.com/tools/emoji-cheat-sheet/
 layout = "centered"
 time_shift_choice = ["14-16", "16-18", "18-20"]
 buurt_choice = ["Centrum", "Oost", "West"]
+materiaal_choice = ["ruote", "parafango"]
 
 st.set_page_config(page_title=page_title, page_icon=page_icon, layout=layout)
 st.title(page_icon)
