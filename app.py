@@ -52,7 +52,7 @@ selected = option_menu(
 )
 
 # --- INPUT & SAVE PERIODS ---
-if selected == "Data Entry":
+if selected == "Make an appointment":
     with st.form("entry_form", clear_on_submit=True):
 
         date = st.date_input("Date")
