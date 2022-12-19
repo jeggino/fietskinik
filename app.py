@@ -16,7 +16,7 @@ db = deta.Base("project_fietsklinik")
 
 # -------------- FUNCTIONS --------------
 
-def insert_period(date, species, n_specimens, comment, lat, lon, image_name=None):
+def insert_period(date,time_shift, name, e_mail, buurt,werkzaamheedeb, materiaal, opmerking):
     """Returns the user on a successful user creation, otherwise raises and error"""
     return db.put({"date": date, "time_shift": time_shift, "name": name, "e_mail": e_mail, "buurt": buurt, 
                    "werkzaamheedeb": werkzaamheedeb, "materiaal":materiaal, "opmerking":opmerking})
@@ -59,18 +59,18 @@ if selected == "Make an appointment":
         date = st.date_input("Date")
         st.write(date)
         
-        with st.expander("Compile please"):
-            time_shift = st.selectbox("Time shift", time_shift_choice )
-            name = st.text_input("", placeholder="Enter your name here ...")
-            e_mail = st.text_input("", placeholder="Enter your e-mail here ...")
-            buurt = st.selectbox("Buurt", buurt_choice)
-            materiaal = st.selectbox("Matiriaal", materiaal_choice)
-            opmerking = st.text_input("Opmerking", placeholder="Opmerking ...")
+        time_shift = st.selectbox("Time shift", time_shift_choice )
+        name = st.text_input("", placeholder="Enter your name here ...")
+        e_mail = st.text_input("", placeholder="Enter your e-mail here ...")
+        buurt = st.selectbox("Buurt", buurt_choice)
+        werkzaamheedeb = st.text_input("", placeholder="Enter your werkzaamheedeb here ...")
+        materiaal = st.selectbox("Matiriaal", materiaal_choice)
+        opmerking = st.text_input("Opmerking", placeholder="Opmerking ...")
                
         "---"
         submitted = st.form_submit_button("Save Data")
         if submitted:
-            insert_period(time_shift, name, e_mail, buurt, materiaal, opmerking)
+            insert_period(date,time_shift, name, e_mail, buurt,werkzaamheedeb, materiaal, opmerking)
             st.success("You booked an appointment!")
             
 # # --- PLOT PERIODS ---
