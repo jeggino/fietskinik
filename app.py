@@ -58,17 +58,18 @@ if selected == "Make an appointment":
         date = st.date_input("Date")
         st.write(date)
         
-        time_shift = st.selectbox("Time shift", time_shift, key="time_shift")
-        name = st.text_input("", placeholder="Enter your name here ...")
-        e_mail = st.text_input("", placeholder="Enter your e-mail here ...")
-        buurt = st.selectbox("Buurt", buurt_choice, key="buurt_choice")
-        materiaal = st.selectbox("Matiriaal", materiaal_choice, key="buurt_choice")
-        opmerking = st.text_input("Opmerking", placeholder="Opmerking ...")
+        with st.expander("Compile please"):
+            time_shift = st.selectbox("Time shift", time_shift, key="time_shift")
+            name = st.text_input("", placeholder="Enter your name here ...")
+            e_mail = st.text_input("", placeholder="Enter your e-mail here ...")
+            buurt = st.selectbox("Buurt", buurt_choice, key="buurt_choice")
+            materiaal = st.selectbox("Matiriaal", materiaal_choice, key="buurt_choice")
+            opmerking = st.text_input("Opmerking", placeholder="Opmerking ...")
                
         "---"
         submitted = st.form_submit_button("Save Data")
         if submitted:
-            insert_period(period, sp, n, comment, lat, lon)
+            insert_period(time_shift, name, e_mail, buurt, materiaal, opmerking)
             st.success("You booked an appointment!")
             
 # # --- PLOT PERIODS ---
