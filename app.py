@@ -59,7 +59,7 @@ if selected == "Make an appointment":
         st.write(date)
         
         with st.expander("Compile please"):
-            time_shift = st.selectbox("Time shift", time_shift)
+            time_shift = st.selectbox("Time shift", time_shift_choice )
             name = st.text_input("", placeholder="Enter your name here ...")
             e_mail = st.text_input("", placeholder="Enter your e-mail here ...")
             buurt = st.selectbox("Buurt", buurt_choice)
