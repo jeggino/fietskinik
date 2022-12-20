@@ -77,7 +77,7 @@ if selected == "Make an appointment":
         if submitted:
             day = parser.parse(date).strftime("%A")
             st.write(day)
-            if day != "Thursday" or day != "Tuesday":
+            if day == "Thursday" or day == "Tuesday":
                 insert_period(date, time_shift, name, e_mail, buurt, werkzaamheedeb, materiaal, opmerking)
                 st.success("You booked an appointment!")
             else:
