@@ -15,8 +15,11 @@ db = deta.Base("project_fietskliniek")
 
 def insert_period(date, time_shift, name, e_mail, buurt, werkzaamheedeb, materiaal, opmerking):
     """Returns the user on a successful user creation, otherwise raises and error"""
-    return db.put({"date": date, "time_shift": time_shift, "name": name, "e_mail": e_mail, "buurt": buurt, 
-                   "werkzaamheedeb": werkzaamheedeb, "materiaal":materiaal, "opmerking":opmerking})
+    return db.put({"date": date, "time_shift": time_shift, 
+                   "name": name, "e_mail": e_mail, 
+                   "buurt": buurt, "werkzaamheedeb": werkzaamheedeb, 
+                   "materiaal":materiaal, "opmerking":opmerking
+                  })
 
 
 # -------------- SETTINGS --------------
@@ -39,6 +42,7 @@ hide_st_style = """
             header {visibility: hidden;}
             </style>
             """
+
 st.markdown(hide_st_style, unsafe_allow_html=True)
 
 # --- NAVIGATION MENU ---
