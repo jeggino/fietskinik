@@ -5,6 +5,7 @@ from streamlit_option_menu import option_menu  # pip install streamlit-option-me
 from deta import Deta
 import pandas as pd
 import altair as alt
+from dateutil import parser
 
 # Connect to Deta Base with your Project Key
 deta = Deta(st.secrets["deta_key"])
@@ -21,9 +22,9 @@ def insert_period(date, time_shift, name, e_mail, buurt, werkzaamheedeb, materia
                    "materiaal":materiaal, "opmerking":opmerking
                   })
 
-def findDay(date):
-#     born = date.weekday()
-    return (calendar.day_name[date])
+# def findDay(date):
+# #     born = date.weekday()
+#     return (calendar.day_name[date])
 
 
 # -------------- SETTINGS --------------
@@ -75,7 +76,8 @@ if selected == "Make an appointment":
                
         "---"
 #         day_name = findDay(date)
-        st.write(date)
+        day = parser.parse(date).strftime("%A")
+        st.write(day)
         submitted = st.form_submit_button("Save Data")
         if submitted:
             insert_period(date, time_shift, name, e_mail, buurt, werkzaamheedeb, materiaal, opmerking)
