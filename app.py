@@ -57,7 +57,7 @@ selected = option_menu(
 if selected == "Make an appointment":
     with st.form("entry_form", clear_on_submit=True):
 
-        date = st.date_input("Date")        
+        date = str(st.date_input("Date"))
         time_shift = st.selectbox("Time shift", time_shift_choice )
         name = st.text_input("", placeholder="Enter your name here ...")
         e_mail = st.text_input("", placeholder="Enter your e-mail here ...")
