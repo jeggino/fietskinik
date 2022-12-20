@@ -63,7 +63,7 @@ if selected == "Make an appointment":
 
         date = str(st.date_input("Date"))
         
-        day_name = findDay(date)
+        
         
         time_shift = st.selectbox("Time shift", time_shift_choice )
         name = st.text_input("", placeholder="Enter your name here ...")
@@ -74,6 +74,7 @@ if selected == "Make an appointment":
         opmerking = st.text_input("Opmerking", placeholder="Opmerking ...")
                
         "---"
+        day_name = findDay(date)
         st.write(day_name)
         submitted = st.form_submit_button("Save Data")
         if submitted:
