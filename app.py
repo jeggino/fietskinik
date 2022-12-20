@@ -47,7 +47,7 @@ st.markdown(hide_st_style, unsafe_allow_html=True)
 
 # --- NAVIGATION MENU ---
 selected = option_menu(
-    menu_title="Fietskliniek",
+    menu_title=None,
     options=["Make an appointment", "Cancel an appointment"],
     icons=["bi-journal-check", "bi-x-octagon-fill"],  # https://icons.getbootstrap.com/
     orientation="horizontal",
