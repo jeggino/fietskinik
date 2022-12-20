@@ -74,8 +74,8 @@ if selected == "Make an appointment":
         opmerking = st.text_input("Opmerking", placeholder="Opmerking ...")
                
         "---"
-        day_name = findDay(date)
-        st.write(day_name)
+#         day_name = findDay(date)
+        st.write(date)
         submitted = st.form_submit_button("Save Data")
         if submitted:
             insert_period(date, time_shift, name, e_mail, buurt, werkzaamheedeb, materiaal, opmerking)
