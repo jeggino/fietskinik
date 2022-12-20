@@ -63,9 +63,6 @@ if selected == "Make an appointment":
     with st.form("entry_form", clear_on_submit=True):
 
         date = str(st.date_input("Date"))
-        
-        
-        
         time_shift = st.selectbox("Time shift", time_shift_choice )
         name = st.text_input("", placeholder="Enter your name here ...")
         e_mail = st.text_input("", placeholder="Enter your e-mail here ...")
@@ -75,13 +72,15 @@ if selected == "Make an appointment":
         opmerking = st.text_input("Opmerking", placeholder="Opmerking ...")
                
         "---"
-#         day_name = findDay(date)
-        day = parser.parse(date).strftime("%A")
-        st.write(day)
+        
         submitted = st.form_submit_button("Save Data")
         if submitted:
-            insert_period(date, time_shift, name, e_mail, buurt, werkzaamheedeb, materiaal, opmerking)
-            st.success("You booked an appointment!")
+            day = parser.parse(date).strftime("%A")
+            if day != "Thursday" or day != "Tuesday" 
+                insert_period(date, time_shift, name, e_mail, buurt, werkzaamheedeb, materiaal, opmerking)
+                st.success("You booked an appointment!")
+            else:
+                st.write("kitammuo")
             
            
 # --- drop appointment ---
