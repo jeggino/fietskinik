@@ -22,8 +22,8 @@ def insert_period(date, time_shift, name, e_mail, buurt, werkzaamheedeb, materia
                   })
 
 def findDay(date):
-    born = date.weekday()
-    return (calendar.day_name[born])
+#     born = date.weekday()
+    return (calendar.day_name[date])
 
 
 # -------------- SETTINGS --------------
