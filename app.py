@@ -76,12 +76,11 @@ if selected == "Make an appointment":
         submitted = st.form_submit_button("Save Data")
         if submitted:
             day = parser.parse(date).strftime("%A")
-            st.write(day)
             if day == "Thursday" or day == "Tuesday":
                 insert_period(date, time_shift, name, e_mail, buurt, werkzaamheedeb, materiaal, opmerking)
                 st.success("You booked an appointment!")
             else:
-                st.write("kitammuo")
+                st.warning('Podes solo el martes o el jueves tonto!!!', icon="⚠️")
             
            
 # --- drop appointment ---
