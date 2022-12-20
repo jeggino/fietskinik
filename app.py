@@ -86,7 +86,7 @@ if selected == "Cancel an appointment":
         db_content = db.fetch().items
         df = pd.DataFrame(db_content)
         
-        key = df[(df.date==date) & (df.time_shift==time_shift) & (df.name==name) & (df.e_mail==e_mail)]
+        key = df[(df.date==date) & (df.time_shift==time_shift) & (df.name==name) & (df.e_mail==e_mail)]["key"].value()[0]
         
         "---"
         
