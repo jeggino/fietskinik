@@ -72,3 +72,25 @@ if selected == "Make an appointment":
         if submitted:
             insert_period(date, time_shift, name, e_mail, buurt, werkzaamheedeb, materiaal, opmerking)
             st.success("You booked an appointment!")
+            
+           
+# --- drop appointment ---
+if selected == "Cancel an appointment":
+    with st.form("cancel_form", clear_on_submit=True):
+
+        date = str(st.date_input("Date"))
+        time_shift = st.selectbox("Time shift", time_shift_choice )
+        name = st.text_input("", placeholder="Enter your name here ...")
+        e_mail = st.text_input("", placeholder="Enter your e-mail here ...")
+        
+        db_content = db.fetch().items
+        df = pd.DataFrame(db_content)
+        
+        key = df[(df.date==date) & (df.time_shift==time_shift) & (df.name==name) & (df.e_mail==e_mail)]
+        
+        "---"
+        
+        submitted = st.form_submit_button("Cancel appointment")
+        if submitted:
+            db.delete(key)
+            st.success("Your appointment has been canceled!") 
