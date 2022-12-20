@@ -15,7 +15,7 @@ db = deta.Base("project_fietskliniek")
 
 def insert_period(date, time_shift, name, e_mail, buurt, werkzaamheedeb, materiaal, opmerking):
     """Returns the user on a successful user creation, otherwise raises and error"""
-    return db.put({"date": date, "time_shift": time_shift, 
+    return db.insert({"date": date, "time_shift": time_shift, 
                    "name": name, "e_mail": e_mail, 
                    "buurt": buurt, "werkzaamheedeb": werkzaamheedeb, 
                    "materiaal":materiaal, "opmerking":opmerking
