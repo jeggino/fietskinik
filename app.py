@@ -7,7 +7,6 @@ import pandas as pd
 import altair as alt
 from dateutil import parser
 
-import pandas_profiling
 from streamlit_pandas_profiling import st_profile_report
 
 # Connect to Deta Base with your Project Key
