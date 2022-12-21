@@ -1,7 +1,7 @@
-import calendar  # Core Python Module
-from datetime import datetime  # Core Python Module
-import streamlit as st  # pip install streamlit
-from streamlit_option_menu import option_menu  # pip install streamlit-option-menu
+import calendar  
+from datetime import datetime 
+import streamlit as st  
+from streamlit_option_menu import option_menu  
 from deta import Deta
 import pandas as pd
 import altair as alt
@@ -71,15 +71,17 @@ if selected == "Make an appointment":
         
         db_content = db.fetch().items
         df = pd.DataFrame(db_content)
-        st.seession["len"] = len(df[(df.date==date) & (df.time_shift==time_shift)])
+        a = len(df[(df.date==date) & (df.time_shift==time_shift)])
         st.dataframe(df, use_container_width=True)
-        st.write(st.seession["len"])
+        st.write(a)
             
         submitted = st.form_submit_button("Save Data")
 
         if submitted:
+            
             day = parser.parse(date).strftime("%A")
             if day == "Thursday" or day == "Tuesday":
+                
                 if time_shift=="14-16" and a > 1:
                     st.warning('please choice another time-shift', icon="⚠️")
 
@@ -88,9 +90,11 @@ if selected == "Make an appointment":
 
                 elif time_shift=="18-20" and a > 3:
                     st.warning('please choice another time-shift', icon="⚠️")
+                    
                 else:
                     insert_period(date, time_shift, name, e_mail, buurt, werkzaamheedeb, materiaal, opmerking)
                     st.success("You booked an appointment!")
+                    
             else:
                 st.warning('At the moment it is only possible to make an appointment on Tuesday or Thursday', icon="⚠️")
             
