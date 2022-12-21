@@ -74,15 +74,21 @@ if selected == "Make an appointment":
         df = df[df.date==date]
         a = df["time_shift"].value_counts()[time_shift]
         st.write(a)
-        
-        submitted = st.form_submit_button("Save Data")
-        if submitted:
-            day = parser.parse(date).strftime("%A")
-            if day == "Thursday" or day == "Tuesday":
-                insert_period(date, time_shift, name, e_mail, buurt, werkzaamheedeb, materiaal, opmerking)
-                st.success("You booked an appointment!")
-            else:
-                st.warning('At the moment it is only possible to make an appointment on Tuesday or Thursday', icon="⚠️")
+        if time_shift=="14-16" and a > 1:
+            st.warning('please choice another time-shift', icon="⚠️")
+        elif time_shift=="16-18" and a > 2:
+            st.warning('please choice another time-shift', icon="⚠️")
+        elif time_shift=="18-20" and a > 3:
+            st.warning('please choice another time-shift', icon="⚠️")
+        else:
+            submitted = st.form_submit_button("Save Data")
+            if submitted:
+                day = parser.parse(date).strftime("%A")
+                if day == "Thursday" or day == "Tuesday":
+                    insert_period(date, time_shift, name, e_mail, buurt, werkzaamheedeb, materiaal, opmerking)
+                    st.success("You booked an appointment!")
+                else:
+                    st.warning('At the moment it is only possible to make an appointment on Tuesday or Thursday', icon="⚠️")
             
            
 # --- drop appointment ---
