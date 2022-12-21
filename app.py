@@ -71,9 +71,10 @@ if selected == "Make an appointment":
         
         db_content = db.fetch().items
         df = pd.DataFrame(db_content)
-        a = len(df[(df.date==date) & (df.time_shift==time_shift)])
-        st.dataframe(df, use_container_width=True)
-        st.metric(label="Number of shifts", value=a)
+        df_filter = df[(df.date==date) & (df.time_shift==time_shift)]
+        len = len(df_filter)
+        st.dataframe(df_filter, use_container_width=True)
+        st.metric(label="Number of shifts", value=len)
             
         submitted = st.form_submit_button("Save Data")
 
