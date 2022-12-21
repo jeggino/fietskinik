@@ -85,15 +85,15 @@ if selected == "Make an appointment":
             day = parser.parse(date).strftime("%A")
             if day == "Thursday" or day == "Tuesday":
                 
-                if time_shift=="14-16" and a > 1:
+                if time_shift=="14-16" and len > 1:
                     st.warning('please choice another time-shift', icon="⚠️")
                     st.stop()
 
-                elif time_shift=="16-18" and a > 2:
+                elif time_shift=="16-18" and len > 2:
                     st.warning('please choice another time-shift', icon="⚠️")
                     st.stop()
 
-                elif time_shift=="18-20" and a > 3:
+                elif time_shift=="18-20" and len > 3:
                     st.warning('please choice another time-shift', icon="⚠️")
                     st.stop()
                     
