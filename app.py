@@ -87,12 +87,15 @@ if selected == "Make an appointment":
                 
                 if time_shift=="14-16" and a > 1:
                     st.warning('please choice another time-shift', icon="⚠️")
+                    st.stop()
 
                 elif time_shift=="16-18" and a > 2:
                     st.warning('please choice another time-shift', icon="⚠️")
+                    st.stop()
 
                 elif time_shift=="18-20" and a > 3:
                     st.warning('please choice another time-shift', icon="⚠️")
+                    st.stop()
                     
                 else:
                     insert_period(date, time_shift, name, e_mail, buurt, werkzaamheedeb, materiaal, opmerking)
@@ -100,6 +103,7 @@ if selected == "Make an appointment":
                     
             else:
                 st.warning('At the moment it is only possible to make an appointment on Tuesday or Thursday', icon="⚠️")
+                st.stop()
             
            
 # --- drop appointment ---
