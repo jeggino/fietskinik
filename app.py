@@ -70,8 +70,8 @@ if selected == "Make an appointment":
         "---"
         
         db_content = db.fetch().items
-        df = pd.DataFrame(db_content)[df.date==date]
-        
+        df = pd.DataFrame(db_content)
+        df = df[df.date==date]
         a = df["time_shift"].value_counts()[time_shift]
         st.write(a)
         
