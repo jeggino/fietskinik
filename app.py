@@ -7,6 +7,9 @@ import pandas as pd
 import altair as alt
 from dateutil import parser
 
+import pandas_profiling
+from streamlit_pandas_profiling import st_profile_report
+
 # Connect to Deta Base with your Project Key
 deta = Deta(st.secrets["deta_key"])
 
@@ -71,7 +74,10 @@ if selected == "Make an appointment":
         
         db_content = db.fetch().items
         df = pd.DataFrame(db_content)
+       
         df_filter = df[(df.date==date) & (df.time_shift==time_shift)]
+        pr = df_filter.profile_report()
+        st_profile_report(pr)
         len = len(df_filter)
         st.dataframe(df_filter, use_container_width=True)
         st.metric(label="Number of shifts", value=len)
