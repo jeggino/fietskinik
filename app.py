@@ -22,10 +22,6 @@ def insert_period(date, time_shift, name, e_mail, buurt, werkzaamheedeb, materia
                    "materiaal":materiaal, "opmerking":opmerking
                   })
 
-# def findDay(date):
-# #     born = date.weekday()
-#     return (calendar.day_name[date])
-
 
 # -------------- SETTINGS --------------
 page_title = None
@@ -76,7 +72,7 @@ if selected == "Make an appointment":
         db_content = db.fetch().items
         df = pd.DataFrame(db_content)
         
-        a = df["time_shift"].value_counts()["time_shift"]
+        a = df["time_shift"].value_counts()[time_shift]
         st.write(a)
         
         submitted = st.form_submit_button("Save Data")
