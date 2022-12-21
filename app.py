@@ -71,9 +71,9 @@ if selected == "Make an appointment":
         
         db_content = db.fetch().items
         df = pd.DataFrame(db_content)
-        a = len(df[(df.date==date) & (df.time_shift==time_shift)])
+        st.seession["len"] = len(df[(df.date==date) & (df.time_shift==time_shift)])
         st.dataframe(df, use_container_width=True)
-        st.write(a)
+        st.write(st.seession["len"])
             
         submitted = st.form_submit_button("Save Data")
 
