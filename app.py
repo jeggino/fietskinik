@@ -73,6 +73,12 @@ if selected == "Make an appointment":
                
         "---"
         
+        db_content = db.fetch().items
+        df = pd.DataFrame(db_content)
+        
+        a = df["time_shift"].value_counts()["time_shift"]
+        st.write(a)
+        
         submitted = st.form_submit_button("Save Data")
         if submitted:
             day = parser.parse(date).strftime("%A")
@@ -80,7 +86,7 @@ if selected == "Make an appointment":
                 insert_period(date, time_shift, name, e_mail, buurt, werkzaamheedeb, materiaal, opmerking)
                 st.success("You booked an appointment!")
             else:
-                st.warning('Podes solo el martes o el jueves tonto!!!', icon="⚠️")
+                st.warning('At the moment it is only possible to make an appointment on Tuesday or Thursday', icon="⚠️")
             
            
 # --- drop appointment ---
