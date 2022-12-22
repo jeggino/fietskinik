@@ -62,7 +62,7 @@ if selected == "Make an appointment":
         date = str(st.date_input("Date"))
         time_shift = st.selectbox("Time shift", time_shift_choice )
         name = st.text_input("", placeholder="Enter your name here ...")
-        if is not name:
+        if name is not None:
             st.warning('please write your name, icon="⚠️")
         e_mail = st.text_input("", placeholder="Enter your e-mail here ...")
         buurt = st.selectbox("Buurt", buurt_choice)
