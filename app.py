@@ -99,7 +99,7 @@ if selected == "Make an appointment":
                 else:
                     st.warning('At the moment it is only possible to make an appointment on Tuesday or Thursday', icon="⚠️")
             else:
-            st.warning('please write your name', icon="⚠️")  
+                st.warning('please write your name', icon="⚠️")  
             
            
 # --- drop appointment ---
