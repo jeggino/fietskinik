@@ -78,7 +78,7 @@ if selected == "Make an appointment":
         # submit the data
         submitted = st.form_submit_button("Save Data")
         if submitted:
-            if name:
+            if name and e_mail:
                 day = parser.parse(date).strftime("%A")
                 if day == "Thursday" or day == "Tuesday":
 
@@ -97,7 +97,7 @@ if selected == "Make an appointment":
                 else:
                     st.warning('At the moment it is only possible to make an appointment on Tuesday or Thursday', icon="⚠️")
             else:
-                st.warning('please write your name', icon="⚠️")  
+                st.warning('please write your name and e_mail', icon="⚠️")  
             
            
 # --- drop appointment ---
