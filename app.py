@@ -113,15 +113,15 @@ if selected == "Cancel an appointment":
         db_content = db.fetch().items
         df = pd.DataFrame(db_content)
         df_filter = df[(df.date==date) & (df.time_shift==time_shift) & (df.e_mail==e_mail)]
+        submitted = st.form_submit_button("Cancel appointment")
         if name and e_mail:
             if len(key) > 0:
                 key = key["key"].values[0]       
-                submitted = st.form_submit_button("Cancel appointment")
                 if submitted:
                     db.delete(key)
                     st.success("Your appointment has been canceled!") 
             else:
                 st.warning('there is no appointment at this name', icon="⚠️")
-                
+
         else:
             st.warning('please write your name and e_mail', icon="⚠️")
