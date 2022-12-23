@@ -13,7 +13,7 @@ deta = Deta(st.secrets["deta_key"])
 # Create a new database
 db = deta.Base("project_fietskliniek")
 
-# -------------- FUNCTIONS --------------
+# --- FUNCTIONS ---
 def insert_period(date, time_shift, name, e_mail, buurt, werkzaamheedeb, materiaal, opmerking):
     """Returns the user on a successful user creation, otherwise raises and error"""
     return db.insert({"date": date, "time_shift": time_shift, 
@@ -23,7 +23,7 @@ def insert_period(date, time_shift, name, e_mail, buurt, werkzaamheedeb, materia
                   })
 
 
-# -------------- SETTINGS --------------
+# --- SETTINGS ---
 page_title = None
 page_icon = " :bike: "  # emojis: https://www.webfx.com/tools/emoji-cheat-sheet/
 layout = "centered"
@@ -32,7 +32,6 @@ buurt_choice = ["Centrum", "Oost", "West"]
 materiaal_choice = ["ruote", "parafango"]
 
 st.set_page_config(page_title=page_title, page_icon=page_icon, layout=layout)
-# st.title(page_icon)
 
 
 # --- HIDE STREAMLIT STYLE ---
@@ -57,7 +56,8 @@ selected = option_menu(
 # --- INPUT & SAVE PERIODS ---
 if selected == "Make an appointment":
     with st.form("entry_form", clear_on_submit=True):
-
+        
+        # create the inputs
         date = str(st.date_input("Date"))
         time_shift = st.selectbox("Time shift", time_shift_choice )
         name = st.text_input("", placeholder="Enter your name here ...",label_visibility="collapsed")
@@ -75,8 +75,8 @@ if selected == "Make an appointment":
         df_filter = df[(df.date==date) & (df.time_shift==time_shift)]
         len = len(df_filter)
         
-        
-        submitted = st.form_submit_button("Save Data",clear_on_submit=False)
+        # submit the data
+        submitted = st.form_submit_button("Save Data")
         if submitted:
             if name is not None:
                 day = parser.parse(date).strftime("%A")
