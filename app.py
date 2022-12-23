@@ -1,4 +1,3 @@
-import calendar  
 import streamlit as st  
 from streamlit_option_menu import option_menu  
 from deta import Deta
@@ -60,7 +59,7 @@ if selected == "Make an appointment":
         # create the inputs
         date = str(st.date_input("Date"))
         time_shift = st.selectbox("Time shift", time_shift_choice )
-        name = st.text_input("", placeholder="Enter your name here ...",label_visibility="collapsed")
+        name = st.text_input("", placeholder="Enter your name here ...", label_visibility="collapsed")
         e_mail = st.text_input("", placeholder="Enter your e-mail here ...")
         buurt = st.selectbox("Buurt", buurt_choice)
         werkzaamheedeb = st.text_input("", placeholder="Enter your werkzaamheedeb here ...")
