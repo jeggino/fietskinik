@@ -68,35 +68,35 @@ if selected == "Make an appointment":
                
         "---"
         
-        # find if there are available shift in that data
-        db_content = db.fetch().items
-        df = pd.DataFrame(db_content)
-        df_filter = df[(df.date==date) & (df.time_shift==time_shift)]
-        len = len(df_filter)
+#         # find if there are available shift in that data
+#         db_content = db.fetch().items
+#         df = pd.DataFrame(db_content)
+#         df_filter = df[(df.date==date) & (df.time_shift==time_shift)]
+#         len = len(df_filter)
         
         # submit the data
         submitted = st.form_submit_button("Save Data")
         if submitted:
-            if name and e_mail:
-                day = parser.parse(date).strftime("%A")
-                if day == "Thursday" or day == "Tuesday":
+#             if name and e_mail:
+#                 day = parser.parse(date).strftime("%A")
+#                 if day == "Thursday" or day == "Tuesday":
 
-                    if time_shift=="14-16" and len >= 1:
-                        st.warning('please choice another time-shift', icon="⚠️")
+#                     if time_shift=="14-16" and len >= 1:
+#                         st.warning('please choice another time-shift', icon="⚠️")
 
-                    elif time_shift=="16-18" and len >= 2:
-                        st.warning('please choice another time-shift', icon="⚠️")
+#                     elif time_shift=="16-18" and len >= 2:
+#                         st.warning('please choice another time-shift', icon="⚠️")
 
-                    elif time_shift=="18-20" and len >= 3:
-                        st.warning('please choice another time-shift', icon="⚠️")
+#                     elif time_shift=="18-20" and len >= 3:
+#                         st.warning('please choice another time-shift', icon="⚠️")
 
-                    else:
+#                     else:
                         insert_period(date, time_shift, name, e_mail, buurt, werkzaamheedeb, materiaal, opmerking)
                         st.success("You booked an appointment!")
-                else:
-                    st.warning('At the moment it is only possible to make an appointment on Tuesday or Thursday', icon="⚠️")
-            else:
-                st.warning('please write your name and e_mail', icon="⚠️")  
+#                 else:
+#                     st.warning('At the moment it is only possible to make an appointment on Tuesday or Thursday', icon="⚠️")
+#             else:
+#                 st.warning('please write your name and e_mail', icon="⚠️")  
             
            
 # --- drop appointment ---
