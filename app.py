@@ -75,9 +75,10 @@ if selected == "Make an appointment":
        
         df_filter = df[(df.date==date) & (df.time_shift==time_shift)]
         len = len(df_filter)
+        
+        submitted = st.form_submit_button("Save Data",clear_on_submit=False)
+        
         if name:
-              
-            submitted = st.form_submit_button("Save Data",clear_on_submit=False)
 
             if submitted:
 
