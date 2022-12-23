@@ -102,7 +102,7 @@ if selected == "Make an appointment":
            
 # --- drop appointment ---
 if selected == "Cancel an appointment":
-    with st.form("cancel_form", clear_on_submit=True):
+    with st.form("cancel_form", clear_on_submit=False):
 
         date = str(st.date_input("Date"))
         time_shift = st.selectbox("Time shift", time_shift_choice )
