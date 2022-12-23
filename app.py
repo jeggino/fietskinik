@@ -62,8 +62,6 @@ if selected == "Make an appointment":
         date = str(st.date_input("Date"))
         time_shift = st.selectbox("Time shift", time_shift_choice )
         name = st.text_input("", placeholder="Enter your name here ...",label_visibility="collapsed")
-        if name is not None:
-            st.warning('please write your name', icon="⚠️")
         e_mail = st.text_input("", placeholder="Enter your e-mail here ...")
         buurt = st.selectbox("Buurt", buurt_choice)
         werkzaamheedeb = st.text_input("", placeholder="Enter your werkzaamheedeb here ...")
@@ -77,29 +75,32 @@ if selected == "Make an appointment":
        
         df_filter = df[(df.date==date) & (df.time_shift==time_shift)]
         len = len(df_filter)
-            
-        submitted = st.form_submit_button("Save Data")
+        if name:
+              
+            submitted = st.form_submit_button("Save Data",clear_on_submit=False)
 
-        if submitted:
-            
-            day = parser.parse(date).strftime("%A")
-            if day == "Thursday" or day == "Tuesday":
-                
-                if time_shift=="14-16" and len >= 1:
-                    st.warning('please choice another time-shift', icon="⚠️")
+            if submitted:
 
-                elif time_shift=="16-18" and len >= 2:
-                    st.warning('please choice another time-shift', icon="⚠️")
+                day = parser.parse(date).strftime("%A")
+                if day == "Thursday" or day == "Tuesday":
 
-                elif time_shift=="18-20" and len >= 3:
-                    st.warning('please choice another time-shift', icon="⚠️")
-                    
+                    if time_shift=="14-16" and len >= 1:
+                        st.warning('please choice another time-shift', icon="⚠️")
+
+                    elif time_shift=="16-18" and len >= 2:
+                        st.warning('please choice another time-shift', icon="⚠️")
+
+                    elif time_shift=="18-20" and len >= 3:
+                        st.warning('please choice another time-shift', icon="⚠️")
+
+                    else:
+                        insert_period(date, time_shift, name, e_mail, buurt, werkzaamheedeb, materiaal, opmerking)
+                        st.success("You booked an appointment!")
+
                 else:
-                    insert_period(date, time_shift, name, e_mail, buurt, werkzaamheedeb, materiaal, opmerking)
-                    st.success("You booked an appointment!")
-                    
-            else:
-                st.warning('At the moment it is only possible to make an appointment on Tuesday or Thursday', icon="⚠️")
+                    st.warning('At the moment it is only possible to make an appointment on Tuesday or Thursday', icon="⚠️")
+        else:
+            st.warning('please write your name', icon="⚠️")  
             
            
 # --- drop appointment ---
