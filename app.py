@@ -77,11 +77,9 @@ if selected == "Make an appointment":
         len = len(df_filter)
         
         submitted = st.form_submit_button("Save Data",clear_on_submit=False)
-        
-        if name:
-
-            if submitted:
-
+        if submitted:
+            if name:
+           
                 day = parser.parse(date).strftime("%A")
                 if day == "Thursday" or day == "Tuesday":
 
@@ -100,7 +98,7 @@ if selected == "Make an appointment":
 
                 else:
                     st.warning('At the moment it is only possible to make an appointment on Tuesday or Thursday', icon="⚠️")
-        else:
+            else:
             st.warning('please write your name', icon="⚠️")  
             
            
