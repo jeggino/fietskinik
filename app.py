@@ -70,16 +70,16 @@ if selected == "Make an appointment":
                
         "---"
         
+        # find if there are available shift in that data
         db_content = db.fetch().items
         df = pd.DataFrame(db_content)
-       
         df_filter = df[(df.date==date) & (df.time_shift==time_shift)]
         len = len(df_filter)
         
+        
         submitted = st.form_submit_button("Save Data",clear_on_submit=False)
         if submitted:
-            if name:
-           
+            if name is not None:
                 day = parser.parse(date).strftime("%A")
                 if day == "Thursday" or day == "Tuesday":
 
@@ -95,7 +95,6 @@ if selected == "Make an appointment":
                     else:
                         insert_period(date, time_shift, name, e_mail, buurt, werkzaamheedeb, materiaal, opmerking)
                         st.success("You booked an appointment!")
-
                 else:
                     st.warning('At the moment it is only possible to make an appointment on Tuesday or Thursday', icon="⚠️")
             else:
