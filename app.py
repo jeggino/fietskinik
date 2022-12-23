@@ -114,7 +114,7 @@ if selected == "Cancel an appointment":
         df = pd.DataFrame(db_content)
         df_filter = df[(df.date==date) & (df.time_shift==time_shift) & (df.e_mail==e_mail)]
         submitted = st.form_submit_button("Cancel appointment")
-        if name and e_mail:
+        if e_mail:
             if len(key) > 0:
                 key = key["key"].values[0]       
                 if submitted:
