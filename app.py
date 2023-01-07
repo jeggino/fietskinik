@@ -120,7 +120,7 @@ if selected == "Cancel an appointment":
                     db.delete(key)
                     st.success("Your appointment has been canceled!") 
                 else:
-                    st.warning('there is no appointment at this name', icon="⚠️")
+                    st.warning('there is no appointment at this email', icon="⚠️")
 
             else:
                 st.warning('please write your e_mail', icon="⚠️")
