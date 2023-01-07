@@ -17,7 +17,7 @@ def insert_period(date, time_shift, name, e_mail, buurt, werkzaamheedeb, materia
     """Returns the user on a successful user creation, otherwise raises and error"""
     return db.insert({"date": date, "time_shift": time_shift, 
                    "name": name, "e_mail": e_mail, 
-                   "buurt": buurt, "werkzaamheedeb": werkzaamheedeb, 
+                   "buurt": buurt, "werkzaamheden": werkzaamheedeb, 
                    "reparatie":materiaal, "opmerking":opmerking
                   })
 
@@ -62,7 +62,7 @@ if selected == "Make an appointment":
         name = st.text_input("", placeholder="Enter your name here ...", label_visibility="collapsed")
         e_mail = st.text_input("", placeholder="Enter your e-mail here ...")
         buurt = st.selectbox("Buurt", buurt_choice)
-        werkzaamheedeb = st.text_input("", placeholder="Enter your werkzaamheedeb here ...")
+        werkzaamheedeb = st.text_input("", placeholder="Werkzaamheden ...")
         materiaal = st.selectbox("Reparatie", materiaal_choice)
         opmerking = st.text_input("", placeholder="Opmerking ...")
                
