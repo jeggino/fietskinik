@@ -63,7 +63,7 @@ if selected == "Make an appointment":
         e_mail = st.text_input("", placeholder="Enter your e-mail here ...")
         buurt = st.selectbox("Buurt", buurt_choice)
         werkzaamheedeb = st.text_input("", placeholder="Enter your werkzaamheedeb here ...")
-        materiaal = st.selectbox("Matiriaal", materiaal_choice)
+        materiaal = st.selectbox("Reparatie", materiaal_choice)
         opmerking = st.text_input("", placeholder="Opmerking ...")
                
         "---"
