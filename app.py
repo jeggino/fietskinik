@@ -18,7 +18,7 @@ def insert_period(date, time_shift, name, e_mail, buurt, werkzaamheedeb, materia
     return db.insert({"date": date, "time_shift": time_shift, 
                    "name": name, "e_mail": e_mail, 
                    "buurt": buurt, "werkzaamheedeb": werkzaamheedeb, 
-                   "materiaal":materiaal, "opmerking":opmerking
+                   "reparatie":materiaal, "opmerking":opmerking
                   })
 
 
