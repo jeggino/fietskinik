@@ -13,11 +13,11 @@ deta = Deta(st.secrets["deta_key"])
 db = deta.Base("project_fietskliniek")
 
 # --- FUNCTIONS ---
-def insert_period(date, time_shift, name, e_mail, number, buurt, werkzaamheedeb, materiaal, opmerking):
+def insert_period(date, time_shift, name, e_mail, number, buurt, expertise, werkzaamheedeb, materiaal, opmerking):
     """Returns the user on a successful user creation, otherwise raises and error"""
     return db.insert({"date": date, "time_shift": time_shift, 
                    "name": name, "e_mail": e_mail, "number": number,
-                   "buurt": buurt, "werkzaamheden": werkzaamheedeb, 
+                   "buurt": buurt, "expertise": expertise, "werkzaamheden": werkzaamheedeb, 
                    "reparatie":materiaal, "opmerking":opmerking
                   })
 
@@ -28,6 +28,7 @@ page_icon = " :bike: "  # emojis: https://www.webfx.com/tools/emoji-cheat-sheet/
 layout = "centered"
 time_shift_choice = ["14-16", "16-18", "18-20"]
 buurt_choice = ["Centrum", "Oost", "West"]
+expertise_choice = ["None", "Low", "Average", "High"]
 materiaal_choice = ["wielen", "spatbord", "keten"]
 
 st.set_page_config(page_title=page_title, page_icon=page_icon, layout=layout)
@@ -59,14 +60,15 @@ if selected == "Make an appointment":
         # create the inputs
         date = str(st.date_input("Date (only Tuesday or Thursday)", help="Here some explination text if you want"))
         time_shift = st.selectbox("Time shift", time_shift_choice )
-        name = st.text_input("", placeholder="Enter your name here ...", label_visibility="collapsed")
-        e_mail = st.text_input("", placeholder="Enter your e-mail here ...")
-        number = st.number_input('', placeholder="Enter your telephon number here ...")
+        name = st.text_input("Name*", placeholder="Enter your name here ...", label_visibility="collapsed")
+        e_mail = st.text_input("E-mail*", placeholder="Enter your e-mail here ...")
+        number = st.text_input("Telophone number*", placeholder="Enter your number here ...")
         buurt = st.selectbox("Buurt", buurt_choice)
+        expertise = st.selectbox("What is your expertise?", expertise_choice )
         werkzaamheedeb = st.text_input("", placeholder="Werkzaamheden ...")
         materiaal = st.selectbox("Reparatie", materiaal_choice)
         opmerking = st.text_input("", placeholder="Opmerking ...")
-               
+        """_*Mandatory fields_"""
         "---"
         
         # find if there are available shift in that data
@@ -92,7 +94,7 @@ if selected == "Make an appointment":
                         st.warning('please choice another time-shift', icon="⚠️")
 
                     else:
-                        insert_period(date, time_shift, name, e_mail, number, buurt, werkzaamheedeb, materiaal, opmerking)
+                        insert_period(date, time_shift, name, e_mail, number, buurt, expertise, werkzaamheedeb, materiaal, opmerking)
                         st.success("You booked an appointment!")
                 else:
                     st.warning('At the moment it is only possible to make an appointment on Tuesday or Thursday', icon="⚠️")
