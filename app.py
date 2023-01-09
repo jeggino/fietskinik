@@ -57,7 +57,7 @@ if selected == "Make an appointment":
     with st.form("entry_form", clear_on_submit=False):
         
         # create the inputs
-        date = str(st.date_input("Date"))
+        date = str(st.date_input("Date (only Tuesday or Thursday)", help="Here some explination text if you want"))
         time_shift = st.selectbox("Time shift", time_shift_choice )
         name = st.text_input("", placeholder="Enter your name here ...", label_visibility="collapsed")
         e_mail = st.text_input("", placeholder="Enter your e-mail here ...")
