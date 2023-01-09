@@ -78,53 +78,46 @@ if selected == "Make an appointment":
         name = st.text_input("Name*", placeholder="Enter your name here ...")
         e_mail = st.text_input("E-mail*", placeholder="Enter your e-mail here ...")
         number = st.text_input("Telophone number*", placeholder="Enter your number here ...")
-        try:
-            if number:
-                if type(number) == int:
-        
-            
-                    buurt = st.selectbox("Buurt", buurt_choice)
-                    expertise = st.selectbox("What is your expertise?", expertise_choice )
-                    werkzaamheedeb = st.text_input("", placeholder="Werkzaamheden ...")
-                    materiaal = st.selectbox("Reparatie", materiaal_choice)
-                    opmerking = st.text_input("", placeholder="Opmerking ...")
-                    """_*Mandatory fields_"""
-                    "---"
+        buurt = st.selectbox("Buurt", buurt_choice)
+        expertise = st.selectbox("What is your expertise?", expertise_choice )
+        werkzaamheedeb = st.text_input("", placeholder="Werkzaamheden ...")
+        materiaal = st.selectbox("Reparatie", materiaal_choice)
+        opmerking = st.text_input("", placeholder="Opmerking ...")
+        """_*Mandatory fields_"""
+        "---"
 
-                    # find if there are available shift in that data
-                    db_content = db.fetch().items
-                    df = pd.DataFrame(db_content)
-                    df_filter = df[(df.date==date) & (df.time_shift==time_shift)]
-                    len = len(df_filter)
+        # find if there are available shift in that data
+        db_content = db.fetch().items
+        df = pd.DataFrame(db_content)
+        df_filter = df[(df.date==date) & (df.time_shift==time_shift)]
+        len = len(df_filter)
 
-                    # submit the data
-                    submitted = st.form_submit_button("Save Data")
-                    if submitted:
+        # submit the data
+        submitted = st.form_submit_button("Save Data")
+        if submitted:
+            if name and e_mail and number:
+                day = parser.parse(date).strftime("%A")
+                if day == "Thursday" or day == "Tuesday":
 
-                        if name and e_mail and number:
-                            day = parser.parse(date).strftime("%A")
-                            if day == "Thursday" or day == "Tuesday":
+                    if time_shift=="14-16" and len >= 1:
+                        st.warning('please choice another time-shift', icon="⚠️")
+                        
+                    elif type(number) == int:        
+                        st.error('Telephone number incorrect', icon="💥")
 
-                                if time_shift=="14-16" and len >= 1:
-                                    st.warning('please choice another time-shift', icon="⚠️")
+                    elif time_shift=="16-18" and len >= 2:
+                        st.warning('please choice another time-shift', icon="⚠️")
 
-                                elif time_shift=="16-18" and len >= 2:
-                                    st.warning('please choice another time-shift', icon="⚠️")
+                    elif time_shift=="18-20" and len >= 3:
+                        st.warning('please choice another time-shift', icon="⚠️")
 
-                                elif time_shift=="18-20" and len >= 3:
-                                    st.warning('please choice another time-shift', icon="⚠️")
-
-                                else:
-                                    insert_period(date, time_shift, name, e_mail, number, buurt, expertise, werkzaamheedeb, materiaal, opmerking)
-                                    st.success("You booked an appointment!")
-                            else:
-                                st.warning('At the moment it is only possible to make an appointment on Tuesday or Thursday', icon="⚠️")
-                        else:
-                            st.warning('please fill the mandatory fields', icon="⚠️") 
-        except:
-            st.error('Telephone number incorrect', icon="💥")
-
-            
+                    else:
+                        insert_period(date, time_shift, name, e_mail, number, buurt, expertise, werkzaamheedeb, materiaal, opmerking)
+                        st.success("You booked an appointment!")
+                else:
+                    st.warning('At the moment it is only possible to make an appointment on Tuesday or Thursday', icon="⚠️")
+            else:
+                st.warning('please fill the mandatory fields', icon="⚠️") 
             
            
 # --- drop appointment ---
