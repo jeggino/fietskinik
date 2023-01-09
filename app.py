@@ -100,7 +100,7 @@ if selected == "Make an appointment":
                 day = parser.parse(date).strftime("%A")
                 
                 try:
-                    type(number) = int                   
+                    int(number)
                     elif day == "Thursday" or day == "Tuesday":
 
                         if time_shift=="14-16" and len >= 1:
