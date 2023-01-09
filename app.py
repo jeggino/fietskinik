@@ -64,7 +64,7 @@ with left:
     st.image(image)
     
 with right:
-    st.markdown(":yellow[Fietskliniek] is a wonderful place where you can learn how to repair your own bike supervised by us just for 5 euros! we make our tools and space available for only 5 euros, but, as we :red[MUST] pay the rent every month, we ask to pay in advance at this :blue[_link_]. If you cancel the appointment we will give you the money back without a problem. The space is available only on Tuesday and Thursday, and three shifts are possible. We ask you about your experiences and also some other information that you will find in the form...")
+    st.markdown("Fietskliniek is a wonderful place where you can learn how to repair your own bike supervised by us just for 5 euros! we make our tools and space available for only 5 euros, but, as we :red[MUST] pay the rent every month, we ask to pay in advance at this :blue[_link_]. If you cancel the appointment we will give you the money back without a problem. The space is available only on Tuesday and Thursday, and three shifts are possible. We ask you about your experiences and also some other information that you will find in the form...")
 
 
 # --- INPUT & SAVE PERIODS ---
