@@ -102,7 +102,7 @@ if selected == "Make an appointment":
                     if time_shift=="14-16" and len >= 1:
                         st.warning('please choice another time-shift', icon="⚠️")
                         
-                    elif type(number) == int:        
+                    elif type(number) != int:        
                         st.error('Telephone number incorrect', icon="💥")
 
                     elif time_shift=="16-18" and len >= 2:
