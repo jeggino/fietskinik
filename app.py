@@ -4,6 +4,7 @@ from deta import Deta
 import pandas as pd
 import altair as alt
 from dateutil import parser
+from datetime import datetime as dt
 
 from PIL import Image
 
@@ -96,8 +97,12 @@ if selected == "Make an appointment":
 
         # submit the data
         submitted = st.form_submit_button("Save Data")
-        if submitted:
-            if name and e_mail and number:
+        if submitted:         
+
+            res = (dt.strptime('2023/1/10', "%Y/%m/%d") - dt.strptime('2023/1/9', "%Y/%m/%d")).days
+            if res < 2: 
+                st.warning('kjhvkvkjhgv', icon="⚠️")
+            elif name and e_mail and number:
                 day = parser.parse(date).strftime("%A")
                 
                 try:
