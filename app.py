@@ -96,14 +96,16 @@ if selected == "Make an appointment":
         submitted = st.form_submit_button("Save Data")
         if submitted:
             if name and e_mail and number:
+                if type(number) != int:        
+                    st.error('Telephone number incorrect', icon="💥")
+                    
                 day = parser.parse(date).strftime("%A")
-                if day == "Thursday" or day == "Tuesday":
+                elif day == "Thursday" or day == "Tuesday":
 
                     if time_shift=="14-16" and len >= 1:
                         st.warning('please choice another time-shift', icon="⚠️")
                         
-                    elif type(number) != int:        
-                        st.error('Telephone number incorrect', icon="💥")
+                    
 
                     elif time_shift=="16-18" and len >= 2:
                         st.warning('please choice another time-shift', icon="⚠️")
