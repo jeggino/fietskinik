@@ -96,10 +96,11 @@ if selected == "Make an appointment":
         submitted = st.form_submit_button("Save Data")
         if submitted:
             if name and e_mail and number:
+                day = parser.parse(date).strftime("%A")
+                
                 if type(number) != int:        
                     st.error('Telephone number incorrect', icon="💥")
                     
-                day = parser.parse(date).strftime("%A")
                 elif day == "Thursday" or day == "Tuesday":
 
                     if time_shift=="14-16" and len >= 1:
