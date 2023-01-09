@@ -76,7 +76,6 @@ if selected == "Make an appointment":
         # create the inputs
         
         date = str(st.date_input("Date (only Tuesday or Thursday)", help="Here some explination text if you want"))
-        st.write(date)
         time_shift = st.selectbox("Time shift", time_shift_choice )
         name = st.text_input("Name*", placeholder="Enter your name here ...")
         e_mail = st.text_input("E-mail*", placeholder="Enter your e-mail here ...")
