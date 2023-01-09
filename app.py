@@ -80,7 +80,7 @@ if selected == "Make an appointment":
         number = st.text_input("Telophone number*", placeholder="Enter your number here ...")
         try:
             if number:
-                if type(number) = int:
+                if type(number) == int:
         
             
         buurt = st.selectbox("Buurt", buurt_choice)
