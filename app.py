@@ -78,10 +78,11 @@ if selected == "Make an appointment":
         name = st.text_input("Name*", placeholder="Enter your name here ...")
         e_mail = st.text_input("E-mail*", placeholder="Enter your e-mail here ...")
         number = st.text_input("Telophone number*", placeholder="Enter your number here ...")
-        if number:
-            if type(number) != int:
-                st.error('Telephone number incorrect', icon="💥")
-                st.stop()
+        try:
+            if number:
+                if type(number) = int:
+        
+            
         buurt = st.selectbox("Buurt", buurt_choice)
         expertise = st.selectbox("What is your expertise?", expertise_choice )
         werkzaamheedeb = st.text_input("", placeholder="Werkzaamheden ...")
@@ -119,7 +120,11 @@ if selected == "Make an appointment":
                 else:
                     st.warning('At the moment it is only possible to make an appointment on Tuesday or Thursday', icon="⚠️")
             else:
-                st.warning('please fill the mandatory fields', icon="⚠️")  
+                st.warning('please fill the mandatory fields', icon="⚠️") 
+        except:
+            st.error('Telephone number incorrect', icon="💥")
+
+            
             
            
 # --- drop appointment ---
