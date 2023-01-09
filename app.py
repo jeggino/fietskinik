@@ -5,6 +5,9 @@ import pandas as pd
 import altair as alt
 from dateutil import parser
 
+from PIL import Image
+
+
 
 # Connect to Deta Base with your Project Key
 deta = Deta(st.secrets["deta_key"])
@@ -53,14 +56,26 @@ selected = option_menu(
     orientation="horizontal",
 )
 
+left, right = st.columns([1,3])
+
+with left:
+    
+    image = Image.open('292366152_369803905279628_8461882568456452789_n.jpg')
+    st.image(image)
+    
+with right:
+    st.markdown(":yellow[Fietskliniek] is a wonderful place where you can learn how to repair your own bike supervised by us just for 5 euros! we make our tools and space available for only 5 euros, but, as we :red[MUST] pay the rent every month, we ask to pay in advance at this :blue[_link_]. If you cancel the appointment we will give you the money back without a problem. The space is available only on Tuesday and Thursday, and three shifts are possible. We ask you about your experiences and also some other information that you will find in the form...")
+
+
 # --- INPUT & SAVE PERIODS ---
 if selected == "Make an appointment":
     with st.form("entry_form", clear_on_submit=False):
         
         # create the inputs
+        
         date = str(st.date_input("Date (only Tuesday or Thursday)", help="Here some explination text if you want"))
         time_shift = st.selectbox("Time shift", time_shift_choice )
-        name = st.text_input("Name*", placeholder="Enter your name here ...", label_visibility="collapsed")
+        name = st.text_input("Name*", placeholder="Enter your name here ...")
         e_mail = st.text_input("E-mail*", placeholder="Enter your e-mail here ...")
         number = st.text_input("Telophone number*", placeholder="Enter your number here ...")
         buurt = st.selectbox("Buurt", buurt_choice)
