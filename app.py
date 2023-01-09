@@ -65,7 +65,7 @@ with left:
     st.image(image)
     
 with right:
-    st.markdown("Fietskliniek is a wonderful place where you can repair your own bike for just 5 euros! we will help you, and make our tools and space available, but, as we :red[MUST] pay the rent every month. For this reason, we ask you to pay in advance at this :blue[_link_]. If you cancel the appointment we will give you the money back.") 
+    st.markdown("Fietskliniek is a wonderful place where you can repair your own bike for just 5 euros! we will help you, and make our tools and space available, but, as we :red[MUST] pay the rent every month, we ask you to pay in advance at this :blue[_link_]. If you cancel the appointment we will give you the money back.") 
     st.markdown("At moment, the space is available only on Tuesday and Thursday and you can book an appointment only with two days in advance. Furthermore, we wish to ask you about your experiences and also some other information that you will find in the form...see you soon!")
 
 
