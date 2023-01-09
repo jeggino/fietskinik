@@ -83,44 +83,44 @@ if selected == "Make an appointment":
                 if type(number) == int:
         
             
-        buurt = st.selectbox("Buurt", buurt_choice)
-        expertise = st.selectbox("What is your expertise?", expertise_choice )
-        werkzaamheedeb = st.text_input("", placeholder="Werkzaamheden ...")
-        materiaal = st.selectbox("Reparatie", materiaal_choice)
-        opmerking = st.text_input("", placeholder="Opmerking ...")
-        """_*Mandatory fields_"""
-        "---"
-        
-        # find if there are available shift in that data
-        db_content = db.fetch().items
-        df = pd.DataFrame(db_content)
-        df_filter = df[(df.date==date) & (df.time_shift==time_shift)]
-        len = len(df_filter)
-        
-        # submit the data
-        submitted = st.form_submit_button("Save Data")
-        if submitted:
-            
-            if name and e_mail and number:
-                day = parser.parse(date).strftime("%A")
-                if day == "Thursday" or day == "Tuesday":
+                    buurt = st.selectbox("Buurt", buurt_choice)
+                    expertise = st.selectbox("What is your expertise?", expertise_choice )
+                    werkzaamheedeb = st.text_input("", placeholder="Werkzaamheden ...")
+                    materiaal = st.selectbox("Reparatie", materiaal_choice)
+                    opmerking = st.text_input("", placeholder="Opmerking ...")
+                    """_*Mandatory fields_"""
+                    "---"
 
-                    if time_shift=="14-16" and len >= 1:
-                        st.warning('please choice another time-shift', icon="⚠️")
+                    # find if there are available shift in that data
+                    db_content = db.fetch().items
+                    df = pd.DataFrame(db_content)
+                    df_filter = df[(df.date==date) & (df.time_shift==time_shift)]
+                    len = len(df_filter)
 
-                    elif time_shift=="16-18" and len >= 2:
-                        st.warning('please choice another time-shift', icon="⚠️")
+                    # submit the data
+                    submitted = st.form_submit_button("Save Data")
+                    if submitted:
 
-                    elif time_shift=="18-20" and len >= 3:
-                        st.warning('please choice another time-shift', icon="⚠️")
+                        if name and e_mail and number:
+                            day = parser.parse(date).strftime("%A")
+                            if day == "Thursday" or day == "Tuesday":
 
-                    else:
-                        insert_period(date, time_shift, name, e_mail, number, buurt, expertise, werkzaamheedeb, materiaal, opmerking)
-                        st.success("You booked an appointment!")
-                else:
-                    st.warning('At the moment it is only possible to make an appointment on Tuesday or Thursday', icon="⚠️")
-            else:
-                st.warning('please fill the mandatory fields', icon="⚠️") 
+                                if time_shift=="14-16" and len >= 1:
+                                    st.warning('please choice another time-shift', icon="⚠️")
+
+                                elif time_shift=="16-18" and len >= 2:
+                                    st.warning('please choice another time-shift', icon="⚠️")
+
+                                elif time_shift=="18-20" and len >= 3:
+                                    st.warning('please choice another time-shift', icon="⚠️")
+
+                                else:
+                                    insert_period(date, time_shift, name, e_mail, number, buurt, expertise, werkzaamheedeb, materiaal, opmerking)
+                                    st.success("You booked an appointment!")
+                            else:
+                                st.warning('At the moment it is only possible to make an appointment on Tuesday or Thursday', icon="⚠️")
+                        else:
+                            st.warning('please fill the mandatory fields', icon="⚠️") 
         except:
             st.error('Telephone number incorrect', icon="💥")
 
