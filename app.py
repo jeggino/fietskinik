@@ -78,6 +78,10 @@ if selected == "Make an appointment":
         name = st.text_input("Name*", placeholder="Enter your name here ...")
         e_mail = st.text_input("E-mail*", placeholder="Enter your e-mail here ...")
         number = st.text_input("Telophone number*", placeholder="Enter your number here ...")
+        if number:
+            if type(number) != int:
+                st.error('Telephone number incorrect', icon="💥")
+                st.stop()
         buurt = st.selectbox("Buurt", buurt_choice)
         expertise = st.selectbox("What is your expertise?", expertise_choice )
         werkzaamheedeb = st.text_input("", placeholder="Werkzaamheden ...")
@@ -95,9 +99,8 @@ if selected == "Make an appointment":
         # submit the data
         submitted = st.form_submit_button("Save Data")
         if submitted:
-            if type(number) != int:
-                st.error('Telephone number incorrect', icon="💥")
-            elif name and e_mail and number:
+            
+            if name and e_mail and number:
                 day = parser.parse(date).strftime("%A")
                 if day == "Thursday" or day == "Tuesday":
 
