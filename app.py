@@ -100,7 +100,7 @@ if selected == "Make an appointment":
                 
                 try:
                     int(number)
-                    elif day == "Thursday" or day == "Tuesday":
+                    if day == "Thursday" or day == "Tuesday":
 
                         if time_shift=="14-16" and len >= 1:
                             st.warning('please choice another time-shift', icon="⚠️")
