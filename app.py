@@ -77,7 +77,7 @@ if selected == "Make an appointment":
         time_shift = st.selectbox("Time shift", time_shift_choice )
         name = st.text_input("Name*", placeholder="Enter your name here ...")
         e_mail = st.text_input("E-mail*", placeholder="Enter your e-mail here ...")
-        number = st.number_input("Telophone number*")
+        number = st.number_input("Telophone number*", min_value=None)
 #         number = st.text_input("Telophone number*", placeholder="Enter your number here ...")
         buurt = st.selectbox("Buurt", buurt_choice)
         expertise = st.selectbox("What is your expertise?", expertise_choice )
