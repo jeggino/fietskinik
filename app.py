@@ -17,11 +17,11 @@ deta = Deta(st.secrets["deta_key"])
 db = deta.Base("project_fietskliniek")
 
 # --- FUNCTIONS ---
-def insert_period(date, time_shift, name, e_mail, number, buurt, expertise, materiaal, opmerking):
+def insert_period(date, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking):
     """Returns the user on a successful user creation, otherwise raises and error"""
     return db.insert({"date": date, "time_shift": time_shift, 
                    "name": name, "e_mail": e_mail, "number": number,
-                   "buurt": buurt, "expertise": expertise, 
+                   "buurt": buurt, "expertise": expertise, "type_bike": type_bike,
                    "reparatie":materiaal, "opmerking":opmerking
                   })
 
@@ -35,6 +35,8 @@ buurt_choice = ["Oud-oost","Indische Buurt", "Oostelijk Havengebied",
                 "Watergraafsmeer","Ijburg","Zeeburgereiland","Centrum",
                 "Zuid","Zuidoost","Weesp","West","Nieuw-West"]
 expertise_choice = ["None", "Low", "Average", "High"]
+type_bike = ["City Bike Pedal Brake","City Bike Internal Gears",
+"Cyty Bike External Gears","Mountain Bike","Race Bike"]
 materiaal_choice = ["Dont know exactly","Flat tire","Change tire front/back ",
 "Chain","Chain cover","Derailleur","Cassette","Sprocket",
 "Brake cable","Brake pads","Brake problem pedalbrake",
@@ -89,9 +91,10 @@ if selected == "Make an appointment":
         name = st.text_input("Name*", placeholder="Enter your name here ...")
         e_mail = st.text_input("E-mail*", placeholder="Enter your e-mail here ...")
         number = st.text_input("Telophone number*", placeholder="Enter your number here ...")
-        buurt = st.selectbox("Neighbourhood - Buurt", buurt_choice)
+        buurt = st.selectbox("Neighbourhood / Buurt", buurt_choice)
         expertise = st.selectbox("What is your expertise?", expertise_choice )
-        materiaal = st.selectbox("Repair to do - Repatie te doen", materiaal_choice)
+        type_bike + st.selectbox("Type of bike / Soort fiets", type_bike)
+        materiaal = st.selectbox("Repair to do / Repatie te doen", materiaal_choice)
         opmerking = st.text_input("", placeholder="Opmerking ...")
         """_*Mandatory fields_"""
         "---"
@@ -125,7 +128,7 @@ if selected == "Make an appointment":
                             st.warning('please choice another time-shift', icon="⚠️")
 
                         else:
-                            insert_period(date, time_shift, name, e_mail, number, buurt, expertise, materiaal, opmerking)
+                            insert_period(date, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
                             st.success("You booked an appointment!")
                     else:
                         st.warning('At the moment it is only possible to make an appointment on Tuesday or Thursday', icon="⚠️")
