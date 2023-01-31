@@ -31,7 +31,9 @@ page_title = None
 page_icon = " :bike: "  # emojis: https://www.webfx.com/tools/emoji-cheat-sheet/
 layout = "centered"
 time_shift_choice = ["14-16", "16-18", "18-20"]
-buurt_choice = ["Centrum", "Oost", "West"]
+buurt_choice = ["Oud-oost","Indische Buurt", "Oostelijk Havengebied",
+                "Watergraafsmeer","Ijburg","Zeeburgereiland","Centrum",
+                "Zuid","Zuidoost","Weesp","West","Nieuw-West"]
 expertise_choice = ["None", "Low", "Average", "High"]
 materiaal_choice = ["wielen", "spatbord", "keten"]
 
