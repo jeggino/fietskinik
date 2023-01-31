@@ -35,7 +35,14 @@ buurt_choice = ["Oud-oost","Indische Buurt", "Oostelijk Havengebied",
                 "Watergraafsmeer","Ijburg","Zeeburgereiland","Centrum",
                 "Zuid","Zuidoost","Weesp","West","Nieuw-West"]
 expertise_choice = ["None", "Low", "Average", "High"]
-materiaal_choice = ["wielen", "spatbord", "keten"]
+materiaal_choice = ["Dont know exactly","Flat tire","Change tire front/back ",
+"Chain","Chain cover","Derailleur","Cassette","Sprocket",
+"Brake cable","Brake pads","Brake problem pedalbrake",
+"Gear problem","Gear cable","Front Axel","Play back wheel",
+"Broken front wheel","Broken back wheel","Spokes",
+"Bottom bracket","Crank left or right","Pedals",
+"Front fork","Handlebars /handelbars pen","Saddle/ saddle pen",
+"Bike lighting","Lock removal","Nieuw lock","Luggage carrier","Front rek"]
 
 st.set_page_config(page_title=page_title, page_icon=page_icon, layout=layout)
 
