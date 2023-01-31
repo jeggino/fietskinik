@@ -93,7 +93,7 @@ if selected == "Make an appointment":
         number = st.text_input("Telophone number*", placeholder="Enter your number here ...")
         buurt = st.selectbox("Neighbourhood / Buurt", buurt_choice)
         expertise = st.selectbox("What is your expertise?", expertise_choice )
-        type_bike + st.selectbox("Type of bike / Soort fiets", type_bike)
+        type_bike = st.selectbox("Type of bike / Soort fiets", type_bike)
         materiaal = st.selectbox("Repair to do / Repatie te doen", materiaal_choice)
         opmerking = st.text_input("", placeholder="Opmerking ...")
         """_*Mandatory fields_"""
