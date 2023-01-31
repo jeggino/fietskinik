@@ -109,7 +109,7 @@ if selected == "Make an appointment":
         submitted = st.form_submit_button("Save Data")
         if submitted:         
             res = (dt.strptime(date, "%Y-%m-%d") - dt.today()).days
-            if res < 2: 
+            if res < 1: 
                 st.warning('Please book an appointment at least two days in advance', icon="⚠️")
             elif name and e_mail and number:
                 day = parser.parse(date).strftime("%A")
