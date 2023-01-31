@@ -17,11 +17,11 @@ deta = Deta(st.secrets["deta_key"])
 db = deta.Base("project_fietskliniek")
 
 # --- FUNCTIONS ---
-def insert_period(date, time_shift, name, e_mail, number, buurt, expertise, werkzaamheedeb, materiaal, opmerking):
+def insert_period(date, time_shift, name, e_mail, number, buurt, expertise, materiaal, opmerking):
     """Returns the user on a successful user creation, otherwise raises and error"""
     return db.insert({"date": date, "time_shift": time_shift, 
                    "name": name, "e_mail": e_mail, "number": number,
-                   "buurt": buurt, "expertise": expertise, "werkzaamheden": werkzaamheedeb, 
+                   "buurt": buurt, "expertise": expertise, 
                    "reparatie":materiaal, "opmerking":opmerking
                   })
 
@@ -89,10 +89,9 @@ if selected == "Make an appointment":
         name = st.text_input("Name*", placeholder="Enter your name here ...")
         e_mail = st.text_input("E-mail*", placeholder="Enter your e-mail here ...")
         number = st.text_input("Telophone number*", placeholder="Enter your number here ...")
-        buurt = st.selectbox("Buurt", buurt_choice)
+        buurt = st.selectbox("Neighbourhood - Buurt", buurt_choice)
         expertise = st.selectbox("What is your expertise?", expertise_choice )
-        werkzaamheedeb = st.text_input("", placeholder="Werkzaamheden ...")
-        materiaal = st.selectbox("Repair to do", materiaal_choice)
+        materiaal = st.selectbox("Repair to do - Repatie te doen", materiaal_choice)
         opmerking = st.text_input("", placeholder="Opmerking ...")
         """_*Mandatory fields_"""
         "---"
@@ -126,7 +125,7 @@ if selected == "Make an appointment":
                             st.warning('please choice another time-shift', icon="⚠️")
 
                         else:
-                            insert_period(date, time_shift, name, e_mail, number, buurt, expertise, werkzaamheedeb, materiaal, opmerking)
+                            insert_period(date, time_shift, name, e_mail, number, buurt, expertise, materiaal, opmerking)
                             st.success("You booked an appointment!")
                     else:
                         st.warning('At the moment it is only possible to make an appointment on Tuesday or Thursday', icon="⚠️")
