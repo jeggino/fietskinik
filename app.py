@@ -19,10 +19,10 @@ db = deta.Base("project_fietskliniek")
 # --- FUNCTIONS ---
 def insert_period(date, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking):
     """Returns the user on a successful user creation, otherwise raises and error"""
-    return db.insert({"date": date, "time_shift": time_shift, 
-                   "name": name, "e_mail": e_mail, "number": number,
-                   "buurt": buurt, "expertise": expertise, "type_bike": type_bike,
-                   "reparatie":materiaal, "opmerking":opmerking
+    return db.insert({"Date": date, "Time shift": time_shift, 
+                   "Name": name, "e_mail": e_mail, "Phone number": number,
+                   "Neighborhood": buurt, "Expertise": expertise, "Type of bike": type_bike,
+                   "Type of reparation":materiaal, "Remarks":opmerking
                   })
 
 
@@ -97,7 +97,7 @@ if selected == "Make an appointment":
         materiaal = st.selectbox("Repair to do / Repatie te doen", materiaal_choice)
         opmerking = st.text_input("", placeholder="Opmerking ...")
         """_*Mandatory fields_"""
-        
+        insert_period(date, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
         "---"
 
         # find if there are available shift in that data
