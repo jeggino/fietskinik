@@ -98,7 +98,6 @@ if selected == "Make an appointment":
         opmerking = st.text_input("", placeholder="Opmerking ...")
         """_*Mandatory fields_"""
         
-        insert_period(date, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
         "---"
 
         # find if there are available shift in that data
