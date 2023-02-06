@@ -5,6 +5,7 @@ import pandas as pd
 import altair as alt
 from dateutil import parser
 from datetime import datetime as dt
+import datetime
 
 from PIL import Image
 
@@ -17,9 +18,9 @@ deta = Deta(st.secrets["deta_key"])
 db = deta.Base("project_fietskliniek")
 
 # --- FUNCTIONS ---
-def insert_period(date, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking):
+def insert_period(date, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking):
     """Returns the user on a successful user creation, otherwise raises and error"""
-    return db.insert({"Date": date, "Time shift": time_shift, 
+    return db.insert({"Date": date, "Week":week, "Time shift": time_shift, 
                    "Name": name, "e_mail": e_mail, "Phone number": number,
                    "Neighborhood": buurt, "Expertise": expertise, "Type of bike": type_bike,
                    "Type of reparation":materiaal, "Remarks":opmerking
@@ -86,7 +87,8 @@ if selected == "Make an appointment":
         
         # create the inputs
         
-        date = str(st.date_input("Date (only Tuesday or Thursday)", help="Here some explination text if you want"))
+        date = st.date_input("Date (only Tuesday or Thursday)", help="Here some explination text if you want")
+        week = date.isocalendar()[1]
         time_shift = st.selectbox("Time shift", time_shift_choice )
         name = st.text_input("Name*", placeholder="Enter your name here ...")
         e_mail = st.text_input("E-mail*", placeholder="Enter your e-mail here ...")
@@ -129,7 +131,7 @@ if selected == "Make an appointment":
                             st.warning('please choice another time-shift', icon="⚠️")
 
                         else:
-                            insert_period(date, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
+                            insert_period(str(date), week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
                             st.success("You booked an appointment!")
                     else:
                         st.warning('At the moment it is only possible to make an appointment on Tuesday or Thursday', icon="⚠️")
