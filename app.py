@@ -5,7 +5,6 @@ import pandas as pd
 import altair as alt
 from dateutil import parser
 from datetime import datetime as dt
-import datetime
 
 from PIL import Image
 
