@@ -122,13 +122,13 @@ if selected == "Make an appointment":
                     if day == "Thursday" or day == "Tuesday":
 
                         if time_shift=="14-16" and len >= 1:
-                            st.warning('please choice another time-shift', icon="⚠️")
+                            st.warning('This time shift is already full. Please choose another one', icon="⚠️")
 
                         elif time_shift=="16-18" and len >= 2:
-                            st.warning('please choice another time-shift', icon="⚠️")
+                            st.warning('This time shift is already full. Please choose another one', icon="⚠️")
 
                         elif time_shift=="18-20" and len >= 3:
-                            st.warning('please choice another time-shift', icon="⚠️")
+                            st.warning('This time shift is already full. Please choose another one', icon="⚠️")
 
                         else:
                             insert_period(str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
