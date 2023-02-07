@@ -89,7 +89,7 @@ if selected == "Make an appointment":
         date = st.date_input("Date (only Tuesday or Thursday)", help="Here some explination text if you want")
         day = date.strftime("%A")
         week = date.isocalendar()[1]
-        time_shift = st.selectbox("Time shift", time_shift_choice )
+        time_shift = st.radio("Time shift", time_shift_choice )
         name = st.text_input("Name*", placeholder="Enter your name here ...")
         e_mail = st.text_input("E-mail*", placeholder="Enter your e-mail here ...")
         number = st.text_input("Telophone number*", placeholder="Enter your number here ...")
