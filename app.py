@@ -76,9 +76,9 @@ with left:
     st.image(image)
     
 with right:
-    st.markdown("Fietskliniek is a wonderful place where you can repair your own bike for just 5 euros! we will help you, and make our tools and space available, but, as we :red[MUST] pay the rent every month, we ask you to pay in advance at this :blue[_link_]. If you cancel the appointment we will give you the money back.") 
-    st.markdown("At moment, the space is available only on Tuesday and Thursday and you can book an appointment only with two days in advance. Furthermore, we wish to ask you about your experiences and also some other information that you will find in the form...see you soon!")
-
+    st.markdown("Fietskliniek is a membership based workspace. Membership is €50 a year voor 10 times use of the space 2 hours per session. Membership is ‘transferable’, you and your friends, collegues  can make use of it. In the bike workspace you will find all the tools and parts you need to repair your bike and you will get free guidance in the process.") 
+    st.markdown("In case you want to use the workspace only once the minimum price is €10 a 2 hour session paid in advance. After making a reservation online you will get  a payement request to your phone number, when paid, then your reservation is confirmed. When cancelled you will get your money back minus €2 for admin pourposes.")
+    st.markdown("Welcome to the Fietskliniek and enjoy your bike session!")
 
 # --- INPUT & SAVE PERIODS ---
 if selected == "Make an appointment":
