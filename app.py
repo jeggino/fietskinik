@@ -46,7 +46,7 @@ materiaal_choice = ["Dont know exactly","Flat tire","Change tire front/back ",
 "Front fork","Handlebars /handelbars pen","Saddle/ saddle pen",
 "Bike lighting","Lock removal","Nieuw lock","Luggage carrier","Front rek"]
 
-MEMBERSHIP_CHOICE = ["I have a Membership (Membership number to fill in)", "I want a membership (€50 for 10x workspace usage)", "I will use it only Once (€10 per 2 hours)"]
+MEMBERSHIP_CHOICE = ["I have a Membership", "I want a membership (€50 for 10x workspace usage)", "I will use it only Once (€10 per 2 hours)"]
 
 st.set_page_config(page_title=page_title, page_icon=page_icon, layout=layout)
 
