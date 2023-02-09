@@ -46,6 +46,8 @@ materiaal_choice = ["Dont know exactly","Flat tire","Change tire front/back ",
 "Front fork","Handlebars /handelbars pen","Saddle/ saddle pen",
 "Bike lighting","Lock removal","Nieuw lock","Luggage carrier","Front rek"]
 
+MEMBERSHIP_CHOICE = ["I am a member", "I'm not a member", "Just once"]
+
 st.set_page_config(page_title=page_title, page_icon=page_icon, layout=layout)
 
 
@@ -86,6 +88,7 @@ if selected == "Make an appointment":
         
         # create the inputs
         
+        membership = st.radio("Membership", MEMBERSHIP_CHOICE, horizontal = True)
         date = st.date_input("Date (only Tuesday or Thursday)", help="Here some explination text if you want")
         day = date.strftime("%A")
         week = date.isocalendar()[1]
