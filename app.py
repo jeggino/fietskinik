@@ -139,7 +139,7 @@ if selected == "Make an appointment":
                             if membership == "I have a Membership":
                                 insert_period(membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
                             else:
-                                insert_period(membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
+                                insert_period(membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
                             st.success("You booked an appointment!")
                     else:
                         st.warning('At the moment it is only possible to make an appointment on Tuesday or Thursday', icon="⚠️")
