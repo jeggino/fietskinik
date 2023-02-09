@@ -88,10 +88,9 @@ if selected == "Make an appointment":
         
         # create the inputs
         
-        membership = st.radio("Payement / betaling", MEMBERSHIP_CHOICE, horizontal = True)
+        membership = st.radio("Payement / betaling", MEMBERSHIP_CHOICE, horizontal = False)
         if membership == "I have a Membership":
-            st.text_input("", placeholder="Membership number to fill in ...")
-            
+            st.text_input("", placeholder="Membership number to fill in ...")            
         date = st.date_input("Date (only Tuesday or Thursday)", help="Here some explination text if you want")
         day = date.strftime("%A")
         week = date.isocalendar()[1]
