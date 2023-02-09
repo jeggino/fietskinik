@@ -46,7 +46,7 @@ materiaal_choice = ["Dont know exactly","Flat tire","Change tire front/back ",
 "Front fork","Handlebars /handelbars pen","Saddle/ saddle pen",
 "Bike lighting","Lock removal","Nieuw lock","Luggage carrier","Front rek"]
 
-MEMBERSHIP_CHOICE = ["I have a Membership", "I want a membership (€50 for 10x workspace usage)", "I will use it only Once (€10 per 2 hours)"]
+MEMBERSHIP_CHOICE = ["I want a membership (€50 for 10x workspace usage)", "I will use it only Once (€10 per 2 hours)","I have a Membership",]
 
 st.set_page_config(page_title=page_title, page_icon=page_icon, layout=layout)
 
@@ -91,7 +91,7 @@ if selected == "Make an appointment":
         membership = st.radio("Payement / betaling", MEMBERSHIP_CHOICE, horizontal = False)
         if membership == "I have a Membership":
             st.text_input("", placeholder="Membership number to fill in ...")            
-        date = st.date_input("Date (only Tuesday or Thursday)", help="Here some explination text if you want")
+        date = st.date_input("Date (only Tuesday or Thursday)")
         day = date.strftime("%A")
         week = date.isocalendar()[1]
         time_shift = st.radio("Time shift", time_shift_choice, horizontal = False)
