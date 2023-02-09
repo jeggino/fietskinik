@@ -84,17 +84,14 @@ with right:
 
 # --- INPUT & SAVE PERIODS ---
 if selected == "Make an appointment":
-    with st.form("entry_form", clear_on_submit=False):
-        
-        # create the inputs
-        
-        membership = st.radio("Payement / betaling", MEMBERSHIP_CHOICE, horizontal = False)
+    membership = st.radio("Payement / betaling", MEMBERSHIP_CHOICE, horizontal = False)
         if membership == "I have a Membership":
-            st.text_input("", placeholder="Membership number to fill in ...")            
+            st.text_input("", placeholder="Membership number to fill in ...")     
+    with st.form("entry_form", clear_on_submit=False):                  
         date = st.date_input("Date (only Tuesday or Thursday)")
         day = date.strftime("%A")
         week = date.isocalendar()[1]
-        time_shift = st.radio("Time shift", time_shift_choice, horizontal = False)
+        time_shift = st.radio("Time shift", time_shift_choice, horizontal = True)
         name = st.text_input("Name*", placeholder="Enter your name here ...")
         e_mail = st.text_input("E-mail*", placeholder="Enter your e-mail here ...")
         number = st.text_input("Telophone number*", placeholder="Enter your number here ...")
