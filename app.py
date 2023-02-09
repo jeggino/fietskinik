@@ -132,9 +132,14 @@ if selected == "Make an appointment":
 
                         elif time_shift=="18-20" and len >= 3:
                             st.warning('This time shift is already full. Please choose another one', icon="⚠️")
+                        
+                        
 
                         else:
-                            insert_period(membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
+                            if membership == "I have a Membership":
+                                insert_period(membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
+                            else:
+                                insert_period(membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
                             st.success("You booked an appointment!")
                     else:
                         st.warning('At the moment it is only possible to make an appointment on Tuesday or Thursday', icon="⚠️")
