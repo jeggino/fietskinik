@@ -85,8 +85,8 @@ with right:
 # --- INPUT & SAVE PERIODS ---
 if selected == "Make an appointment":
     membership = st.radio("Payement / betaling", MEMBERSHIP_CHOICE, horizontal = False)
-    if membership == "I have a Membership":
-        membership_number = st.text_input("", placeholder="Membership number to fill in ...",label_visibility="collapsed")     
+#     if membership == "I have a Membership":
+#         membership_number = st.text_input("", placeholder="Membership number to fill in ...",label_visibility="collapsed")     
     with st.form("entry_form", clear_on_submit=False):                  
         date = st.date_input("Date (only Tuesday or Thursday)")
         day = date.strftime("%A")
