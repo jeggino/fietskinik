@@ -87,6 +87,9 @@ if selected == "Make an appointment":
     membership = st.radio("Payement / betaling", MEMBERSHIP_CHOICE, horizontal = False)
     if membership == "I have a Membership":
         membership_number = st.text_input("", placeholder="Membership number to fill in ...",label_visibility="collapsed")
+    elif membership == "I will use it only Once (€10 per 2 hours)":
+        st.markdown("[https://www.ing.nl/particulier/betaalverzoek/index.html?trxid=WZvack2Jq3lg7dM97EFKhnNUzvFLgZPI](link)")
+        
     with st.form("entry_form", clear_on_submit=False):                  
         date = st.date_input("Date (only Tuesday or Thursday)")
         day = date.strftime("%A")
