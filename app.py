@@ -113,7 +113,7 @@ if selected == "Make an appointment":
         df = pd.DataFrame(db_content)
         df_filter = df[(df["Date"]==str(date)) & (df["Time shift"]==time_shift)]
         df_control = df[(df["Date"]==str(date)) & (df["Time shift"]==time_shift) & (df["Name"]==name)]
-        len = len(df_filter)
+        len_1 = len(df_filter)
         len_control = len(df_control)       
 
         # submit the data
@@ -130,13 +130,13 @@ if selected == "Make an appointment":
                         int(number)
                         if day == "Thursday" or day == "Tuesday":
 
-                            if time_shift=="14-16" and len >= 1:
+                            if time_shift=="14-16" and len_1 >= 1:
                                 st.warning('This time shift is already full. Please choose another one', icon="⚠️")
 
-                            elif time_shift=="16-18" and len >= 2:
+                            elif time_shift=="16-18" and len_1 >= 2:
                                 st.warning('This time shift is already full. Please choose another one', icon="⚠️")
 
-                            elif time_shift=="18-20" and len >= 3:
+                            elif time_shift=="18-20" and len_1 >= 3:
                                 st.warning('This time shift is already full. Please choose another one', icon="⚠️")
 
 
