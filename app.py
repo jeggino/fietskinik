@@ -112,44 +112,50 @@ if selected == "Make an appointment":
         db_content = db.fetch().items
         df = pd.DataFrame(db_content)
         df_filter = df[(df["Date"]==str(date)) & (df["Time shift"]==time_shift)]
+        df_control = df[(df["Date"]==str(date)) & (df["Time shift"]==time_shift) & (df["Name"]==name)]
         len = len(df_filter)
 
         # submit the data
         submitted = st.form_submit_button("Save Data")
-        if submitted:         
-            res = (dt.strptime(str(date), "%Y-%m-%d") - dt.today()).days
-            if res < 1: 
-                st.warning('Please book an appointment at least two days in advance', icon="⚠️")
-            elif name and e_mail and number:
-                day = parser.parse(str(date)).strftime("%A")
-                
-                try:
-                    int(number)
-                    if day == "Thursday" or day == "Tuesday":
+        if len(df_control):
+            if submitted:
 
-                        if time_shift=="14-16" and len >= 1:
-                            st.warning('This time shift is already full. Please choose another one', icon="⚠️")
+                res = (dt.strptime(str(date), "%Y-%m-%d") - dt.today()).days
+                if res < 1: 
+                    st.warning('Please book an appointment at least two days in advance', icon="⚠️")
+                elif name and e_mail and number:
+                    day = parser.parse(str(date)).strftime("%A")
 
-                        elif time_shift=="16-18" and len >= 2:
-                            st.warning('This time shift is already full. Please choose another one', icon="⚠️")
+                    try:
+                        int(number)
+                        if day == "Thursday" or day == "Tuesday":
 
-                        elif time_shift=="18-20" and len >= 3:
-                            st.warning('This time shift is already full. Please choose another one', icon="⚠️")
-                        
-                        
+                            if time_shift=="14-16" and len >= 1:
+                                st.warning('This time shift is already full. Please choose another one', icon="⚠️")
 
-                        else:
-                            if membership == "I have a Membership":
-                                insert_period(membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
+                            elif time_shift=="16-18" and len >= 2:
+                                st.warning('This time shift is already full. Please choose another one', icon="⚠️")
+
+                            elif time_shift=="18-20" and len >= 3:
+                                st.warning('This time shift is already full. Please choose another one', icon="⚠️")
+
+
+
                             else:
-                                insert_period(membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
-                            st.success("You booked an appointment!")
-                    else:
-                        st.warning('At the moment it is only possible to make an appointment on Tuesday or Thursday', icon="⚠️")
-                except:
-                    st.error('Telephone number incorrect', icon="💥")
-            else:
-                st.warning('Please fill the mandatory fields', icon="⚠️") 
+                                if membership == "I have a Membership":
+                                    insert_period(membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
+                                else:
+                                    insert_period(membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
+                                st.success("You booked an appointment!")
+                        else:
+                            st.warning('At the moment it is only possible to make an appointment on Tuesday or Thursday', icon="⚠️")
+                    except:
+                        st.error('Telephone number incorrect', icon="💥")
+                else:
+                    st.warning('Please fill the mandatory fields', icon="⚠️") 
+    else:
+        st.warning('There is already an appointment at this date and time with the same name', icon="⚠️") 
+        
             
            
 # --- drop appointment ---
