@@ -117,7 +117,7 @@ if selected == "Make an appointment":
 
         # submit the data
         submitted = st.form_submit_button("Save Data")
-        if len(df_control):
+        if len(df_control) == 0:
             if submitted:
 
                 res = (dt.strptime(str(date), "%Y-%m-%d") - dt.today()).days
