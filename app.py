@@ -114,11 +114,12 @@ if selected == "Make an appointment":
         df_filter = df[(df["Date"]==str(date)) & (df["Time shift"]==time_shift)]
         df_control = df[(df["Date"]==str(date)) & (df["Time shift"]==time_shift) & (df["Name"]==name)]
         len = len(df_filter)
+        len_control = len(df_control)       
 
         # submit the data
         submitted = st.form_submit_button("Save Data")
         if submitted:
-            if len(df_control) == 0:
+            if len_control == 0:
                 res = (dt.strptime(str(date), "%Y-%m-%d") - dt.today()).days
                 if res < 1: 
                     st.warning('Please book an appointment at least two days in advance', icon="⚠️")
