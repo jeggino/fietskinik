@@ -153,8 +153,8 @@ if selected == "Make an appointment":
                         st.error('Telephone number incorrect', icon="💥")
                 else:
                     st.warning('Please fill the mandatory fields', icon="⚠️") 
-            else:
-                st.warning('There is already an appointment at this date and time with the same name', icon="⚠️") 
+        else:
+            st.warning('There is already an appointment at this date and time with the same name', icon="⚠️") 
         
             
            
