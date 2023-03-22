@@ -120,7 +120,7 @@ if selected == "Make an appointment":
         submitted = st.form_submit_button("Save Data")
         if submitted:
             if len_control == 0:
-                res = ((dt.strptime(str(date), "%Y-%m-%d").date() - dt.today().date()).days) == 0:
+                res = ((dt.strptime(str(date), "%Y-%m-%d").date() - dt.today().date()).days) == 0
                 if res == 0: 
                     st.warning('Sorry, you cannot book an appointment on the same day', icon="⚠️")
                 elif name and e_mail and number:
