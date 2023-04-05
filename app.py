@@ -79,7 +79,7 @@ with left:
     
 with right:
     st.markdown("Fietskliniek is a membership based workspace. Membership is €50 a year voor 10 times use of the space 2 hours per session. Membership is ‘transferable’, you and your friends, collegues  can make use of it. In the bike workspace you will find all the tools and parts you need to repair your bike and you will get free guidance in the process.") 
-    st.markdown("In case you want to use the workspace only once the minimum price is €10 a 2 hour session paid in advance. After making a reservation online you will get  a payement request to your phone number, when paid, then your reservation is confirmed. When cancelled you will get your money back minus €2 for admin pourposes.")
+    st.markdown("In case you want to use the workspace only once the minimum price is €10 for a 2 hour session paid in advance. Once you click Save Data you reservation is Done!you wont get any confirmation. You can not make a reservation the same day that you want to pass by. If you make a reservation  and you can not come just Cancel it on the button above this can be done on the same day  as the appointment till 12 am.  When cancelled till 12 am you will get your money back minus €2 for admin purposes. By no show or no cancel you wont get you money back.")
     st.markdown("Welcome to the Fietskliniek and enjoy your bike session!")
 
 # --- INPUT & SAVE PERIODS ---
