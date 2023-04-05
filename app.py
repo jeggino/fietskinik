@@ -133,7 +133,7 @@ if selected == "Make an appointment":
                             if time_shift=="14-16" and len_1 >= 1:
                                 st.warning('This time shift is already full. Please choose another one', icon="⚠️")
 
-                            elif time_shift=="16-18" and len_1 >= 2:
+                            elif time_shift=="16-18" and len_1 >= 1:
                                 st.warning('This time shift is already full. Please choose another one', icon="⚠️")
 
                             elif time_shift=="18-20" and len_1 >= 3:
