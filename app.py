@@ -70,6 +70,8 @@ selected = option_menu(
     orientation="horizontal",
 )
 
+st.warning('The Fietskliniek will be closed from July 15 until the end of August. No appointments can be made during that period', icon="⚠️")
+
 left, right = st.columns([1,3])
 
 with left:
@@ -84,6 +86,7 @@ with right:
 
 # --- INPUT & SAVE PERIODS ---
 if selected == "Make an appointment":
+    
     membership = st.radio("Payement / betaling", MEMBERSHIP_CHOICE, horizontal = False)
     if membership == "I have a Membership":
         membership_number = st.text_input("", placeholder="Membership number to fill in ...",label_visibility="collapsed")
