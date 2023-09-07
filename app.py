@@ -70,8 +70,6 @@ selected = option_menu(
     orientation="horizontal",
 )
 
-st.warning('The Fietskliniek will be closed from July 15 until the end of August. No appointments can be made during that period', icon="⚠️")
-
 left, right = st.columns([1,3])
 
 with left:
