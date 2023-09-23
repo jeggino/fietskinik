@@ -31,6 +31,8 @@ page_title = None
 page_icon = " :bike: "  # emojis: https://www.webfx.com/tools/emoji-cheat-sheet/
 layout = "centered"
 time_shift_choice = ["14-16", "16-18", "18-20"]
+# time_shift_choice = ["14-16", "16-18", "18-20"]
+
 buurt_choice = ["Oud-oost","Indische Buurt/Oostelijk Havengebied",
                 "Watergraafsmeer","Ijburg/Zeeburgereiland","Centrum",
                 "Zuid","Zuidoost","Weesp","West","Nieuw-West"]
@@ -89,7 +91,7 @@ if selected == "Make an appointment":
     if membership == "I have a Membership":
         membership_number = st.text_input("", placeholder="Membership number to fill in ...",label_visibility="collapsed")
     elif membership == "I will use it only Once (€10 per 2 hours)":
-        "https://www.ing.nl/particulier/betaalverzoek/index.html?trxid=XuCz0tkwJlt2laHN4UXzCKHCkxuQxV8O"
+        "https://www.ing.nl/particulier/betaalverzoek/index.html?trxid=fAt3yNeoyINV4EfivItVJIEaUpnHZpW6"
         
     with st.form("entry_form", clear_on_submit=False):                  
         date = st.date_input("Date (only Tuesday or Thursday)")
