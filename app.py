@@ -32,7 +32,7 @@ page_icon = " :bike: "  # emojis: https://www.webfx.com/tools/emoji-cheat-sheet/
 layout = "centered"
 
 # --- HERE THE CHANGE WITH THE SHIFT, 14-16 HAS BEEN DELETED ---
-time_shift_choice = ["14-16", "18-20"]
+time_shift_choice = ["16-18", "18-20"]
 # time_shift_choice = ["14-16", "16-18", "18-20"]
 # --- HERE THE CHANGE WITH THE SHIFT, 14-16 HAS BEEN DELETED ---
 
