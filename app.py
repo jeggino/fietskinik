@@ -226,8 +226,8 @@ if selected == "Make an appointment":
                             else:
                                 insert_period(membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
                             st.success("You booked an appointment!")
-                    except:
-                        st.error("Vul alstublieft een juist telefoonnummer in")
+                except:
+                    st.error("Vul alstublieft een juist telefoonnummer in")
 
         else:
             st.warning('There is already an appointment at this date and time with the same name', icon="⚠️") 
