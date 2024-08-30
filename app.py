@@ -215,6 +215,7 @@ if selected == "Make an appointment":
 
 
                 else:
+                    st.warning("HEREEEEEE")
                     if membership == "ik heb een stadspads":
                         insert_period(membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
                     else:
