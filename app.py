@@ -104,7 +104,7 @@ st.markdown(hide_st_style, unsafe_allow_html=True)
 # --- NAVIGATION MENU ---
 selected = option_menu(
     menu_title=None,
-    options=["Maak een afspraak ", "Afspraak afzeggen"],
+    options=["Maak een afspraak", "Afspraak afzeggen"],
     icons=["bi-journal-check", "bi-x-octagon-fill"],  # https://icons.getbootstrap.com/
     orientation="horizontal",
 )
