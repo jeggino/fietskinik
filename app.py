@@ -46,7 +46,10 @@ buurt_choice = ["Oud-oost","Indische Buurt/Oostelijk Havengebied",
 
 expertise_choice = ["None", "Low", "Average", "High"]
 
-type_bike = ["Vouwfiets","Kinderfiets",
+type_bike = ["Terugtraprem", 
+"Racefiets",
+"Versnellingen buiten",
+"Versnellingen binnen","Vouwfiets","Kinderfiets",
 "Driewieler","Backfiets","E-bike","mijn fiets staat er niet op"]
 
 materiaal_choice = ["Dont know exactly","Flat tire","Change tire front/back ",
