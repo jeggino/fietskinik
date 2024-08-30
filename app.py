@@ -226,7 +226,7 @@ if selected == "Make an appointment":
     
                     elif day == "Friday":
     
-                        if time_shift=="11:30-13:30" and len_1 >= 1:
+                        if time_shift=="11:00-13:00" and len_1 >= 1:
                             st.warning('Deze tijdsverschuiving is al vol. Kies een andere / This time shift is already full. Please choose another', icon="⚠️")
     
                         elif time_shift=="13:30-15:30" and len_1 >= 1:
