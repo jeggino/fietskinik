@@ -141,7 +141,9 @@ if selected == "Make an appointment":
         date = st.date_input("Datum (alleen Dinsdag, Donderdag, of Vrijdag)")
         day = date.strftime("%A")
         week = date.isocalendar()[1]
-        st.write(day)
+        if day not in ["Tuesday","Thursday","Friday"]:
+            st.warning("U kunt alleen een afspraak maken op dinsdag, donderdag of vrijdag")
+            st.stop()
         if day=="Friday":
             time_shift = st.radio("Time shift", time_shift_choice_vrijdag, horizontal = True)
         else:
