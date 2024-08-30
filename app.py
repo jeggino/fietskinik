@@ -207,14 +207,18 @@ if selected == "Make an appointment":
                             st.warning('This time shift is already full. Please choose another one', icon="⚠️")
     
                         else:
-                            if membership == "ik heb een stadspads":
+                            try:
                                 bytes_data = picture.getvalue()
                                 drive.put(name_picture, data=bytes_data)
-                                insert_period(name_picture,membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
-                            else:
-                                bytes_data = picture.getvalue()
-                                drive.put(name_picture, data=bytes_data)
-                                insert_period(name_picture,membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
+                                if membership == "ik heb een stadspads":
+                                    insert_period(name_picture,membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
+                                else:
+                                    insert_period(name_picture,membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
+                            except:
+                                if membership == "ik heb een stadspads":
+                                    insert_period(name_picture,membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
+                                else:
+                                    insert_period(name_picture,membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
                             st.success("You booked an appointment!")
     
                     elif day == "Friday":
@@ -229,10 +233,18 @@ if selected == "Make an appointment":
                             st.warning('This time shift is already full. Please choose another one', icon="⚠️")
     
                         else:
-                            if membership == "ik heb een stadspads":
-                                insert_period(name_picture, membership, str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
-                            else:
-                                insert_period(name_picture, membership, str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
+                            try:
+                                bytes_data = picture.getvalue()
+                                drive.put(name_picture, data=bytes_data)
+                                if membership == "ik heb een stadspads":
+                                    insert_period(name_picture,membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
+                                else:
+                                    insert_period(name_picture,membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
+                            except:
+                                if membership == "ik heb een stadspads":
+                                    insert_period(name_picture, membership, str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
+                                else:
+                                    insert_period(name_picture, membership, str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
                             st.success("You booked an appointment!")
                 except:
                     st.error("Vul alstublieft een juist telefoonnummer in")
