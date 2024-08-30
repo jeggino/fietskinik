@@ -216,13 +216,13 @@ if selected == "Maak een afspraak":
                     elif day == "Friday":
     
                         if time_shift=="11:00-13:00" and len_1 >= 1:
-                            st.warning('Deze tijdsverschuiving is al vol. Kies een andere / This time shift is already full. Please choose another', icon="⚠️")
+                            st.warning('Deze tijdsverschuiving is al vol. Kies een andere', icon="⚠️")
     
                         elif time_shift=="13:30-15:30" and len_1 >= 1:
-                            st.warning('Deze tijdsverschuiving is al vol. Kies een andere / This time shift is already full. Please choose another', icon="⚠️")
+                            st.warning('Deze tijdsverschuiving is al vol. Kies een andere', icon="⚠️")
     
                         elif time_shift=="15:30-17:30" and len_1 >= 1:
-                            st.warning('Deze tijdsverschuiving is al vol. Kies een andere / This time shift is already full. Please choose another', icon="⚠️")
+                            st.warning('Deze tijdsverschuiving is al vol. Kies een andere', icon="⚠️")
     
                         else:
                             try:
@@ -237,12 +237,12 @@ if selected == "Maak een afspraak":
                                     insert_period(name_picture, membership, str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
                                 else:
                                     insert_period(name_picture, membership, str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
-                            st.success("You booked an appointment!")
+                            st.success("🚲🚲 U heeft een afspraak gemaakt! 🚲🚲")
                 except:
                     st.error("Vul alstublieft een juist telefoonnummer in")
 
         else:
-            st.warning('Er is al een afspraak op deze datum en tijd met dezelfde naam / There is already an appointment at this date and time with the same name', icon="⚠️") 
+            st.warning('Er is al een afspraak op deze datum en tijd met dezelfde naam', icon="⚠️") 
 
         
            
