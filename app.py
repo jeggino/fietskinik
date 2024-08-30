@@ -216,12 +216,12 @@ if selected == "Make an appointment":
 
 
 
+                else:
+                    if membership == "ik heb een stadspads":
+                        insert_period(membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
                     else:
-                        if membership == "ik heb een stadspads":
-                            insert_period(membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
-                        else:
-                            insert_period(membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
-                        st.success("You booked an appointment!")
+                        insert_period(membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
+                    st.success("You booked an appointment!")
                 st.stop()
         else:
             st.warning('There is already an appointment at this date and time with the same name', icon="⚠️") 
