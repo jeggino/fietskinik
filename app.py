@@ -14,7 +14,7 @@ from PIL import Image
 deta = Deta(st.secrets["deta_key"])
 
 # Create a new database
-db = deta.Base("project_fietskliniek")
+db = deta.Base("db_data")
 
 # --- FUNCTIONS ---
 def insert_period(membership,date, day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number = None, ):
