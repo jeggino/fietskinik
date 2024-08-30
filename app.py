@@ -104,7 +104,7 @@ st.markdown(hide_st_style, unsafe_allow_html=True)
 # --- NAVIGATION MENU ---
 selected = option_menu(
     menu_title=None,
-    options=["Make an appointment", "Cancel an appointment"],
+    options=["Maak een afspraak ", "Afspraak afzeggen"],
     icons=["bi-journal-check", "bi-x-octagon-fill"],  # https://icons.getbootstrap.com/
     orientation="horizontal",
 )
@@ -122,7 +122,7 @@ st.markdown(TEXT)
 "---"
 
 # --- INPUT & SAVE PERIODS ---
-if selected == "Make an appointment":       
+if selected == "Maak een afspraak":       
     
     membership = st.radio("Betaling", MEMBERSHIP_CHOICE, horizontal = False)
     if membership == "ik heb een Stadspas":
@@ -244,7 +244,7 @@ if selected == "Make an appointment":
         
            
 ##### --- drop appointment ---
-if selected == "Cancel an appointment":
+if selected == "Afspraak afzeggen":
     with st.form("cancel_form", clear_on_submit=False):
 
         date = str(st.date_input("Date"))
