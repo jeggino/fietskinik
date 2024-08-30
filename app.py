@@ -172,7 +172,7 @@ if selected == "Make an appointment":
             st.warning("Upload een foto van uw fiets")
             st.stop()  
             
-    materiaal = st.selectbox("Repair to do / Reparatie te doen", materiaal_choice)
+    materiaal = st.multiselect("Reparatie te doen / Repair to do", materiaal_choice)
     opmerking = st.text_input("", placeholder="Opmerking ...",label_visibility="collapsed")
     
     """_*Mandatory fields_"""
