@@ -144,7 +144,7 @@ st.markdown(TEXT)
 if selected == "Make an appointment":       
     
     membership = st.radio("Betaling", MEMBERSHIP_CHOICE, horizontal = False)
-    if membership == "ik heb een stadspads":
+    if membership == "ik heb een Stadspas":
         membership_number = st.text_input("", placeholder="Stadspasnummer overschrijven ...",label_visibility="collapsed")
         if  len(membership_number) == 0:
             st.warning("Vul het Stadspasnummer in aub")
