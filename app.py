@@ -157,8 +157,9 @@ if selected == "Make an appointment":
     if type_bike in ["Backfiets","E-bike","mijn fiets staat er niet op"]:
         picture = st.camera_input("Maak een foto")
 
-        if picture:
-            st.image(picture)
+        if not picture:
+            st.warning("Upload een foto van uw fiets")
+            st.stop()
     materiaal = st.selectbox("Repair to do / Reparatie te doen", materiaal_choice)
     opmerking = st.text_input("", placeholder="Opmerking ...",label_visibility="collapsed")
     
