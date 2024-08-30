@@ -127,6 +127,7 @@ if selected == "Maak een afspraak":
     membership = st.radio("Betaling", MEMBERSHIP_CHOICE, horizontal = False)
     if membership == "ik heb een Stadspas":
         membership_number = st.text_input("", placeholder="Stadspasnummer overschrijven ...",label_visibility="collapsed")
+        
         if  len(membership_number) == 0:
             st.warning("Vul het Stadspasnummer in aub")
             st.stop()
@@ -152,8 +153,10 @@ if selected == "Maak een afspraak":
     type_bike = st.selectbox("Type of bike that you have? / Wat voor fiets wil je repareren?", type_bike)
     if type_bike in ["Backfiets","E-bike","mijn fiets staat er niet op"]:
         picture = st.file_uploader("Upload een foto")
+        
         if picture:
             st.image(picture,width = 300)
+            
         if not picture:
             st.warning("Upload een foto van uw fiets")
             st.stop()  
