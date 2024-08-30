@@ -136,7 +136,7 @@ if selected == "Make an appointment":
     if membership == "ik heb een stadspads":
         membership_number = st.text_input("", placeholder="Stadspasnummer overschrijven ...",label_visibility="collapsed")
         if  len(membership_number) == 0:
-            st.warning("full dhlas")
+            st.warning("Vul het Stadspasnummer in aub")
             st.stop()
 
     date = st.date_input("Datum (alleen Dinsdag, Donderdag, of Vrijdag)")
