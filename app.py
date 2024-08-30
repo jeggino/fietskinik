@@ -171,7 +171,8 @@ if selected == "Make an appointment":
     type_bike = st.selectbox("Type of bike that you have? / Wat voor fiets wil je repareren?", type_bike)
     if type_bike in ["Backfiets","E-bike","mijn fiets staat er niet op"]:
         picture = st.file_uploader("Upload een foto")
-        st.image(picture)
+        if picture:
+            st.image(picture,width = 100)
         if not picture:
             st.warning("Upload een foto van uw fiets")
             st.stop()  
