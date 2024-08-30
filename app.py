@@ -141,16 +141,16 @@ if selected == "Maak een afspraak":
         st.stop()
         
     if day=="Friday":
-        time_shift = st.radio("Time shift", time_shift_choice_vrijdag, horizontal = True)
+        time_shift = st.radio("Tijdsverschuiving", time_shift_choice_vrijdag, horizontal = True)
     else:
-        time_shift = st.radio("Time shift", time_shift_choice_dinsdag_donderdag, horizontal = True)
+        time_shift = st.radio("Tijdsverschuiving", time_shift_choice_dinsdag_donderdag, horizontal = True)
         
-    name = st.text_input("Name*", placeholder="Enter your name here ...")
-    e_mail = st.text_input("E-mail*", placeholder="Enter your e-mail here ...")
-    number = st.text_input("Telephone number*", placeholder="Enter your number here ...")
-    buurt = st.selectbox("In which neighbourhood do you live in Amsterdam / Uit welk buurt kom je? (Voor statistic pourposes)", buurt_choice)
-    expertise = st.selectbox("What is your expertise with bikes? / Welk ervaring heb je met fietsen?", expertise_choice )
-    type_bike = st.selectbox("Type of bike that you have? / Wat voor fiets wil je repareren?", type_bike)
+    name = st.text_input("Naam*", placeholder="Vul hier uw naam in ...")
+    e_mail = st.text_input("E-mail*", placeholder="Voer hier uw e-mailadres in ...")
+    number = st.text_input("Telefoonnummer*", placeholder="Voer hier uw nummer in ...")
+    buurt = st.selectbox("Uit welk buurt kom je? (Voor statistic pourposes)", buurt_choice)
+    expertise = st.selectbox("Welk ervaring heb je met fietsen?", expertise_choice )
+    type_bike = st.selectbox("Wat voor fiets wil je repareren?", type_bike)
     if type_bike in ["Backfiets","E-bike","mijn fiets staat er niet op"]:
         picture = st.file_uploader("Upload een foto")
         
@@ -161,7 +161,7 @@ if selected == "Maak een afspraak":
             st.warning("Upload een foto van uw fiets")
             st.stop()  
             
-    materiaal = st.multiselect("Reparatie te doen / Repair to do", materiaal_choice)
+    materiaal = st.multiselect("Reparatie te doen", materiaal_choice)
     opmerking = st.text_input("", placeholder="Opmerking ...",label_visibility="collapsed")
     
     """_*Verplichte velden / Mandatory fields_"""
@@ -181,13 +181,13 @@ if selected == "Maak een afspraak":
     if submitted:
 
         if len(name) == 0 or len(e_mail)==0 or len(number)==0:
-            st.warning('Vul de verplichte velden in / Please fill the mandatory fields', icon="⚠️")
+            st.warning('Vul de verplichte velden in', icon="⚠️")
             st.stop()
             
         if len_control == 0:
             res = ((dt.strptime(str(date), "%Y-%m-%d").date() - dt.today().date()).days)
             if res == 0: 
-                st.warning('Helaas kunt u geen afspraak op dezelfde dag boeken / Sorry, you cannot book an appointment on the same day', icon="⚠️")
+                st.warning('Helaas kunt u geen afspraak op dezelfde dag boeken', icon="⚠️")
                 st.stop()
             else:
                 day = parser.parse(str(date)).strftime("%A")
@@ -196,7 +196,7 @@ if selected == "Maak een afspraak":
                     if day in ["Thursday","Tuesday"]:
     
                         if time_shift=="18:30-20:30" and len_1 >= 3:
-                            st.warning('Deze tijdsverschuiving is al vol. Kies een andere / This time shift is already full. Please choose another', icon="⚠️")
+                            st.warning('Deze tijdsverschuiving is al vol. Kies een andere', icon="⚠️")
     
                         else:
                             try:
@@ -211,7 +211,7 @@ if selected == "Maak een afspraak":
                                     insert_period(name_picture,membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
                                 else:
                                     insert_period(name_picture,membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
-                            st.success("You booked an appointment!")
+                            st.success("🚲🚲 U heeft een afspraak gemaakt! 🚲🚲")
     
                     elif day == "Friday":
     
