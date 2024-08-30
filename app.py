@@ -164,7 +164,7 @@ if selected == "Maak een afspraak":
     materiaal = st.multiselect("Reparatie te doen", materiaal_choice)
     opmerking = st.text_input("", placeholder="Opmerking ...",label_visibility="collapsed")
     
-    """_*Verplichte velden / Mandatory fields_"""
+    """_*Verplichte velden_"""
     
     "---"
 
