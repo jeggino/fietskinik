@@ -135,7 +135,7 @@ if selected == "Make an appointment":
     membership = st.radio("Betaling", MEMBERSHIP_CHOICE, horizontal = False)
     if membership == "ik heb een stadspads":
         membership_number = st.text_input("", placeholder="Stadspasnummer overschrijven ...",label_visibility="collapsed")
-        if  membership_number is None:
+        if  len(membership_number) == 0:
             st.warning("full dhlas")
             st.stop()
 
