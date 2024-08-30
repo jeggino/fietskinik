@@ -19,9 +19,9 @@ db = deta.Base("db_data")
 drive = deta.Drive("df_pictures")
 
 # --- FUNCTIONS ---
-def insert_period(name,membership,date, day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number = None, ):
+def insert_period(name_picture,membership,date, day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number = None, ):
     """Returns the user on a successful user creation, otherwise raises and error"""
-    return db.insert({"Name":name,"Membership":membership, "Membership_number":membership_number, "Date": date, "Day":day, "Week":week, "Time shift": time_shift, 
+    return db.insert({"Name_picture":name_picture,"Membership":membership, "Membership_number":membership_number, "Date": date, "Day":day, "Week":week, "Time shift": time_shift, 
                    "Name": name, "e_mail": e_mail, "Phone number": number,
                    "Neighborhood": buurt, "Expertise": expertise, "Type of bike": type_bike,
                    "Type of reparation":materiaal, "Remarks":opmerking
@@ -229,9 +229,9 @@ if selected == "Make an appointment":
     
                         else:
                             if membership == "ik heb een stadspads":
-                                insert_period(name, membership, str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
+                                insert_period(name_picture, membership, str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
                             else:
-                                insert_period(name, membership, str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
+                                insert_period(name_picture, membership, str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
                             st.success("You booked an appointment!")
                 except:
                     st.error("Vul alstublieft een juist telefoonnummer in")
