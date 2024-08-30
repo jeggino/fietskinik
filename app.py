@@ -137,85 +137,85 @@ if selected == "Make an appointment":
         membership_number = st.text_input("", placeholder="Stadspasnummer overschrijven ...",label_visibility="collapsed")
 
         
-    # with st.form("entry_form", clear_on_submit=False):                  
-        date = st.date_input("Datum (alleen Dinsdag, Donderdag, of Vrijdag)")
-        day = date.strftime("%A")
-        week = date.isocalendar()[1]
-        if day not in ["Tuesday","Thursday","Friday"]:
-            st.warning("U kunt alleen een afspraak maken op dinsdag, donderdag of vrijdag")
-            st.stop()
-        if day=="Friday":
-            time_shift = st.radio("Time shift", time_shift_choice_vrijdag, horizontal = True)
-        else:
-            time_shift = st.radio("Time shift", time_shift_choice_dinsdag_donderdag, horizontal = True)
-        name = st.text_input("Name*", placeholder="Enter your name here ...")
-        e_mail = st.text_input("E-mail*", placeholder="Enter your e-mail here ...")
-        number = st.text_input("Telophone number*", placeholder="Enter your number here ...")
-        buurt = st.selectbox("In which neighbourhood do you live in Amsterdam / Uit welk buurt kom je? (Voor statistic pourposes)", buurt_choice)
-        expertise = st.selectbox("What is your expertise with bikes? / Welk ervaring heb je met fietsen?", expertise_choice )
-        type_bike = st.selectbox("Type of bike that you have? / Wat voor fiets wil je repareren?", type_bike)
-        if type_bike in ["Backfiets","E-bike","mijn fiets staat er niet op"]:
-            picture = st.camera_input("Maak een foto")
+# with st.form("entry_form", clear_on_submit=False):                  
+    date = st.date_input("Datum (alleen Dinsdag, Donderdag, of Vrijdag)")
+    day = date.strftime("%A")
+    week = date.isocalendar()[1]
+    if day not in ["Tuesday","Thursday","Friday"]:
+        st.warning("U kunt alleen een afspraak maken op dinsdag, donderdag of vrijdag")
+        st.stop()
+    if day=="Friday":
+        time_shift = st.radio("Time shift", time_shift_choice_vrijdag, horizontal = True)
+    else:
+        time_shift = st.radio("Time shift", time_shift_choice_dinsdag_donderdag, horizontal = True)
+    name = st.text_input("Name*", placeholder="Enter your name here ...")
+    e_mail = st.text_input("E-mail*", placeholder="Enter your e-mail here ...")
+    number = st.text_input("Telophone number*", placeholder="Enter your number here ...")
+    buurt = st.selectbox("In which neighbourhood do you live in Amsterdam / Uit welk buurt kom je? (Voor statistic pourposes)", buurt_choice)
+    expertise = st.selectbox("What is your expertise with bikes? / Welk ervaring heb je met fietsen?", expertise_choice )
+    type_bike = st.selectbox("Type of bike that you have? / Wat voor fiets wil je repareren?", type_bike)
+    if type_bike in ["Backfiets","E-bike","mijn fiets staat er niet op"]:
+        picture = st.camera_input("Maak een foto")
 
-            if picture:
-                st.image(picture)
-        materiaal = st.selectbox("Repair to do / Reparatie te doen", materiaal_choice)
-        opmerking = st.text_input("", placeholder="Opmerking ...",label_visibility="collapsed")
-        
-        """_*Mandatory fields_"""
-        
-        "---"
+        if picture:
+            st.image(picture)
+    materiaal = st.selectbox("Repair to do / Reparatie te doen", materiaal_choice)
+    opmerking = st.text_input("", placeholder="Opmerking ...",label_visibility="collapsed")
+    
+    """_*Mandatory fields_"""
+    
+    "---"
 
-        # find if there are available shift in that data
-        db_content = db.fetch().items
-        df = pd.DataFrame(db_content)
-        df_filter = df[(df["Date"]==str(date)) & (df["Time shift"]==time_shift)]
-        df_control = df[(df["Date"]==str(date)) & (df["Time shift"]==time_shift) & (df["Name"]==name)]
-        len_1 = len(df_filter)
-        len_control = len(df_control)       
+    # find if there are available shift in that data
+    db_content = db.fetch().items
+    df = pd.DataFrame(db_content)
+    df_filter = df[(df["Date"]==str(date)) & (df["Time shift"]==time_shift)]
+    df_control = df[(df["Date"]==str(date)) & (df["Time shift"]==time_shift) & (df["Name"]==name)]
+    len_1 = len(df_filter)
+    len_control = len(df_control)       
 
-        # submit the data
-        # submitted = st.form_submit_button("Save Data")
-        submitted = st.button("Save Data")
-        if submitted:
-            if len_control == 0:
-                res = ((dt.strptime(str(date), "%Y-%m-%d").date() - dt.today().date()).days)
-                if res == 0: 
-                    st.warning('Sorry, you cannot book an appointment on the same day', icon="⚠️")
-                elif name and e_mail and number:
-                    day = parser.parse(str(date)).strftime("%A")
+    # submit the data
+    # submitted = st.form_submit_button("Save Data")
+    submitted = st.button("Save Data")
+    if submitted:
+        if len_control == 0:
+            res = ((dt.strptime(str(date), "%Y-%m-%d").date() - dt.today().date()).days)
+            if res == 0: 
+                st.warning('Sorry, you cannot book an appointment on the same day', icon="⚠️")
+            elif name and e_mail and number:
+                day = parser.parse(str(date)).strftime("%A")
 
-                    try:
-                        int(number)
-                        if day == "Thursday" or day == "Tuesday" or day == "Friday":
+                try:
+                    int(number)
+                    if day == "Thursday" or day == "Tuesday" or day == "Friday":
 
-                            if time_shift=="14-16" and len_1 >= 1:
-                                st.warning('This time shift is already full. Please choose another one', icon="⚠️")
+                        if time_shift=="14-16" and len_1 >= 1:
+                            st.warning('This time shift is already full. Please choose another one', icon="⚠️")
 
-                            elif time_shift=="16-18" and len_1 >= 1:
-                                st.warning('This time shift is already full. Please choose another one', icon="⚠️")
+                        elif time_shift=="16-18" and len_1 >= 1:
+                            st.warning('This time shift is already full. Please choose another one', icon="⚠️")
 
-                            elif time_shift=="18-20" and len_1 >= 3:
-                                st.warning('This time shift is already full. Please choose another one', icon="⚠️")
+                        elif time_shift=="18-20" and len_1 >= 3:
+                            st.warning('This time shift is already full. Please choose another one', icon="⚠️")
 
 
 
-                            else:
-                                if membership == "ik heb een stadspads":
-                                    insert_period(membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
-                                else:
-                                    insert_period(membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
-                                st.success("You booked an appointment!")
                         else:
-                            st.warning('Op dit moment is het alleen mogelijk om een ​​afspraak te maken op dinsdag, donderdag of vrijdag', icon="⚠️")
-                    except:
-                        st.error('Telephone number incorrect', icon="💥")
-                else:
-                    st.warning('Please fill the mandatory fields', icon="⚠️") 
+                            if membership == "ik heb een stadspads":
+                                insert_period(membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
+                            else:
+                                insert_period(membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
+                            st.success("You booked an appointment!")
+                    else:
+                        st.warning('Op dit moment is het alleen mogelijk om een ​​afspraak te maken op dinsdag, donderdag of vrijdag', icon="⚠️")
+                except:
+                    st.error('Telephone number incorrect', icon="💥")
             else:
-                st.warning('There is already an appointment at this date and time with the same name', icon="⚠️") 
+                st.warning('Please fill the mandatory fields', icon="⚠️") 
+        else:
+            st.warning('There is already an appointment at this date and time with the same name', icon="⚠️") 
+    
         
-            
            
 # --- drop appointment ---
 if selected == "Cancel an appointment":
