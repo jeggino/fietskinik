@@ -237,10 +237,11 @@ if selected == "Make an appointment":
                                 bytes_data = picture.getvalue()
                                 drive.put(name_picture, data=bytes_data)
                                 if membership == "ik heb een stadspads":
-                                    insert_period(name_picture,membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
+                                    insert_period(name_picture,membership,str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
                                 else:
-                                    insert_period(name_picture,membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
+                                    insert_period(name_picture,membership,str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
                             except:
+                                st.warning("cappotto")
                                 if membership == "ik heb een stadspads":
                                     insert_period(name_picture, membership, str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
                                 else:
