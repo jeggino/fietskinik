@@ -184,8 +184,8 @@ if selected == "Make an appointment":
     submitted = st.button("Save Data")
     if submitted:
 
-        if name == None or e_mail==None or number==None:
-            st.warning('Please fill the mandatory fields', icon="⚠️")
+        if len(name) == 0 or len(e_mail)==0 or len(number)==0:
+            st.warning('Vul de verplichte velden in / Please fill the mandatory fields', icon="⚠️")
             st.stop()
             
         if len_control == 0:
