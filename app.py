@@ -176,7 +176,6 @@ if selected == "Make an appointment":
     len_control = len(df_control)       
 
     # submit the data
-    # submitted = st.form_submit_button("Save Data")
     submitted = st.button("Save Data")
     if submitted:
         if len_control == 0:
@@ -188,15 +187,20 @@ if selected == "Make an appointment":
 
                 try:
                     int(number)
-                    if day == "Thursday" or day == "Tuesday" or day == "Friday":
+                    if day in ["Thursday","Tuesday"]:
 
-                        if time_shift=="14-16" and len_1 >= 1:
+                        if time_shift=="18:30-20:30" and len_1 > 3:
                             st.warning('This time shift is already full. Please choose another one', icon="⚠️")
 
-                        elif time_shift=="16-18" and len_1 >= 1:
+                    elif day == "Friday":
+
+                        if time_shift=="11:30-13:30" and len_1 > 1:
                             st.warning('This time shift is already full. Please choose another one', icon="⚠️")
 
-                        elif time_shift=="18-20" and len_1 >= 3:
+                        elif time_shift=="13:30-15:30" and len_1 > 1:
+                            st.warning('This time shift is already full. Please choose another one', icon="⚠️")
+
+                        elif time_shift=="15:30-17:30" and len_1 > 1:
                             st.warning('This time shift is already full. Please choose another one', icon="⚠️")
 
 
