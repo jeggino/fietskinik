@@ -152,11 +152,11 @@ if selected == "Make an appointment":
         buurt = st.selectbox("In which neighbourhood do you live in Amsterdam / Uit welk buurt kom je? (Voor statistic pourposes)", buurt_choice)
         expertise = st.selectbox("What is your expertise with bikes? / Welk ervaring heb je met fietsen?", expertise_choice )
         type_bike = st.selectbox("Type of bike that you have? / Wat voor fiets wil je repareren?", type_bike)
-        if type_bike.isin(["Backfiets","E-bike","mijn fiets staat er niet op"]):
+        if type_bike in ["Backfiets","E-bike","mijn fiets staat er niet op"]:
             picture = st.camera_input("Maak een foto")
 
-        if picture:
-            st.image(picture)
+            if picture:
+                st.image(picture)
         materiaal = st.selectbox("Repair to do / Reparatie te doen", materiaal_choice)
         opmerking = st.text_input("", placeholder="Opmerking ...",label_visibility="collapsed")
         
