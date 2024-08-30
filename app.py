@@ -5,6 +5,7 @@ import pandas as pd
 import altair as alt
 from dateutil import parser
 from datetime import datetime as dt
+import random
 
 from PIL import Image
 
@@ -15,11 +16,12 @@ deta = Deta(st.secrets["deta_key"])
 
 # Create a new database
 db = deta.Base("db_data")
+drive = deta.Drive("df_pictures")
 
 # --- FUNCTIONS ---
-def insert_period(membership,date, day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number = None, ):
+def insert_period(name,membership,date, day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number = None, ):
     """Returns the user on a successful user creation, otherwise raises and error"""
-    return db.insert({"Membership":membership, "Membership_number":membership_number, "Date": date, "Day":day, "Week":week, "Time shift": time_shift, 
+    return db.insert({"Name":name,"Membership":membership, "Membership_number":membership_number, "Date": date, "Day":day, "Week":week, "Time shift": time_shift, 
                    "Name": name, "e_mail": e_mail, "Phone number": number,
                    "Neighborhood": buurt, "Expertise": expertise, "Type of bike": type_bike,
                    "Type of reparation":materiaal, "Remarks":opmerking
@@ -34,6 +36,9 @@ layout = "centered"
 # --- HERE THE CHANGE WITH THE SHIFT, 14-16 HAS BEEN DELETED ---
 time_shift_choice_dinsdag_donderdag = ["18:30-20:30"]
 time_shift_choice_vrijdag = ["11:30-13:30","13:30-15:30","15:30-17:30"]
+
+name_picture = f"{random.randint(1,1000000000000)}.jpeg"
+
 
 buurt_choice = ["Oud-oost","Indische Buurt/Oostelijk Havengebied",
                 "Watergraafsmeer","Ijburg/Zeeburgereiland","Centrum",
@@ -158,12 +163,14 @@ if selected == "Make an appointment":
     buurt = st.selectbox("In which neighbourhood do you live in Amsterdam / Uit welk buurt kom je? (Voor statistic pourposes)", buurt_choice)
     expertise = st.selectbox("What is your expertise with bikes? / Welk ervaring heb je met fietsen?", expertise_choice )
     type_bike = st.selectbox("Type of bike that you have? / Wat voor fiets wil je repareren?", type_bike)
-    
     if type_bike in ["Backfiets","E-bike","mijn fiets staat er niet op"]:
         picture = st.camera_input("Maak een foto")
         if not picture:
             st.warning("Upload een foto van uw fiets")
             st.stop()
+        else:
+            bytes_data = picture.getvalue()
+            drive.put(name_picture, data=bytes_data)  
             
     materiaal = st.selectbox("Repair to do / Reparatie te doen", materiaal_choice)
     opmerking = st.text_input("", placeholder="Opmerking ...",label_visibility="collapsed")
@@ -222,9 +229,9 @@ if selected == "Make an appointment":
     
                         else:
                             if membership == "ik heb een stadspads":
-                                insert_period(membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
+                                insert_period(name, membership, str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
                             else:
-                                insert_period(membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
+                                insert_period(name, membership, str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
                             st.success("You booked an appointment!")
                 except:
                     st.error("Vul alstublieft een juist telefoonnummer in")
