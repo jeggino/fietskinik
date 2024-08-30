@@ -195,6 +195,7 @@ if selected == "Make an appointment":
                 day = parser.parse(str(date)).strftime("%A")
                 int(number)
                 st.warning("HEREEEEEE")
+                st.write(day)
                 if day in ["Thursday","Tuesday"]:
 
                     if time_shift=="18:30-20:30" and len_1 >= 3:
