@@ -32,16 +32,18 @@ page_icon = " :bike: "  # emojis: https://www.webfx.com/tools/emoji-cheat-sheet/
 layout = "centered"
 
 # --- HERE THE CHANGE WITH THE SHIFT, 14-16 HAS BEEN DELETED ---
-time_shift_choice = ["16-18", "18-20"]
-# time_shift_choice = ["14-16", "16-18", "18-20"]
-# --- HERE THE CHANGE WITH THE SHIFT, 14-16 HAS BEEN DELETED ---
+time_shift_choice_dinsdag_donderdag = ["18:30-20:30"]
+time_shift_choice_vrijdag = ["11:30-13:30","13:30-15:30","15:30-17:30"]
 
 buurt_choice = ["Oud-oost","Indische Buurt/Oostelijk Havengebied",
                 "Watergraafsmeer","Ijburg/Zeeburgereiland","Centrum",
                 "Zuid","Zuidoost","Weesp","West","Nieuw-West"]
+
 expertise_choice = ["None", "Low", "Average", "High"]
-type_bike = ["City Bike Pedal Brake","City Bike Internal Gears",
-"Cyty Bike External Gears","Mountain Bike","Race Bike"]
+
+type_bike = ["Vouwfiets","Kinderfiets",
+"Driewieler","Backfiets","E-bike","mijn fiets staat er niet op"]
+
 materiaal_choice = ["Dont know exactly","Flat tire","Change tire front/back ",
 "Chain","Chain cover","Derailleur","Cassette","Sprocket",
 "Brake cable","Brake pads","Brake problem pedalbrake",
@@ -51,7 +53,7 @@ materiaal_choice = ["Dont know exactly","Flat tire","Change tire front/back ",
 "Front fork","Handlebars /handelbars pen","Saddle/ saddle pen",
 "Bike lighting","Lock removal","Nieuw lock","Luggage carrier","Front rek"]
 
-MEMBERSHIP_CHOICE = ["I want a membership (€50 for 10x workspace usage)", "I will use it only Once (€10 per 2 hours)","I have a Membership",]
+MEMBERSHIP_CHOICE = ["ik heb een stadspads", "ik heb geen Stadspas (€12 per 2 uur)"]
 TEXT = """
 Fietskliniek is een buurt-, sociaal betrokken fietswerkplaats. In de fietsenwerkplaats vind je alle gereedschappen en onderdelen (nieuw en tweedehands) die je nodig hebt om je fiets te repareren en je krijgt gratis begeleiding van een ervaren fietsenmaker daarbij. Hierbij moet je rekening houden met de volgende regels
 
@@ -128,25 +130,33 @@ with right:
     st.markdown(TEXT) 
 
 # --- INPUT & SAVE PERIODS ---
-if selected == "Make an appointment":
+if selected == "Make an appointment":       
     
-    membership = st.radio("Payement / betaling", MEMBERSHIP_CHOICE, horizontal = False)
-    if membership == "I have a Membership":
-        membership_number = st.text_input("", placeholder="Membership number to fill in ...",label_visibility="collapsed")
-    elif membership == "I will use it only Once (€10 per 2 hours)":
-        "https://www.ing.nl/particulier/betaalverzoek/index.html?trxid=fAt3yNeoyINV4EfivItVJIEaUpnHZpW6"
+    membership = st.radio("Betaling", MEMBERSHIP_CHOICE, horizontal = False)
+    if membership == "ik heb een stadspads":
+        membership_number = st.text_input("", placeholder="Stadspasnummer overschrijven ...",label_visibility="collapsed")
+
         
     with st.form("entry_form", clear_on_submit=False):                  
-        date = st.date_input("Date (only Tuesday or Thursday)")
+        date = st.date_input("Datum (only Dinsdag, Donderdag, of Vrijdag)")
         day = date.strftime("%A")
         week = date.isocalendar()[1]
-        time_shift = st.radio("Time shift", time_shift_choice, horizontal = True)
+        st.write(day)
+        if day=="Friday":
+            time_shift = st.radio("Time shift", time_shift_choice_vrijdag, horizontal = True)
+        else:
+            time_shift = st.radio("Time shift", time_shift_choice_dinsdag_donderdag, horizontal = True)
         name = st.text_input("Name*", placeholder="Enter your name here ...")
         e_mail = st.text_input("E-mail*", placeholder="Enter your e-mail here ...")
         number = st.text_input("Telophone number*", placeholder="Enter your number here ...")
         buurt = st.selectbox("In which neighbourhood do you live in Amsterdam / Uit welk buurt kom je? (Voor statistic pourposes)", buurt_choice)
         expertise = st.selectbox("What is your expertise with bikes? / Welk ervaring heb je met fietsen?", expertise_choice )
         type_bike = st.selectbox("Type of bike that you have? / Wat voor fiets wil je repareren?", type_bike)
+        if type_bike.isin(["Backfiets","E-bike","mijn fiets staat er niet op"]):
+            picture = st.camera_input("Maak een foto")
+
+        if picture:
+            st.image(picture)
         materiaal = st.selectbox("Repair to do / Reparatie te doen", materiaal_choice)
         opmerking = st.text_input("", placeholder="Opmerking ...",label_visibility="collapsed")
         
@@ -174,7 +184,7 @@ if selected == "Make an appointment":
 
                     try:
                         int(number)
-                        if day == "Thursday" or day == "Tuesday":
+                        if day == "Thursday" or day == "Tuesday" or day == "Friday":
 
                             if time_shift=="14-16" and len_1 >= 1:
                                 st.warning('This time shift is already full. Please choose another one', icon="⚠️")
@@ -188,13 +198,13 @@ if selected == "Make an appointment":
 
 
                             else:
-                                if membership == "I have a Membership":
+                                if membership == "ik heb een stadspads":
                                     insert_period(membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
                                 else:
                                     insert_period(membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
                                 st.success("You booked an appointment!")
                         else:
-                            st.warning('At the moment it is only possible to make an appointment on Tuesday or Thursday', icon="⚠️")
+                            st.warning('Op dit moment is het alleen mogelijk om een ​​afspraak te maken op dinsdag, donderdag of vrijdag', icon="⚠️")
                     except:
                         st.error('Telephone number incorrect', icon="💥")
                 else:
