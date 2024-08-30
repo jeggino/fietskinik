@@ -220,7 +220,7 @@ if selected == "Make an appointment":
                     elif time_shift=="15:30-17:30" and len_1 >= 1:
                         st.warning('This time shift is already full. Please choose another one', icon="⚠️")
 
-                     else:
+                    else:
                         if membership == "ik heb een stadspads":
                             insert_period(membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
                         else:
