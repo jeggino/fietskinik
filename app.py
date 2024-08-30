@@ -192,38 +192,32 @@ if selected == "Make an appointment":
                 st.stop()
             else:
                 day = parser.parse(str(date)).strftime("%A")
+                int(number)
+                if day in ["Thursday","Tuesday"]:
 
-                try:
-                    int(number)
-                    if day in ["Thursday","Tuesday"]:
+                    if time_shift=="18:30-20:30" and len_1 >= 3:
+                        st.warning('This time shift is already full. Please choose another one', icon="⚠️")
 
-                        if time_shift=="18:30-20:30" and len_1 >= 3:
-                            st.warning('This time shift is already full. Please choose another one', icon="⚠️")
+                elif day == "Friday":
 
-                    elif day == "Friday":
+                    if time_shift=="11:30-13:30" and len_1 >= 1:
+                        st.warning('This time shift is already full. Please choose another one', icon="⚠️")
 
-                        if time_shift=="11:30-13:30" and len_1 >= 1:
-                            st.warning('This time shift is already full. Please choose another one', icon="⚠️")
+                    elif time_shift=="13:30-15:30" and len_1 >= 1:
+                        st.warning('This time shift is already full. Please choose another one', icon="⚠️")
 
-                        elif time_shift=="13:30-15:30" and len_1 >= 1:
-                            st.warning('This time shift is already full. Please choose another one', icon="⚠️")
-
-                        elif time_shift=="15:30-17:30" and len_1 >= 1:
-                            st.warning('This time shift is already full. Please choose another one', icon="⚠️")
+                    elif time_shift=="15:30-17:30" and len_1 >= 1:
+                        st.warning('This time shift is already full. Please choose another one', icon="⚠️")
 
 
 
+                    else:
+                        if membership == "ik heb een stadspads":
+                            insert_period(membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
                         else:
-                            if membership == "ik heb een stadspads":
-                                insert_period(membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
-                            else:
-                                insert_period(membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
-                            st.success("You booked an appointment!")
-                            st.stop()
-                except:
-                    st.error('Telephone number incorrect', icon="💥")
-            # else:
-            #     st.warning('Please fill the mandatory fields', icon="⚠️") 
+                            insert_period(membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
+                        st.success("You booked an appointment!")
+                st.stop()
         else:
             st.warning('There is already an appointment at this date and time with the same name', icon="⚠️") 
     
