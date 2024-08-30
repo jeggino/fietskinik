@@ -189,18 +189,18 @@ if selected == "Make an appointment":
                     int(number)
                     if day in ["Thursday","Tuesday"]:
 
-                        if time_shift=="18:30-20:30" and len_1 > 3:
+                        if time_shift=="18:30-20:30" and len_1 >= 3:
                             st.warning('This time shift is already full. Please choose another one', icon="⚠️")
 
                     elif day == "Friday":
 
-                        if time_shift=="11:30-13:30" and len_1 > 1:
+                        if time_shift=="11:30-13:30" and len_1 >= 1:
                             st.warning('This time shift is already full. Please choose another one', icon="⚠️")
 
-                        elif time_shift=="13:30-15:30" and len_1 > 1:
+                        elif time_shift=="13:30-15:30" and len_1 >= 1:
                             st.warning('This time shift is already full. Please choose another one', icon="⚠️")
 
-                        elif time_shift=="15:30-17:30" and len_1 > 1:
+                        elif time_shift=="15:30-17:30" and len_1 >= 1:
                             st.warning('This time shift is already full. Please choose another one', icon="⚠️")
 
 
