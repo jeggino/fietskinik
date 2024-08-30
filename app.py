@@ -135,6 +135,9 @@ if selected == "Make an appointment":
     membership = st.radio("Betaling", MEMBERSHIP_CHOICE, horizontal = False)
     if membership == "ik heb een stadspads":
         membership_number = st.text_input("", placeholder="Stadspasnummer overschrijven ...",label_visibility="collapsed")
+        if  membership_number == None:
+            st.warning("full dhlas")
+            st.stop()
 
     date = st.date_input("Datum (alleen Dinsdag, Donderdag, of Vrijdag)")
     day = date.strftime("%A")
@@ -186,7 +189,6 @@ if selected == "Make an appointment":
             st.stop()
             
         if len_control == 0:
-            st.warning("HEREEEEEE_1")
             res = ((dt.strptime(str(date), "%Y-%m-%d").date() - dt.today().date()).days)
             if res == 0: 
                 st.warning('Sorry, you cannot book an appointment on the same day', icon="⚠️")
@@ -194,8 +196,6 @@ if selected == "Make an appointment":
             else:
                 day = parser.parse(str(date)).strftime("%A")
                 int(number)
-                st.warning("HEREEEEEE_2")
-                st.write(day)
                 if day in ["Thursday","Tuesday"]:
 
                     if time_shift=="18:30-20:30" and len_1 >= 3:
@@ -209,7 +209,6 @@ if selected == "Make an appointment":
                         st.success("You booked an appointment!")
 
                 elif day == "Friday":
-                    st.warning("HEREEEEEE")
 
                     if time_shift=="11:30-13:30" and len_1 >= 1:
                         st.warning('This time shift is already full. Please choose another one', icon="⚠️")
