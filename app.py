@@ -137,8 +137,8 @@ if selected == "Make an appointment":
         membership_number = st.text_input("", placeholder="Stadspasnummer overschrijven ...",label_visibility="collapsed")
 
         
-    with st.form("entry_form", clear_on_submit=False):                  
-        date = st.date_input("Datum (only Dinsdag, Donderdag, of Vrijdag)")
+    # with st.form("entry_form", clear_on_submit=False):                  
+        date = st.date_input("Datum (alleen Dinsdag, Donderdag, of Vrijdag)")
         day = date.strftime("%A")
         week = date.isocalendar()[1]
         st.write(day)
@@ -173,7 +173,8 @@ if selected == "Make an appointment":
         len_control = len(df_control)       
 
         # submit the data
-        submitted = st.form_submit_button("Save Data")
+        # submitted = st.form_submit_button("Save Data")
+        submitted = st.button("Save Data")
         if submitted:
             if len_control == 0:
                 res = ((dt.strptime(str(date), "%Y-%m-%d").date() - dt.today().date()).days)
