@@ -136,30 +136,32 @@ if selected == "Make an appointment":
     if membership == "ik heb een stadspads":
         membership_number = st.text_input("", placeholder="Stadspasnummer overschrijven ...",label_visibility="collapsed")
 
-        
-# with st.form("entry_form", clear_on_submit=False):                  
     date = st.date_input("Datum (alleen Dinsdag, Donderdag, of Vrijdag)")
     day = date.strftime("%A")
     week = date.isocalendar()[1]
+    
     if day not in ["Tuesday","Thursday","Friday"]:
         st.warning("U kunt alleen een afspraak maken op dinsdag, donderdag of vrijdag")
         st.stop()
+        
     if day=="Friday":
         time_shift = st.radio("Time shift", time_shift_choice_vrijdag, horizontal = True)
     else:
         time_shift = st.radio("Time shift", time_shift_choice_dinsdag_donderdag, horizontal = True)
+        
     name = st.text_input("Name*", placeholder="Enter your name here ...")
     e_mail = st.text_input("E-mail*", placeholder="Enter your e-mail here ...")
     number = st.text_input("Telophone number*", placeholder="Enter your number here ...")
     buurt = st.selectbox("In which neighbourhood do you live in Amsterdam / Uit welk buurt kom je? (Voor statistic pourposes)", buurt_choice)
     expertise = st.selectbox("What is your expertise with bikes? / Welk ervaring heb je met fietsen?", expertise_choice )
     type_bike = st.selectbox("Type of bike that you have? / Wat voor fiets wil je repareren?", type_bike)
+    
     if type_bike in ["Backfiets","E-bike","mijn fiets staat er niet op"]:
         picture = st.camera_input("Maak een foto")
-
         if not picture:
             st.warning("Upload een foto van uw fiets")
             st.stop()
+            
     materiaal = st.selectbox("Repair to do / Reparatie te doen", materiaal_choice)
     opmerking = st.text_input("", placeholder="Opmerking ...",label_visibility="collapsed")
     
