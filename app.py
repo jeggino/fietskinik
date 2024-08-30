@@ -167,10 +167,7 @@ if selected == "Make an appointment":
         picture = st.camera_input("Maak een foto")
         if not picture:
             st.warning("Upload een foto van uw fiets")
-            st.stop()
-        else:
-            bytes_data = picture.getvalue()
-            drive.put(name_picture, data=bytes_data)  
+            st.stop()  
             
     materiaal = st.selectbox("Repair to do / Reparatie te doen", materiaal_choice)
     opmerking = st.text_input("", placeholder="Opmerking ...",label_visibility="collapsed")
@@ -211,9 +208,13 @@ if selected == "Make an appointment":
     
                         else:
                             if membership == "ik heb een stadspads":
-                                insert_period(membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
+                                bytes_data = picture.getvalue()
+                                drive.put(name_picture, data=bytes_data)
+                                insert_period(name_picture,membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
                             else:
-                                insert_period(membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
+                                bytes_data = picture.getvalue()
+                                drive.put(name_picture, data=bytes_data)
+                                insert_period(name_picture,membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
                             st.success("You booked an appointment!")
     
                     elif day == "Friday":
