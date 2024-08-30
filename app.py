@@ -151,11 +151,7 @@ if selected == "Make an appointment":
         
     name = st.text_input("Name*", placeholder="Enter your name here ...")
     e_mail = st.text_input("E-mail*", placeholder="Enter your e-mail here ...")
-    try:
-        number = int(st.text_input("Telophone number*", placeholder="Enter your number here ..."))
-    except:
-        st.error("wrong nummer")
-    
+    number = int(st.text_input("Telophone number*", placeholder="Enter your number here ..."))
     buurt = st.selectbox("In which neighbourhood do you live in Amsterdam / Uit welk buurt kom je? (Voor statistic pourposes)", buurt_choice)
     expertise = st.selectbox("What is your expertise with bikes? / Welk ervaring heb je met fietsen?", expertise_choice )
     type_bike = st.selectbox("Type of bike that you have? / Wat voor fiets wil je repareren?", type_bike)
@@ -190,13 +186,13 @@ if selected == "Make an appointment":
             st.stop()
             
         if len_control == 0:
+            st.warning("HEREEEEEE")
             res = ((dt.strptime(str(date), "%Y-%m-%d").date() - dt.today().date()).days)
             if res == 0: 
                 st.warning('Sorry, you cannot book an appointment on the same day', icon="⚠️")
                 st.stop()
             else:
                 day = parser.parse(str(date)).strftime("%A")
-                st.write(number)
                 int(number)
                 if day in ["Thursday","Tuesday"]:
 
@@ -225,7 +221,7 @@ if selected == "Make an appointment":
                 st.stop()
         else:
             st.warning('There is already an appointment at this date and time with the same name', icon="⚠️") 
-    
+
         
            
 ##### --- drop appointment ---
