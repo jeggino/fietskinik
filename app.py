@@ -192,6 +192,7 @@ if selected == "Make an appointment":
                 st.stop()
             else:
                 day = parser.parse(str(date)).strftime("%A")
+                st.write(number)
                 int(number)
                 if day in ["Thursday","Tuesday"]:
 
