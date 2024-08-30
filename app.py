@@ -211,6 +211,7 @@ if selected == "Make an appointment":
                             else:
                                 insert_period(membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
                             st.success("You booked an appointment!")
+                            st.reset()
                     else:
                         st.warning('Op dit moment is het alleen mogelijk om een ​​afspraak te maken op dinsdag, donderdag of vrijdag', icon="⚠️")
                 except:
