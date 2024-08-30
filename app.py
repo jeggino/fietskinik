@@ -31,7 +31,7 @@ def insert_period(name_picture,membership,date, day, week, time_shift, name, e_m
 # --- SETTINGS ---
 page_title = None
 page_icon = " :bike: "  # emojis: https://www.webfx.com/tools/emoji-cheat-sheet/
-layout = "centered"
+layout = "wide"
 
 # --- HERE THE CHANGE WITH THE SHIFT, 14-16 HAS BEEN DELETED ---
 time_shift_choice_dinsdag_donderdag = ["18:30-20:30"]
