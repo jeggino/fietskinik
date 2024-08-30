@@ -119,6 +119,8 @@ st.image(image)
 # with right:
 st.markdown(TEXT) 
 
+"---"
+
 # --- INPUT & SAVE PERIODS ---
 if selected == "Make an appointment":       
     
