@@ -52,6 +52,48 @@ materiaal_choice = ["Dont know exactly","Flat tire","Change tire front/back ",
 "Bike lighting","Lock removal","Nieuw lock","Luggage carrier","Front rek"]
 
 MEMBERSHIP_CHOICE = ["I want a membership (€50 for 10x workspace usage)", "I will use it only Once (€10 per 2 hours)","I have a Membership",]
+TEXT = """
+Fietskliniek is een buurt-, sociaal betrokken fietswerkplaats. In de fietsenwerkplaats vind je alle gereedschappen en onderdelen (nieuw en tweedehands) die je nodig hebt om je fiets te repareren en je krijgt gratis begeleiding van een ervaren fietsenmaker daarbij. Hierbij moet je rekening houden met de volgende regels
+
+Afspraak is max 2uur
+
+Als de fiets niet klaar is binnen 2 uur, dan moet er een nieuwe afspraak gemaakt worden.
+
+Als je meerdere fietsen hebt om te repareren moeten er meerdere afspraken worden gemaakt.
+
+Eenmalig gebruik van de werkplaats kost €12. Met Stadspas €4,00
+
+Onderdelen nodig voor de reparatie moeten apart worden betaald. We hebben nieuw een 2e hands onderdelen voor een halve prijs van een nieuwe.
+
+Vul onderstaand formulier in om te reserveren. Zodra u op Gegevens opslaan klikt, is uw reservering voltooid! Je krijgt geen bevestiging.
+
+U kunt niet dezelfde dag reserveren waarop u langs wilt komen. Indien u een reservering heeft gemaakt en U kunt niet komen, kunt u deze gewoon annuleren via de knop hierboven, dit kan op dezelfde dag als de afspraak tot 12.00 uur.
+
+Bij annulering tot 12.00 uur krijgt u uw geld terug minus € 2,- voor administratieve doeleinden. Bij no-show of no-cancelling krijgt U geen geld terug.
+
+Welkom bij de Fietskliniek en geniet van je fietssessie!
+
+ENGELS
+
+Fietskliniek is a neighborhood, socially engaged bicycle workshop. In the bicycle workshop you will find all the tools and parts (new and second-hand) you need to repair your bicycle and you will receive free guidance from a bike mechanic. You must take the following rules into account
+
+Appointment is max 2 hours
+
+If the bicycle is not ready within 2 hours, a new appointment must be made.
+
+If you have multiple bicycles to repair, multiple appointments must be made.
+
+One-time use of the workshop costs €12. With Stadspas only €4.00
+
+Parts required for the repair must be paid for separately. We have new and second-hand parts for half the price of new ones.
+
+Complete the form below to make a reservation. Once you click Save Details, your reservation is complete! You will not receive confirmation.
+
+You cannot reserve the same day you want to visit. If you have made a reservation and you cannot come, you can simply cancel it via the button above, this can be done on the same day as the appointment until 12:00 noon.
+
+If you cancel before 12:00, you will receive your money back minus €2 for administrative purposes. In case of no-show or no-cancellation you will not receive a refund.
+
+Welcome to the Fietskliniek and enjoy your cycling session!"""
 
 st.set_page_config(page_title=page_title, page_icon=page_icon, layout=layout)
 
@@ -83,9 +125,7 @@ with left:
     st.image(image)
     
 with right:
-    st.markdown("Fietskliniek is a membership based workspace. Membership is €50 a year voor 10 times use of the space 2 hours per session. Membership is ‘transferable’, you and your friends, collegues  can make use of it. In the bike workspace you will find all the tools and parts you need to repair your bike and you will get free guidance in the process.") 
-    st.markdown("In case you want to use the workspace only once the minimum price is €10 for a 2 hour session paid in advance. Once you click Save Data you reservation is Done!you wont get any confirmation. You can not make a reservation the same day that you want to pass by. If you make a reservation  and you can not come just Cancel it on the button above this can be done on the same day  as the appointment till 12 am.  When cancelled till 12 am you will get your money back minus €2 for admin purposes. By no show or no cancel you wont get you money back.")
-    st.markdown("Welcome to the Fietskliniek and enjoy your bike session!")
+    st.markdown(TEXT) 
 
 # --- INPUT & SAVE PERIODS ---
 if selected == "Make an appointment":
