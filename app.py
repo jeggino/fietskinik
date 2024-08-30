@@ -172,17 +172,18 @@ if selected == "Make an appointment":
     
     "---"
 
-    # find if there are available shift in that data
-    db_content = db.fetch().items
-    df = pd.DataFrame(db_content)
-    df_filter = df[(df["Date"]==str(date)) & (df["Time shift"]==time_shift)]
-    df_control = df[(df["Date"]==str(date)) & (df["Time shift"]==time_shift) & (df["Name"]==name)]
-    len_1 = len(df_filter)
-    len_control = len(df_control)       
+    # # find if there are available shift in that data
+    # db_content = db.fetch().items
+    # df = pd.DataFrame(db_content)
+    # df_filter = df[(df["Date"]==str(date)) & (df["Time shift"]==time_shift)]
+    # df_control = df[(df["Date"]==str(date)) & (df["Time shift"]==time_shift) & (df["Name"]==name)]
+    # len_1 = len(df_filter)
+    # len_control = len(df_control)       
 
     # submit the data
     submitted = st.button("Save Data")
     if submitted:
+        insert_period(membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
 
         if len(name) == 0 or len(e_mail)==0 or len(number)==0:
             st.warning('Vul de verplichte velden in / Please fill the mandatory fields', icon="⚠️")
