@@ -53,7 +53,7 @@ materiaal_choice = ["Dont know exactly","Flat tire","Change tire front/back ",
 "Front fork","Handlebars /handelbars pen","Saddle/ saddle pen",
 "Bike lighting","Lock removal","Nieuw lock","Luggage carrier","Front rek"]
 
-MEMBERSHIP_CHOICE = ["ik heb een stadspads", "ik heb geen Stadspas (€12 per 2 uur)"]
+MEMBERSHIP_CHOICE = [ "ik heb geen Stadspas (€12 per 2 uur)", "ik heb een stadspads"]
 TEXT = """
 Fietskliniek is een buurt-, sociaal betrokken fietswerkplaats. In de fietsenwerkplaats vind je alle gereedschappen en onderdelen (nieuw en tweedehands) die je nodig hebt om je fiets te repareren en je krijgt gratis begeleiding van een ervaren fietsenmaker daarbij. Hierbij moet je rekening houden met de volgende regels
 
