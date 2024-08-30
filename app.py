@@ -35,7 +35,7 @@ layout = "centered"
 
 # --- HERE THE CHANGE WITH THE SHIFT, 14-16 HAS BEEN DELETED ---
 time_shift_choice_dinsdag_donderdag = ["18:30-20:30"]
-time_shift_choice_vrijdag = ["11:30-13:30","13:30-15:30","15:30-17:30"]
+time_shift_choice_vrijdag = ["11:00-13:00","13:30-15:30","15:30-17:30"]
 
 name_picture = f"{random.randint(1,1000000000000)}.jpeg"
 
