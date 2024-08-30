@@ -119,15 +119,15 @@ selected = option_menu(
     orientation="horizontal",
 )
 
-left, right = st.columns([1,3])
+# left, right = st.columns([1,3])
 
-with left:
+# with left:
     
-    image = Image.open('292366152_369803905279628_8461882568456452789_n.jpg')
-    st.image(image)
+image = Image.open('292366152_369803905279628_8461882568456452789_n.jpg')
+st.image(image)
     
-with right:
-    st.markdown(TEXT) 
+# with right:
+st.markdown(TEXT) 
 
 # --- INPUT & SAVE PERIODS ---
 if selected == "Make an appointment":       
@@ -180,11 +180,17 @@ if selected == "Make an appointment":
     # submit the data
     submitted = st.button("Save Data")
     if submitted:
+
+        if name == None or e_mail==None or number==None:
+            st.warning('Please fill the mandatory fields', icon="⚠️")
+            st.stop()
+            
         if len_control == 0:
             res = ((dt.strptime(str(date), "%Y-%m-%d").date() - dt.today().date()).days)
             if res == 0: 
                 st.warning('Sorry, you cannot book an appointment on the same day', icon="⚠️")
-            elif name and e_mail and number:
+                st.stop()
+            else:
                 day = parser.parse(str(date)).strftime("%A")
 
                 try:
@@ -216,14 +222,14 @@ if selected == "Make an appointment":
                             st.stop()
                 except:
                     st.error('Telephone number incorrect', icon="💥")
-            else:
-                st.warning('Please fill the mandatory fields', icon="⚠️") 
+            # else:
+            #     st.warning('Please fill the mandatory fields', icon="⚠️") 
         else:
             st.warning('There is already an appointment at this date and time with the same name', icon="⚠️") 
     
         
            
-# --- drop appointment ---
+##### --- drop appointment ---
 if selected == "Cancel an appointment":
     with st.form("cancel_form", clear_on_submit=False):
 
