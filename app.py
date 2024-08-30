@@ -204,7 +204,7 @@ if selected == "Make an appointment":
                     if day in ["Thursday","Tuesday"]:
     
                         if time_shift=="18:30-20:30" and len_1 >= 3:
-                            st.warning('This time shift is already full. Please choose another one', icon="⚠️")
+                            st.warning('Deze tijdsverschuiving is al vol. Kies een andere / This time shift is already full. Please choose another', icon="⚠️")
     
                         else:
                             try:
