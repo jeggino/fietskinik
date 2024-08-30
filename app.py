@@ -59,6 +59,7 @@ materiaal_choice = ["Dont know exactly","Flat tire","Change tire front/back ",
 "Bike lighting","Lock removal","Nieuw lock","Luggage carrier","Front rek"]
 
 MEMBERSHIP_CHOICE = [ "ik heb geen Stadspas (€12 per 2 uur)", "ik heb een stadspads"]
+
 TEXT = """
 Fietskliniek is een buurt-, sociaal betrokken fietswerkplaats. In de fietsenwerkplaats vind je alle gereedschappen en onderdelen (nieuw en tweedehands) die je nodig hebt om je fiets te repareren en je krijgt gratis begeleiding van een ervaren fietsenmaker daarbij. Hierbij moet je rekening houden met de volgende regels
 
@@ -101,6 +102,8 @@ You cannot reserve the same day you want to visit. If you have made a reservatio
 If you cancel before 12:00, you will receive your money back minus €2 for administrative purposes. In case of no-show or no-cancellation you will not receive a refund.
 
 Welcome to the Fietskliniek and enjoy your cycling session!"""
+
+
 
 st.set_page_config(page_title=page_title, page_icon=page_icon, layout=layout)
 
@@ -241,7 +244,6 @@ if selected == "Make an appointment":
                                 else:
                                     insert_period(name_picture,membership,str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
                             except:
-                                st.warning("cappotto")
                                 if membership == "ik heb een stadspads":
                                     insert_period(name_picture, membership, str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
                                 else:
