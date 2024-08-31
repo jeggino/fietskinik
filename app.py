@@ -44,10 +44,7 @@ buurt_choice = ["Oud-oost","Indische Buurt/Oostelijk Havengebied",
                 "Watergraafsmeer","Ijburg/Zeeburgereiland","Centrum",
                 "Zuid","Zuidoost","Weesp","West","Nieuw-West"]
 
-expertise_choice = ['Geen',
-'Laag',
-'Gemiddeld', 
-'Ervaren',]
+expertise_choice = ['Geen','Laag','Gemiddeld','Ervaren']
 
 type_bike = ["Terugtraprem", 
 "Racefiets",
