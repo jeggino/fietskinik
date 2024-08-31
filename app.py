@@ -84,13 +84,13 @@ MEMBERSHIP_CHOICE = [ "ik heb geen Stadspas (€12 per 2 uur)", "ik heb een Stad
 TEXT = """
 Fietskliniek is een buurt-, sociaal betrokken fietswerkplaats. In de fietsenwerkplaats vind je alle gereedschappen en onderdelen (nieuw en tweedehands) die je nodig hebt om je fiets te repareren en je krijgt begeleiding van een ervaren vrijwilliger fietsenmaker daarbij. Hierbij moet je rekening houden met de volgende regels:
 
-- Afspraak is max 2uur
+- Afspraak is max 2uur.
 
 - Als de fiets niet klaar is binnen 2 uur, dan moet er een nieuwe afspraak gemaakt worden.
 
 - Als je meerdere fietsen hebt om te repareren moeten er meerdere afspraken worden gemaakt.
 
-- Eenmalig gebruik van de werkplaats kost €12. Met Stadspas €4,00
+- Eenmalig gebruik van de werkplaats kost €12. Met Stadspas €4,00.
 
 - Onderdelen nodig voor de reparatie moeten apart worden betaald. We hebben nieuwe - en 2e hands onderdelen voor de halve prijs van een nieuwe.
 
