@@ -195,7 +195,7 @@ if selected == "Maak een afspraak":
     len_control = len(df_control)       
 
     # submit the data
-    submitted = st.button("Save Data")
+    submitted = st.button("Gegevens opslaan")
     if submitted:
 
         if len(name) == 0 or len(e_mail)==0 or len(number)==0:
