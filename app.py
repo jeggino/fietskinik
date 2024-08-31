@@ -170,7 +170,7 @@ if selected == "Maak een afspraak":
     buurt = st.selectbox("Uit welke buurt kom je? (voor statistieken doeleinden)", buurt_choice)
     expertise = st.selectbox("Welke ervaring heb je met fietsen?", expertise_choice )
     type_bike = st.selectbox("Wat voor fiets wil je repareren?", type_bike)
-    if type_bike in ["Backfiets","E-bike","mijn fiets staat er niet op"]:
+    if type_bike in ["Backfiets - Stuur een foto aub","E-bike - Stuur een foto aub","mijn fiets staat er niet op"]:
         picture = st.file_uploader("Upload een foto")
         
         if picture:
