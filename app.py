@@ -44,7 +44,10 @@ buurt_choice = ["Oud-oost","Indische Buurt/Oostelijk Havengebied",
                 "Watergraafsmeer","Ijburg/Zeeburgereiland","Centrum",
                 "Zuid","Zuidoost","Weesp","West","Nieuw-West"]
 
-expertise_choice = ["None", "Low", "Average", "High"]
+expertise_choice = ['Geen',
+'Laag',
+'Gemiddeld', 
+'Ervaren',]
 
 type_bike = ["Terugtraprem", 
 "Racefiets",
@@ -82,7 +85,7 @@ materiaal_choice = ['Ik weet niet precies',
 MEMBERSHIP_CHOICE = [ "ik heb geen Stadspas (€12 per 2 uur)", "ik heb een Stadspas"]
 
 TEXT = """
-Fietskliniek is een buurt-, sociaal betrokken fietswerkplaats. In de fietsenwerkplaats vind je alle gereedschappen en onderdelen (nieuw en tweedehands) die je nodig hebt om je fiets te repareren en je krijgt gratis begeleiding van een ervaren fietsenmaker daarbij. Hierbij moet je rekening houden met de volgende regels:
+Fietskliniek is een buurt-, sociaal betrokken fietswerkplaats. In de fietsenwerkplaats vind je alle gereedschappen en onderdelen (nieuw en tweedehands) die je nodig hebt om je fiets te repareren en je krijgt begeleiding van een ervaren vrijwilliger fietsenmaker daarbij. Hierbij moet je rekening houden met de volgende regels:
 
 - Afspraak is max 2uur
 
@@ -166,8 +169,8 @@ if selected == "Maak een afspraak":
     name = st.text_input("Naam*", placeholder="Vul hier uw naam in ...")
     e_mail = st.text_input("E-mail*", placeholder="Voer hier uw e-mailadres in ...")
     number = st.text_input("Telefoonnummer*", placeholder="Voer hier uw nummer in ...")
-    buurt = st.selectbox("Uit welk buurt kom je? (Voor statistic pourposes)", buurt_choice)
-    expertise = st.selectbox("Welk ervaring heb je met fietsen?", expertise_choice )
+    buurt = st.selectbox("Uit welke buurt kom je? (voor statistieken doeleinden)", buurt_choice)
+    expertise = st.selectbox("Welke ervaring heb je met fietsen?", expertise_choice )
     type_bike = st.selectbox("Wat voor fiets wil je repareren?", type_bike)
     if type_bike in ["Backfiets","E-bike","mijn fiets staat er niet op"]:
         picture = st.file_uploader("Upload een foto")
