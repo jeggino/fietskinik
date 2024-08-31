@@ -80,25 +80,18 @@ materiaal_choice = ['Ik weet niet precies',
 MEMBERSHIP_CHOICE = [ "ik heb geen Stadspas (€12 per 2 uur)", "ik heb een Stadspas"]
 
 TEXT = """
-Fietskliniek is een buurt-, sociaal betrokken fietswerkplaats. In de fietsenwerkplaats vind je alle gereedschappen en onderdelen (nieuw en tweedehands) die je nodig hebt om je fiets te repareren en je krijgt begeleiding van een ervaren vrijwilliger fietsenmaker daarbij. Hierbij moet je rekening houden met de volgende regels:
+Fietskliniek is een buurt-, sociaal betrokken fietswerkplaats. In de fietsenwerkplaats vind u alle gereedschappen en onderdelen (nieuw en tweedehands) die u nodig hebt om uw fiets te repareren en u krijgt begeleiding van een ervaren vrijwilliger fietsenmaker daarbij. Hierbij moet je rekening houden met de volgende regels:
 
 - Afspraak is max 2uur.
-
 - Als de fiets niet klaar is binnen 2 uur, dan moet er een nieuwe afspraak gemaakt worden.
-
-- Als je meerdere fietsen hebt om te repareren moeten er meerdere afspraken worden gemaakt.
-
+- Als u meerdere fietsen hebt om te repareren moeten er meerdere afspraken worden gemaakt.
 - Eenmalig gebruik van de werkplaats kost €12. Met Stadspas €4,00.
+- Onderdelen nodig voor de reparatie moeten apart worden betaald. We hebben nieuwe - en 2e hands onderdelen voor de halve prijs van een nieuwe.
+- Vul onderstaand formulier in om te reserveren. Zodra u op Gegevens opslaan klikt, is uw reservering voltooid! U krijgt geen bevestiging.
+- U kunt niet dezelfde dag reserveren waarop u langs wilt komen. Indien u een reservering heeft gemaakt en u kunt niet komen, kunt u deze gewoon annuleren via de knop hierboven, dit kan op dezelfde dag als de afspraak tot 12.00 uur.
+- Bij annulering tot 12.00 uur krijgt u uw geld terug minus € 2,- voor administratieve doeleinden. Bij no-show of no-cancelling krijgt u geen geld terug.
 
-- Onderdelen nodig voor de reparatie moeten apart worden betaald. We hebben nieuwe - en 2e hands onderdelen voor de halve prijs van een nieuwe.
-
-- Vul onderstaand formulier in om te reserveren. Zodra u op Gegevens opslaan klikt, is uw reservering voltooid! Je krijgt geen bevestiging.
-
-- U kunt niet dezelfde dag reserveren waarop u langs wilt komen. Indien u een reservering heeft gemaakt en U kunt niet komen, kunt u deze gewoon annuleren via de knop hierboven, dit kan op dezelfde dag als de afspraak tot 12.00 uur.
-
-- Bij annulering tot 12.00 uur krijgt u uw geld terug minus € 2,- voor administratieve doeleinden. Bij no-show of no-cancelling krijgt U geen geld terug.
-
-Welkom bij de Fietskliniek en geniet van je fietssessie!
+Welkom bij de Fietskliniek en geniet van uw fietssessie!
 """
 
 
@@ -164,9 +157,9 @@ if selected == "Maak een afspraak":
     name = st.text_input("Naam*", placeholder="Vul hier uw naam in ...")
     e_mail = st.text_input("E-mail*", placeholder="Voer hier uw e-mailadres in ...")
     number = st.text_input("Telefoonnummer*", placeholder="Voer hier uw nummer in ...")
-    buurt = st.selectbox("Uit welke buurt kom je? (voor statistieken doeleinden)", buurt_choice)
-    expertise = st.selectbox("Welke ervaring heb je met fietsen?", expertise_choice )
-    type_bike = st.selectbox("Wat voor fiets wil je repareren?", type_bike)
+    buurt = st.selectbox("Uit welke buurt komt u? (voor statistieken doeleinden)", buurt_choice)
+    expertise = st.selectbox("Welke ervaring heeft u met fietsen?", expertise_choice )
+    type_bike = st.selectbox("Wat voor fiets wilt u repareren?", type_bike)
     if type_bike in ["Backfiets - Stuur een foto aub","E-bike - Stuur een foto aub","mijn fiets staat er niet op"]:
         picture = st.file_uploader("Upload een foto")
         
