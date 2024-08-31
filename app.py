@@ -47,11 +47,8 @@ buurt_choice = ["Oud-oost","Indische Buurt/Oostelijk Havengebied",
 
 expertise_choice = ['Geen','Laag','Gemiddeld','Ervaren']
 
-type_bike = ["Terugtraprem", 
-"Racefiets",
-"Versnellingen buiten",
-"Versnellingen binnen","Vouwfiets","Kinderfiets",
-"Driewieler","Backfiets - Stuur een foto aub","E-bike - Stuur een foto aub","mijn fiets staat er niet op"]
+type_bike = ["Terugtraprem", "Racefiets","Versnellingen buiten","Versnellingen binnen","Vouwfiets","Kinderfiets",
+             "Driewieler","Backfiets - Stuur een foto aub","E-bike - Stuur een foto aub","mijn fiets staat er niet op"]
 
 materiaal_choice = ['Ik weet niet precies', 
 'Nieuw buitenband voor of achter',
