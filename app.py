@@ -278,7 +278,7 @@ if selected == "Afspraak afzeggen":
         db_content = db.fetch().items
         df = pd.DataFrame(db_content)
         df_filter = df[(df["Date"]==date) & (df["Time shift"]==time_shift) & (df.e_mail==e_mail)]
-        submitted = st.form_submit_button("Cancel appointment")
+        submitted = st.form_submit_button("Afspraak annuleren")
         if submitted:
             if e_mail:
                 if len(df_filter) > 0:
