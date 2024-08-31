@@ -51,7 +51,7 @@ type_bike = ["Terugtraprem",
 "Racefiets",
 "Versnellingen buiten",
 "Versnellingen binnen","Vouwfiets","Kinderfiets",
-"Driewieler","Backfiets","E-bike","mijn fiets staat er niet op"]
+"Driewieler","Backfiets - Stuur een foto aub","E-bike - Stuur een foto aub","mijn fiets staat er niet op"]
 
 materiaal_choice = ['Ik weet niet precies', 
 'Nieuw buitenband voor of achter',
@@ -181,7 +181,7 @@ if selected == "Maak een afspraak":
             st.stop()  
             
     materiaal = st.multiselect("Reparatie te doen", materiaal_choice)
-    opmerking = st.text_input("", placeholder="Opmerking ...",label_visibility="collapsed")
+    opmerking = st.text_input("", placeholder="Stuur een berich, vraag, enz ...",label_visibility="collapsed")
     
     """_*Verplichte velden_"""
     
@@ -269,7 +269,7 @@ if selected == "Maak een afspraak":
 if selected == "Afspraak afzeggen":
     with st.form("cancel_form", clear_on_submit=False):
 
-        date = str(st.date_input("Date"))
+        date = str(st.date_input("Datum"))
         time_shift = st.selectbox("Time shift", time_shift_choice_cancel )
         e_mail = st.text_input("", placeholder="Enter your e-mail here ...")
         
