@@ -270,8 +270,8 @@ if selected == "Afspraak afzeggen":
     with st.form("cancel_form", clear_on_submit=False):
 
         date = str(st.date_input("Datum"))
-        time_shift = st.selectbox("Time shift", time_shift_choice_cancel )
-        e_mail = st.text_input("", placeholder="Enter your e-mail here ...")
+        time_shift = st.selectbox("Tijdsverschuiving", time_shift_choice_cancel )
+        e_mail = st.text_input("", placeholder="Voer hier uw e-mailadres in ...")
         
         "---"
         
@@ -284,9 +284,9 @@ if selected == "Afspraak afzeggen":
                 if len(df_filter) > 0:
                     key = df_filter["key"].values[0]       
                     db.delete(key)
-                    st.success("Your appointment has been canceled!") 
+                    st.success("Uw afspraak is geannuleerd!") 
                 else:
-                    st.warning('there is no appointment at this email', icon="⚠️")
+                    st.warning('Er is geen afspraak op dit e-mailadres', icon="⚠️")
 
             else:
-                st.warning('please write your e_mail', icon="⚠️")
+                st.warning('schrijf alstublieft uw e-mail', icon="⚠️")
