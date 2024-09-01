@@ -207,8 +207,6 @@ st.markdown(hide_st_style, unsafe_allow_html=True)
 on = st.toggle("English")
 
 if not on:
-    st.logo("https://cdn4.iconfinder.com/data/icons/general13/png/256/world.png", "https://cdn4.iconfinder.com/data/icons/general13/png/256/world.png")
-
     # --- NAVIGATION MENU ---
     selected = option_menu(
         menu_title=None,
@@ -572,8 +570,3 @@ else:
     
                 else:
                     st.warning('Please write your email', icon="⚠️")
-
-    
-
-# pg = st.navigation([st.Page(Nederland,icon="🇳🇱"),st.Page(English,icon="🇬🇧")])
-# pg.run()
