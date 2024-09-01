@@ -413,6 +413,17 @@ def English():
         date = st.date_input("Date (Tuesday, Thursday, or Friday only)")
         day = date.strftime("%A")
         week = date.isocalendar()[1]
+
+                #_________vakantie_______
+        res_holiday = fun(hol_dict, str(date))
+
+        try:
+            if res_holiday[0]==True:
+                st.warning(f"It's {res_holiday[1]}! Sorry, the Fietskliniek is closed.")
+                st.stop()
+        except:
+            pass
+        #_________vakantie_______
         
         if day not in ["Tuesday","Thursday","Friday"]:
             st.warning("You can only make an appointment on Tuesday, Thursday or Friday")
