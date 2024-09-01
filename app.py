@@ -282,6 +282,7 @@ if not on:
         opmerking = st.text_input("", placeholder="Stuur een bericht, vraag, enz ...",label_visibility="collapsed")
         
         """_*Verplichte velden_"""
+        """_**persoonlijke data wordt niet opgeslagen, alleen gebruikt voor administratieve doeleinden van de gemaakte afspraak"""
         
         "---"
     
@@ -464,6 +465,7 @@ else:
         opmerking = st.text_input("", placeholder="Send a message, question, etc. ...",label_visibility="collapsed")
         
         """_*Required fields_"""
+        """_**personal data is not stored, only used for administrative purposes of the appointment made"""
         
         "---"
     
