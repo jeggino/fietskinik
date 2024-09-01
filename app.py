@@ -41,6 +41,38 @@ time_shift_choice_cancel = ["11:00-13:00","13:30-15:30","15:30-17:30","18:30-20:
 name_picture = f"{random.randint(1,1000000000000)}.jpeg"
 
 
+#_________vakantie_______
+holidays = {'Herfstvakantie' : pd.date_range(start="2024-10-26", end="2024-11-03"),
+'Kerstvakantie' : pd.date_range(start="2024-12-21", end="2025-01-05"),
+'Voorjaarsvakantie' : pd.date_range(start="2025-02-15", end="2025-02-23"),
+'Meivakantie' : pd.date_range(start="2025-04-26", end="2025-05-04"),
+'Zomervakantie' : pd.date_range(start="2025-07-12", end="2025-08-04")
+            }
+
+
+hol_dict = {}
+for holiday in holidays.keys():
+    
+    list_holidays = []
+    
+    for date in holidays[holiday]:
+        list_holidays.append(str(date.date()))
+        
+    hol_dict[holiday] = list_holidays
+
+
+def fun(dict_, date):
+    for holiday_name, list_date in dict_.items():
+        if date in list_date:
+            return True, holiday_name
+        else:
+            return False, None
+
+#_________vakantie_______
+
+
+
+
 buurt_choice = ["Oud-oost","Indische Buurt/Oostelijk Havengebied",
                 "Watergraafsmeer","Ijburg/Zeeburgereiland","Centrum",
                 "Zuid","Zuidoost","Weesp","West","Nieuw-West"]
@@ -196,6 +228,16 @@ def Nederland():
         date = st.date_input("Datum (alleen Dinsdag, Donderdag, of Vrijdag)")
         day = date.strftime("%A")
         week = date.isocalendar()[1]
+        
+
+        #_________vakantie_______
+
+        res_holiday = fun(hol_dict, str(date))
+        if res[0]==True:
+            st.warning(f"Het is {res[1]}! Excuus, de Fietskliniek is gesloten.")
+            st.stop()
+        #_________vakantie_______
+
         
         if day not in ["Tuesday","Thursday","Friday"]:
             st.warning("U kunt alleen een afspraak maken op dinsdag, donderdag of vrijdag")
