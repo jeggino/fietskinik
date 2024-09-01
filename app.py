@@ -465,7 +465,7 @@ else:
         opmerking = st.text_input("", placeholder="Send a message, question, etc. ...",label_visibility="collapsed")
         
         """_*Required fields_"""
-        """_**personal data is not stored, only used for administrative purposes of the appointment made_"""
+        """:orange-background[_personal data is not stored, only used for administrative purposes of the appointment made_]"""
         
         "---"
     
