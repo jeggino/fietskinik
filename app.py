@@ -26,6 +26,15 @@ def insert_period(name_picture,membership,date, day, week, time_shift, name, e_m
                    "Neighborhood": buurt, "Expertise": expertise, "Type of bike": type_bike,
                    "Type of reparation":materiaal, "Remarks":opmerking
                   })
+    
+#_________vakantie_______
+def fun(dict_, date):
+    for holiday_name, list_date in dict_.items():
+        if date in list_date:
+            return True, holiday_name
+        else:
+            return False, None
+#_________vakantie_______
 
 
 # --- SETTINGS ---
@@ -49,7 +58,6 @@ holidays = {'Herfstvakantie' : pd.date_range(start="2024-10-26", end="2024-11-03
 'Zomervakantie' : pd.date_range(start="2025-07-12", end="2025-08-04")
             }
 
-
 hol_dict = {}
 for holiday in holidays.keys():
     
@@ -59,15 +67,6 @@ for holiday in holidays.keys():
         list_holidays.append(str(date.date()))
         
     hol_dict[holiday] = list_holidays
-
-
-def fun(dict_, date):
-    for holiday_name, list_date in dict_.items():
-        if date in list_date:
-            return True, holiday_name
-        else:
-            return False, None
-
 #_________vakantie_______
 
 
@@ -231,12 +230,10 @@ def Nederland():
         
 
         #_________vakantie_______
-
         res_holiday = fun(hol_dict, str(date))
         if res_holiday[0]==True:
             st.warning(f"Het is {res_holiday[1]}! Excuus, de Fietskliniek is gesloten.")
             st.stop()
-            
         #_________vakantie_______
 
         
