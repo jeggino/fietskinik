@@ -47,7 +47,7 @@ buurt_choice = ["Oud-oost","Indische Buurt/Oostelijk Havengebied",
 
 expertise_choice = ['Geen','Laag','Gemiddeld','Ervaren']
 
-type_bike = ["Terugtraprem", "Racefiets","Versnellingen buiten","Versnellingen binnen","Vouwfiets","Kinderfiets",
+type_bikes = ["Terugtraprem", "Racefiets","Versnellingen buiten","Versnellingen binnen","Vouwfiets","Kinderfiets",
              "Driewieler","Backfiets - Stuur een foto aub","E-bike - Stuur een foto aub","mijn fiets staat er niet op"]
 
 materiaal_choice = ['Ik weet niet precies', 
@@ -160,7 +160,7 @@ def Nederland():
         number = st.text_input("Telefoonnummer*", placeholder="Voer hier uw nummer in ...")
         buurt = st.selectbox("Uit welke buurt komt u? (voor statistieken doeleinden)", buurt_choice)
         expertise = st.selectbox("Welke ervaring heeft u met fietsen?", expertise_choice )
-        type_bike = st.selectbox("Wat voor fiets wilt u repareren?", type_bike)
+        type_bike = st.selectbox("Wat voor fiets wilt u repareren?", type_bikes)
         if type_bike in ["Backfiets - Stuur een foto aub","E-bike - Stuur een foto aub","mijn fiets staat er niet op"]:
             picture = st.file_uploader("Upload een foto")
             
