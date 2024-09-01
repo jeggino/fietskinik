@@ -94,6 +94,57 @@ Fietskliniek is een buurt-, sociaal betrokken fietswerkplaats. In de fietsenwerk
 Welkom bij de Fietskliniek en geniet van uw fietssessie!
 """
 
+#---COSTANTS IN ENGLISH---
+expertise_choice_english = ['None', 'Low', 'Average', 'Experienced']
+
+type_bikes_english = ["Coaster brake", "Racing bike","Outside gears","Inside gears","Folding bike","Children's bike", "Tricycle","Back bike - Please send a photo","E-bike - Please send a photo","my bike is not listed"]
+
+
+materiaal_choice_english = ['I dont know exactly',
+'New outer tire front or rear',
+'Chain',
+'Chain case',
+'Derailleur',
+'Cassette',
+'Sprocket',
+'Brake cable',
+'Brake shoe',
+'Coaster brake problem',
+'Gear internals problem',
+'Gear cassette problem',
+'Gear cable',
+'Front axle',
+'Rear wheel play',
+'Spokes',
+'Bottom bracket',
+'Left or right sprocket',
+'Pedals',
+'Front fork',
+'Handlebars, handlebars pin',
+'Saddle, seat post',
+'Lighting',
+'Remove lock',
+'New lock',
+'Rear, Front rack']
+
+MEMBERSHIP_CHOICE_english = ["I don't have a City Pass (€12 per 2 hours)", "I have a City Pass"]
+
+TEXT_english = """
+Fietskliniek is a neighbourhood, socially involved bicycle workshop. In the bicycle workshop you will find all the tools and parts (new and second-hand) that you need to repair your bicycle and you will be guided by an experienced volunteer bicycle mechanic. You must take the following rules into account:
+
+- Appointment is max 2 hours.
+- If the bicycle is not ready within 2 hours, a new appointment must be made.
+- If you have multiple bicycles to repair, multiple appointments must be made.
+- One-time use of the workshop costs €12. With City Pass €4.00.
+- Parts needed for the repair must be paid for separately. We have new - and second-hand parts for half the price of a new one.
+- Fill in the form below to make a reservation. As soon as you click on Save data, your reservation is complete! You will not receive a confirmation.
+- You cannot make a reservation on the same day that you want to come by. If you have made a reservation and you cannot come, you can simply cancel it via the button above, this can be done on the same day as the appointment until 12:00.
+- If you cancel until 12:00, you will receive your money back minus € 2,- for administrative purposes. In case of no-show or no-cancellation, you will not receive any money back.
+
+Welcome to the Cycling Clinic and enjoy your cycling session!
+"""
+
+
 
 
 st.set_page_config(page_title=page_title, page_icon=page_icon, layout=layout)
