@@ -44,7 +44,6 @@ def fun(dict_, date):
 # sidebar_logo = st.selectbox("Sidebar logo", options, 0)
 # main_body_logo = st.selectbox("Main body logo", options, 1)
 
-st.logo("https://cdn4.iconfinder.com/data/icons/general13/png/256/world.png", "https://cdn4.iconfinder.com/data/icons/general13/png/256/world.png")
 # --- SETTINGS ---
 page_title = None
 page_icon = " :bike: "  # emojis: https://www.webfx.com/tools/emoji-cheat-sheet/
@@ -207,7 +206,8 @@ st.markdown(hide_st_style, unsafe_allow_html=True)
 
 
 def Nederland():
-    
+    st.logo("https://cdn4.iconfinder.com/data/icons/general13/png/256/world.png", "https://cdn4.iconfinder.com/data/icons/general13/png/256/world.png")
+
     # --- NAVIGATION MENU ---
     selected = option_menu(
         menu_title=None,
@@ -392,8 +392,7 @@ def Nederland():
 
 
 def English():
-    # image = "https://www.thesignmaker.co.nz/wp-content/uploads/2019/04/C16_Work-In-Progress.png"
-    # st.image(image)
+    st.logo("https://cdn4.iconfinder.com/data/icons/general13/png/256/world.png", "https://cdn4.iconfinder.com/data/icons/general13/png/256/world.png")
 
     
     # --- NAVIGATION MENU ---
