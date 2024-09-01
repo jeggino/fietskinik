@@ -118,165 +118,169 @@ selected = option_menu(
     orientation="horizontal",
 )
 
-# left, right = st.columns([1,3])
-
-# with left:
-    
-image = Image.open('292366152_369803905279628_8461882568456452789_n.jpg')
-st.image(image)
-    
-# with right:
-st.markdown(TEXT) 
-
-"---"
-
-# --- INPUT & SAVE PERIODS ---
-if selected == "Maak een afspraak":       
-    
-    membership = st.radio("Betaling", MEMBERSHIP_CHOICE, horizontal = False)
-    if membership == "ik heb een Stadspas":
-        membership_number = st.text_input("", placeholder="Stadspasnummer overschrijven ...",label_visibility="collapsed")
+def Nederland():
         
-        if  len(membership_number) == 0:
-            st.warning("Vul het Stadspasnummer in aub")
-            st.stop()
-
-    date = st.date_input("Datum (alleen Dinsdag, Donderdag, of Vrijdag)")
-    day = date.strftime("%A")
-    week = date.isocalendar()[1]
-    
-    if day not in ["Tuesday","Thursday","Friday"]:
-        st.warning("U kunt alleen een afspraak maken op dinsdag, donderdag of vrijdag")
-        st.stop()
+    image = Image.open('292366152_369803905279628_8461882568456452789_n.jpg')
+    st.image(image)
         
-    if day=="Friday":
-        time_shift = st.radio("Tijdsverschuiving", time_shift_choice_vrijdag, horizontal = True)
-    else:
-        time_shift = st.radio("Tijdsverschuiving", time_shift_choice_dinsdag_donderdag, horizontal = True)
-        
-    name = st.text_input("Naam*", placeholder="Vul hier uw naam in ...")
-    e_mail = st.text_input("E-mail*", placeholder="Voer hier uw e-mailadres in ...")
-    number = st.text_input("Telefoonnummer*", placeholder="Voer hier uw nummer in ...")
-    buurt = st.selectbox("Uit welke buurt komt u? (voor statistieken doeleinden)", buurt_choice)
-    expertise = st.selectbox("Welke ervaring heeft u met fietsen?", expertise_choice )
-    type_bike = st.selectbox("Wat voor fiets wilt u repareren?", type_bike)
-    if type_bike in ["Backfiets - Stuur een foto aub","E-bike - Stuur een foto aub","mijn fiets staat er niet op"]:
-        picture = st.file_uploader("Upload een foto")
-        
-        if picture:
-            st.image(picture,width = 300)
-            
-        if not picture:
-            st.warning("Upload een foto van uw fiets")
-            st.stop()  
-            
-    materiaal = st.multiselect("Reparatie te doen", materiaal_choice)
-    opmerking = st.text_input("", placeholder="Stuur een berich, vraag, enz ...",label_visibility="collapsed")
-    
-    """_*Verplichte velden_"""
+    # with right:
+    st.markdown(TEXT) 
     
     "---"
-
-    # find if there are available shift in that data
-    db_content = db.fetch().items
-    df = pd.DataFrame(db_content)
-    df_filter = df[(df["Date"]==str(date)) & (df["Time shift"]==time_shift)]
-    df_control = df[(df["Date"]==str(date)) & (df["Time shift"]==time_shift) & (df["Name"]==name)]
-    len_1 = len(df_filter)
-    len_control = len(df_control)       
-
-    # submit the data
-    submitted = st.button("Gegevens opslaan")
-    if submitted:
-
-        if len(name) == 0 or len(e_mail)==0 or len(number)==0:
-            st.warning('Vul de verplichte velden in', icon="⚠️")
+    
+    # --- INPUT & SAVE PERIODS ---
+    if selected == "Maak een afspraak":       
+        
+        membership = st.radio("Betaling", MEMBERSHIP_CHOICE, horizontal = False)
+        if membership == "ik heb een Stadspas":
+            membership_number = st.text_input("", placeholder="Stadspasnummer overschrijven ...",label_visibility="collapsed")
+            
+            if  len(membership_number) == 0:
+                st.warning("Vul het Stadspasnummer in aub")
+                st.stop()
+    
+        date = st.date_input("Datum (alleen Dinsdag, Donderdag, of Vrijdag)")
+        day = date.strftime("%A")
+        week = date.isocalendar()[1]
+        
+        if day not in ["Tuesday","Thursday","Friday"]:
+            st.warning("U kunt alleen een afspraak maken op dinsdag, donderdag of vrijdag")
             st.stop()
             
-        if len_control == 0:
-            res = ((dt.strptime(str(date), "%Y-%m-%d").date() - dt.today().date()).days)
-            if res == 0: 
-                st.warning('Helaas kunt u geen afspraak op dezelfde dag boeken', icon="⚠️")
-                st.stop()
-            else:
-                day = parser.parse(str(date)).strftime("%A")
-                try:
-                    int(number)
-                    if day in ["Thursday","Tuesday"]:
-    
-                        if time_shift=="18:30-20:30" and len_1 >= 3:
-                            st.warning('Deze tijdsverschuiving is al vol. Kies een andere', icon="⚠️")
-    
-                        else:
-                            try:
-                                bytes_data = picture.getvalue()
-                                drive.put(name_picture, data=bytes_data)
-                                if membership == "ik heb een stadspads":
-                                    insert_period(name_picture,membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
-                                else:
-                                    insert_period(name_picture,membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
-                            except:
-                                if membership == "ik heb een stadspads":
-                                    insert_period(name_picture,membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
-                                else:
-                                    insert_period(name_picture,membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
-                            st.success("🚲🚲 U heeft een afspraak gemaakt! 🚲🚲")
-    
-                    elif day == "Friday":
-    
-                        if time_shift=="11:00-13:00" and len_1 >= 1:
-                            st.warning('Deze tijdsverschuiving is al vol. Kies een andere', icon="⚠️")
-    
-                        elif time_shift=="13:30-15:30" and len_1 >= 1:
-                            st.warning('Deze tijdsverschuiving is al vol. Kies een andere', icon="⚠️")
-    
-                        elif time_shift=="15:30-17:30" and len_1 >= 1:
-                            st.warning('Deze tijdsverschuiving is al vol. Kies een andere', icon="⚠️")
-    
-                        else:
-                            try:
-                                bytes_data = picture.getvalue()
-                                drive.put(name_picture, data=bytes_data)
-                                if membership == "ik heb een stadspads":
-                                    insert_period(name_picture,membership,str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
-                                else:
-                                    insert_period(name_picture,membership,str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
-                            except:
-                                if membership == "ik heb een stadspads":
-                                    insert_period(name_picture, membership, str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
-                                else:
-                                    insert_period(name_picture, membership, str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
-                            st.success("🚲🚲 U heeft een afspraak gemaakt! 🚲🚲")
-                except:
-                    st.error("Vul alstublieft een juist telefoonnummer in")
-
+        if day=="Friday":
+            time_shift = st.radio("Tijdsverschuiving", time_shift_choice_vrijdag, horizontal = True)
         else:
-            st.warning('Er is al een afspraak op deze datum en tijd met dezelfde naam', icon="⚠️") 
-
+            time_shift = st.radio("Tijdsverschuiving", time_shift_choice_dinsdag_donderdag, horizontal = True)
+            
+        name = st.text_input("Naam*", placeholder="Vul hier uw naam in ...")
+        e_mail = st.text_input("E-mail*", placeholder="Voer hier uw e-mailadres in ...")
+        number = st.text_input("Telefoonnummer*", placeholder="Voer hier uw nummer in ...")
+        buurt = st.selectbox("Uit welke buurt komt u? (voor statistieken doeleinden)", buurt_choice)
+        expertise = st.selectbox("Welke ervaring heeft u met fietsen?", expertise_choice )
+        type_bike = st.selectbox("Wat voor fiets wilt u repareren?", type_bike)
+        if type_bike in ["Backfiets - Stuur een foto aub","E-bike - Stuur een foto aub","mijn fiets staat er niet op"]:
+            picture = st.file_uploader("Upload een foto")
+            
+            if picture:
+                st.image(picture,width = 300)
+                
+            if not picture:
+                st.warning("Upload een foto van uw fiets")
+                st.stop()  
+                
+        materiaal = st.multiselect("Reparatie te doen", materiaal_choice)
+        opmerking = st.text_input("", placeholder="Stuur een berich, vraag, enz ...",label_visibility="collapsed")
         
-           
-##### --- drop appointment ---
-if selected == "Afspraak afzeggen":
-    with st.form("cancel_form", clear_on_submit=False):
-
-        date = str(st.date_input("Datum"))
-        time_shift = st.selectbox("Tijdsverschuiving", time_shift_choice_cancel )
-        e_mail = st.text_input("", placeholder="Voer hier uw e-mailadres in ...")
+        """_*Verplichte velden_"""
         
         "---"
-        
+    
+        # find if there are available shift in that data
         db_content = db.fetch().items
         df = pd.DataFrame(db_content)
-        df_filter = df[(df["Date"]==date) & (df["Time shift"]==time_shift) & (df.e_mail==e_mail)]
-        submitted = st.form_submit_button("Afspraak annuleren")
+        df_filter = df[(df["Date"]==str(date)) & (df["Time shift"]==time_shift)]
+        df_control = df[(df["Date"]==str(date)) & (df["Time shift"]==time_shift) & (df["Name"]==name)]
+        len_1 = len(df_filter)
+        len_control = len(df_control)       
+    
+        # submit the data
+        submitted = st.button("Gegevens opslaan")
         if submitted:
-            if e_mail:
-                if len(df_filter) > 0:
-                    key = df_filter["key"].values[0]       
-                    db.delete(key)
-                    st.success("Uw afspraak is geannuleerd!") 
+    
+            if len(name) == 0 or len(e_mail)==0 or len(number)==0:
+                st.warning('Vul de verplichte velden in', icon="⚠️")
+                st.stop()
+                
+            if len_control == 0:
+                res = ((dt.strptime(str(date), "%Y-%m-%d").date() - dt.today().date()).days)
+                if res == 0: 
+                    st.warning('Helaas kunt u geen afspraak op dezelfde dag boeken', icon="⚠️")
+                    st.stop()
                 else:
-                    st.warning('Er is geen afspraak op dit e-mailadres', icon="⚠️")
-
+                    day = parser.parse(str(date)).strftime("%A")
+                    try:
+                        int(number)
+                        if day in ["Thursday","Tuesday"]:
+        
+                            if time_shift=="18:30-20:30" and len_1 >= 3:
+                                st.warning('Deze tijdsverschuiving is al vol. Kies een andere', icon="⚠️")
+        
+                            else:
+                                try:
+                                    bytes_data = picture.getvalue()
+                                    drive.put(name_picture, data=bytes_data)
+                                    if membership == "ik heb een stadspads":
+                                        insert_period(name_picture,membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
+                                    else:
+                                        insert_period(name_picture,membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
+                                except:
+                                    if membership == "ik heb een stadspads":
+                                        insert_period(name_picture,membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
+                                    else:
+                                        insert_period(name_picture,membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
+                                st.success("🚲🚲 U heeft een afspraak gemaakt! 🚲🚲")
+        
+                        elif day == "Friday":
+        
+                            if time_shift=="11:00-13:00" and len_1 >= 1:
+                                st.warning('Deze tijdsverschuiving is al vol. Kies een andere', icon="⚠️")
+        
+                            elif time_shift=="13:30-15:30" and len_1 >= 1:
+                                st.warning('Deze tijdsverschuiving is al vol. Kies een andere', icon="⚠️")
+        
+                            elif time_shift=="15:30-17:30" and len_1 >= 1:
+                                st.warning('Deze tijdsverschuiving is al vol. Kies een andere', icon="⚠️")
+        
+                            else:
+                                try:
+                                    bytes_data = picture.getvalue()
+                                    drive.put(name_picture, data=bytes_data)
+                                    if membership == "ik heb een stadspads":
+                                        insert_period(name_picture,membership,str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
+                                    else:
+                                        insert_period(name_picture,membership,str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
+                                except:
+                                    if membership == "ik heb een stadspads":
+                                        insert_period(name_picture, membership, str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
+                                    else:
+                                        insert_period(name_picture, membership, str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
+                                st.success("🚲🚲 U heeft een afspraak gemaakt! 🚲🚲")
+                    except:
+                        st.error("Vul alstublieft een juist telefoonnummer in")
+    
             else:
-                st.warning('schrijf alstublieft uw e-mail', icon="⚠️")
+                st.warning('Er is al een afspraak op deze datum en tijd met dezelfde naam', icon="⚠️") 
+    
+            
+               
+    ##### --- drop appointment ---
+    if selected == "Afspraak afzeggen":
+        with st.form("cancel_form", clear_on_submit=False):
+    
+            date = str(st.date_input("Datum"))
+            time_shift = st.selectbox("Tijdsverschuiving", time_shift_choice_cancel )
+            e_mail = st.text_input("", placeholder="Voer hier uw e-mailadres in ...")
+            
+            "---"
+            
+            db_content = db.fetch().items
+            df = pd.DataFrame(db_content)
+            df_filter = df[(df["Date"]==date) & (df["Time shift"]==time_shift) & (df.e_mail==e_mail)]
+            submitted = st.form_submit_button("Afspraak annuleren")
+            if submitted:
+                if e_mail:
+                    if len(df_filter) > 0:
+                        key = df_filter["key"].values[0]       
+                        db.delete(key)
+                        st.success("Uw afspraak is geannuleerd!") 
+                    else:
+                        st.warning('Er is geen afspraak op dit e-mailadres', icon="⚠️")
+    
+                else:
+                    st.warning('schrijf alstublieft uw e-mail', icon="⚠️")
+
+
+
+
+pg = st.navigation([st.Page(Netherlands,icon="🇳🇱")])
+pg.run()
