@@ -57,7 +57,7 @@ holidays = {'Herfstvakantie' : pd.date_range(start="2024-10-26", end="2024-11-03
             'Day off' : []
             }
 
-DAY_OFF = '2025-02-13'
+DAY_OFF = None
 hol_dict = {}
 
 for holiday in holidays.keys():
