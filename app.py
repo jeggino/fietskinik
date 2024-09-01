@@ -204,7 +204,7 @@ hide_st_style = """
 
 st.markdown(hide_st_style, unsafe_allow_html=True)
 
-on = st.toggle("English version 🇬🇧")
+on = st.toggle("🇬🇧")
 
 if not on:
     # --- NAVIGATION MENU ---
