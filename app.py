@@ -392,10 +392,7 @@ if not on:
                     st.warning('schrijf alstublieft uw e-mail', icon="⚠️")
 
 
-else:
-    st.logo("https://cdn4.iconfinder.com/data/icons/general13/png/256/world.png", "https://cdn4.iconfinder.com/data/icons/general13/png/256/world.png")
-
-    
+else:    
     # --- NAVIGATION MENU ---
     selected = option_menu(
         menu_title=None,
