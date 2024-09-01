@@ -204,8 +204,9 @@ hide_st_style = """
 
 st.markdown(hide_st_style, unsafe_allow_html=True)
 
+on = st.toggle("English")
 
-def Nederland():
+if not on:
     st.logo("https://cdn4.iconfinder.com/data/icons/general13/png/256/world.png", "https://cdn4.iconfinder.com/data/icons/general13/png/256/world.png")
 
     # --- NAVIGATION MENU ---
@@ -391,7 +392,7 @@ def Nederland():
                     st.warning('schrijf alstublieft uw e-mail', icon="⚠️")
 
 
-def English():
+else:
     st.logo("https://cdn4.iconfinder.com/data/icons/general13/png/256/world.png", "https://cdn4.iconfinder.com/data/icons/general13/png/256/world.png")
 
     
@@ -577,5 +578,5 @@ def English():
 
     
 
-pg = st.navigation([st.Page(Nederland,icon="🇳🇱"),st.Page(English,icon="🇬🇧")])
-pg.run()
+# pg = st.navigation([st.Page(Nederland,icon="🇳🇱"),st.Page(English,icon="🇬🇧")])
+# pg.run()
