@@ -110,15 +110,18 @@ hide_st_style = """
 
 st.markdown(hide_st_style, unsafe_allow_html=True)
 
-# --- NAVIGATION MENU ---
-selected = option_menu(
-    menu_title=None,
-    options=["Maak een afspraak", "Afspraak afzeggen"],
-    icons=["bi-journal-check", "bi-x-octagon-fill"],  # https://icons.getbootstrap.com/
-    orientation="horizontal",
-)
 
 def Nederland():
+    
+    # --- NAVIGATION MENU ---
+    selected = option_menu(
+        menu_title=None,
+        options=["Maak een afspraak", "Afspraak afzeggen"],
+        icons=["bi-journal-check", "bi-x-octagon-fill"],  # https://icons.getbootstrap.com/
+        orientation="horizontal",
+    )
+
+
         
     image = Image.open('292366152_369803905279628_8461882568456452789_n.jpg')
     st.image(image)
