@@ -54,7 +54,7 @@ holidays = {'Herfstvakantie' : pd.date_range(start="2024-10-26", end="2024-11-03
 'Voorjaarsvakantie' : pd.date_range(start="2025-02-15", end="2025-02-23"),
 'Meivakantie' : pd.date_range(start="2025-04-26", end="2025-05-04"),
 'Zomervakantie' : pd.date_range(start="2025-07-12", end="2025-08-04"),
-            'Day off' : []
+            'Vrije dag' : []
             }
 
 DAY_OFF = None
@@ -69,8 +69,7 @@ for holiday in holidays.keys():
         
     hol_dict[holiday] = list_holidays
 
-hol_dict['Day off'].append(DAY_OFF)
-
+hol_dict['Vrije dag'].append(DAY_OFF)
 #_________vakantie_______
 
 
