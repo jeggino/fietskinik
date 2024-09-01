@@ -384,7 +384,7 @@ def English():
         name = st.text_input("Name*", placeholder="Enter your name here ...")
         e_mail = st.text_input("E-mail*", placeholder="Enter your email address here ...")
         number = st.text_input("Phone number*", placeholder="Enter your number here ...")
-        buurt = st.selectbox("What neighborhood are you from? (for statistics purposes)", buurt_choice_english)
+        buurt = st.selectbox("What neighborhood are you from? (for statistics purposes)", buurt_choice)
         expertise = st.selectbox("What experience do you have with cycling?", expertise_choice_english )
         type_bike = st.selectbox("What kind of bicycle do you want to repair?", type_bikes_english)
         if type_bike in ["Cargo bike - Please send a photo","E-bike - Please send a photo","my bike is not listed"]:
