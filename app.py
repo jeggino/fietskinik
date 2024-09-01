@@ -282,7 +282,7 @@ if not on:
         opmerking = st.text_input("", placeholder="Stuur een bericht, vraag, enz ...",label_visibility="collapsed")
         
         """_*Verplichte velden_"""
-        """_**persoonlijke data wordt niet opgeslagen, alleen gebruikt voor administratieve doeleinden van de gemaakte afspraak_"""
+        """:blue-background[Persoonlijke data wordt niet opgeslagen, alleen gebruikt voor administratieve doeleinden van de gemaakte afspraak]"""
         
         "---"
     
