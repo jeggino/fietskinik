@@ -32,8 +32,6 @@ def fun(dict_, date):
     for holiday_name, list_date in dict_.items():
         if date in list_date:
             return True, holiday_name
-        else:
-            return False, None
 #_________vakantie_______
 
 
@@ -231,10 +229,13 @@ def Nederland():
 
         #_________vakantie_______
         res_holiday = fun(hol_dict, str(date))
-        st.write(str(date))
-        if res_holiday[0]==True:
-            st.warning(f"Het is {res_holiday[1]}! Excuus, de Fietskliniek is gesloten.")
-            st.stop()
+
+        try:
+            if res_holiday[0]==True:
+                st.warning(f"Het is {res_holiday[1]}! Excuus, de Fietskliniek is gesloten.")
+                st.stop()
+        except:
+            pass
         #_________vakantie_______
 
         
