@@ -282,5 +282,5 @@ def Nederland():
 
 
 
-pg = st.navigation([st.Page(Netherlands,icon="🇳🇱")])
+pg = st.navigation([st.Page(Nederland,icon="🇳🇱")])
 pg.run()
