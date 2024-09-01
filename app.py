@@ -280,7 +280,10 @@ def Nederland():
                     st.warning('schrijf alstublieft uw e-mail', icon="⚠️")
 
 
+def English():
+    image = "https://www.thesignmaker.co.nz/wp-content/uploads/2019/04/C16_Work-In-Progress.png"
+    st.image(image)
+    
 
-
-pg = st.navigation([st.Page(Nederland,icon="🇳🇱")])
+pg = st.navigation([st.Page(Nederland,icon="🇳🇱"),st.Page(English,icon="🇬🇧")])
 pg.run()
