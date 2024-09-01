@@ -278,11 +278,11 @@ if not on:
                 st.warning("Upload een foto van uw fiets")
                 st.stop()  
                 
-        materiaal = st.multiselect("Reparatie te doen", materiaal_choice)
+        materiaal = st.multiselect("Reparatie te doen (Meer opties mogelijk)", materiaal_choice)
         opmerking = st.text_input("", placeholder="Stuur een bericht, vraag, enz ...",label_visibility="collapsed")
         
         """_*Verplichte velden_"""
-        """_**persoonlijke data wordt niet opgeslagen, alleen gebruikt voor administratieve doeleinden van de gemaakte afspraak"""
+        """_**persoonlijke data wordt niet opgeslagen, alleen gebruikt voor administratieve doeleinden van de gemaakte afspraak_"""
         
         "---"
     
@@ -461,11 +461,11 @@ else:
                 st.warning("Upload a photo of your bike")
                 st.stop()  
                 
-        materiaal = st.multiselect("Repair to be done", materiaal_choice_english)
+        materiaal = st.multiselect("Repair to be done (More options possible)", materiaal_choice_english)
         opmerking = st.text_input("", placeholder="Send a message, question, etc. ...",label_visibility="collapsed")
         
         """_*Required fields_"""
-        """_**personal data is not stored, only used for administrative purposes of the appointment made"""
+        """_**personal data is not stored, only used for administrative purposes of the appointment made_"""
         
         "---"
     
