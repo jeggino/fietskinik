@@ -353,7 +353,7 @@ def English():
     st.image(image)
         
     # with right:
-    st.markdown(TEXT) 
+    st.markdown(TEXT_english) 
     
     "---"
     
