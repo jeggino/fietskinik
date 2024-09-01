@@ -231,6 +231,7 @@ def Nederland():
 
         #_________vakantie_______
         res_holiday = fun(hol_dict, str(date))
+        st.write(str(date))
         if res_holiday[0]==True:
             st.warning(f"Het is {res_holiday[1]}! Excuus, de Fietskliniek is gesloten.")
             st.stop()
