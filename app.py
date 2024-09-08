@@ -84,9 +84,15 @@ hol_dict['Vrije dag'].append(DAY_OFF)
 
 
 
-buurt_choice = ["Oud-oost","Indische Buurt/Oostelijk Havengebied",
-                "Watergraafsmeer","Ijburg/Zeeburgereiland","Centrum",
-                "Zuid","Zuidoost","Weesp","West","Nieuw-West"]
+buurt_choice = ['Bijlmer-West', 'Bijlmer-Centrum', 'Bijlmer-Oost', 'Bos en Lommer',
+       'Oud-Zuid', 'Osdorp', 'Indische Buurt, Oostelijk Havengebied',
+       'Centrum-West', 'Noord-West', 'Gaasperdam',
+       'Sloterdijk Nieuw-West', 'De Aker, Sloten, Nieuw-Sloten',
+       'Centrum-Oost', 'IJburg, Zeeburgereiland',
+       'Geuzenveld, Slotermeer', 'Oud-Oost', 'Westerpark',
+       'Buitenveldert, Zuidas', 'Weesp, Driemond', 'Noord-Oost',
+       'Oud-West, De Baarsjes', 'De Pijp, Rivierenbuurt', 'Oud-Noord',
+       'Slotervaart', 'Watergraafsmeer']
 
 expertise_choice = ['Geen','Laag','Gemiddeld','Ervaren']
 
