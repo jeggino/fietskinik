@@ -301,7 +301,7 @@ if not on:
         len_control = len(df_control)       
     
         # submit the data
-        submitted = st.button("Gegevens opslaan")
+        submitted = st.button(st.markdown("**yellow[Gegevens opslaan]**"))
         if submitted:
     
             if len(name) == 0 or len(e_mail)==0 or len(number)==0:
