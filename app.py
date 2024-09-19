@@ -524,15 +524,19 @@ else:
                                     drive.put(name_picture, data=bytes_data)
                                     if membership == "I have a City Pass":
                                         insert_period(name_picture,membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
+                                        st.markdown(PAYMENT_LINK_STADPASS)
                                     else:
                                         insert_period(name_picture,membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
+                                        st.markdown(PAYMENT_LINK_NO_STADPASS)
                                 except:
                                     if membership == "I have a City Pass":
                                         insert_period(name_picture,membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
+                                        st.markdown(PAYMENT_LINK_STADPASS)
                                     else:
                                         insert_period(name_picture,membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
+                                        st.markdown(PAYMENT_LINK_NO_STADPASS)
                                 st.success("🚲🚲 You have booked an appointment! 🚲🚲")
-                                st.markdown("https://www.ing.nl/payreq/m/?trxid=nT6szaulTjl68azo82hIuQ1FjeJOS4VR")
+                    
         
                         elif day == "Friday":
         
@@ -551,13 +555,17 @@ else:
                                     drive.put(name_picture, data=bytes_data)
                                     if membership == "I have a City Pass":
                                         insert_period(name_picture,membership,str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
+                                        st.markdown(PAYMENT_LINK_STADPASS)
                                     else:
                                         insert_period(name_picture,membership,str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
+                                        st.markdown(PAYMENT_LINK_NO_STADPASS)
                                 except:
                                     if membership == "I have a City Pass":
                                         insert_period(name_picture, membership, str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
+                                        st.markdown(PAYMENT_LINK_STADPASS)
                                     else:
                                         insert_period(name_picture, membership, str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
+                                        st.markdown(PAYMENT_LINK_NO_STADPASS)
                                 st.success("🚲🚲 You have booked an appointment! 🚲🚲")
                     except:
                         st.error("Please enter a correct phone number")
