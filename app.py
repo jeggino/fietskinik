@@ -194,6 +194,7 @@ Fietskliniek is a neighbourhood, socially involved bicycle workshop. In the bicy
 - Fill in the form below to make a reservation. As soon as you click on Save data, your reservation is complete! You will not receive a confirmation.
 - You cannot make a reservation on the same day that you want to come by. If you have made a reservation and you cannot come, you can simply cancel it via the button above, this can be done on the same day as the appointment until 12:00.
 - If you cancel until 12:00, you will receive your money back minus €4,- for administrative purposes. In case of no-show or no-cancellation, you will not receive any money back.
+- :orange-background[When making an appointment, payement has to be done to secure your reservation.]
 
 Welcome to the Cycling Clinic and enjoy your cycling session!
 """
