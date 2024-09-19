@@ -129,7 +129,7 @@ materiaal_choice = ['Ik weet niet precies',
 'Nieuw lock',
 'Achter, Voor rek']
 
-MEMBERSHIP_CHOICE = [ "ik heb geen Stadspas (€12 per 2 uur)", "ik heb een Stadspas"]
+MEMBERSHIP_CHOICE = [ "ik heb geen Stadspas (€15 per 2 uur)", "ik heb een Stadspas"]
 
 TEXT = """
 Fietskliniek is een buurt-, sociaal betrokken fietswerkplaats. In de fietsenwerkplaats vind u alle gereedschappen en onderdelen (nieuw en tweedehands) die u nodig hebt om uw fiets te repareren en u krijgt begeleiding van een ervaren vrijwilliger fietsenmaker daarbij. Hierbij moet je rekening houden met de volgende regels:
@@ -180,7 +180,7 @@ materiaal_choice_english = ['I dont know exactly',
 'New lock',
 'Rear, Front rack']
 
-MEMBERSHIP_CHOICE_english = ["I don't have a City Pass (€12 per 2 hours)", "I have a City Pass"]
+MEMBERSHIP_CHOICE_english = ["I don't have a City Pass (€15 per 2 hours)", "I have a City Pass"]
 
 TEXT_english = """
 Fietskliniek is a neighbourhood, socially involved bicycle workshop. In the bicycle workshop you will find all the tools and parts (new and second-hand) that you need to repair your bicycle and you will be guided by an experienced volunteer bicycle mechanic. You must take the following rules into account:
