@@ -137,12 +137,12 @@ Fietskliniek is een buurt-, sociaal betrokken fietswerkplaats. In de fietsenwerk
 - Afspraak is max 2uur.
 - Als de fiets niet klaar is binnen 2 uur, dan moet er een nieuwe afspraak gemaakt worden.
 - Als u meerdere fietsen hebt om te repareren moeten er meerdere afspraken worden gemaakt.
-- Eenmalig gebruik van de werkplaats kost €12. Met Stadspas €4,00.
+- Eenmalig gebruik van de werkplaats kost €15. Met Stadspas €4,00.
 - Onderdelen nodig voor de reparatie moeten apart worden betaald. We hebben nieuwe - en 2e hands onderdelen voor de halve prijs van een nieuwe.
 - Vul onderstaand formulier in om te reserveren. Zodra u op Gegevens opslaan klikt, is uw reservering voltooid! U krijgt geen bevestiging.
 - U kunt niet dezelfde dag reserveren waarop u langs wilt komen. 
 - Indien u een reservering heeft gemaakt en u kunt niet komen, kunt u deze gewoon annuleren via de knop hierboven, dit kan op dezelfde dag als de afspraak tot 12.00 uur.
-- Bij annulering tot 12.00 uur krijgt u uw geld terug minus € 2,- voor administratieve doeleinden. Bij no-show of no-cancelling krijgt u geen geld terug.
+- Bij annulering tot 12.00 uur krijgt u uw geld terug minus € 4,- voor administratieve doeleinden. Bij no-show of no-cancelling krijgt u geen geld terug.
 
 Welkom bij de Fietskliniek en geniet van uw fietssessie!
 """
