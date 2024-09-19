@@ -185,11 +185,11 @@ Fietskliniek is a neighbourhood, socially involved bicycle workshop. In the bicy
 - Appointment is max 2 hours.
 - If the bicycle is not ready within 2 hours, a new appointment must be made.
 - If you have multiple bicycles to repair, multiple appointments must be made.
-- One-time use of the workshop costs €12. With City Pass €4.00.
+- One-time use of the workshop costs €15. With City Pass €4.00.
 - Parts needed for the repair must be paid for separately. We have new - and second-hand parts for half the price of a new one.
 - Fill in the form below to make a reservation. As soon as you click on Save data, your reservation is complete! You will not receive a confirmation.
 - You cannot make a reservation on the same day that you want to come by. If you have made a reservation and you cannot come, you can simply cancel it via the button above, this can be done on the same day as the appointment until 12:00.
-- If you cancel until 12:00, you will receive your money back minus € 2,- for administrative purposes. In case of no-show or no-cancellation, you will not receive any money back.
+- If you cancel until 12:00, you will receive your money back minus €4,- for administrative purposes. In case of no-show or no-cancellation, you will not receive any money back.
 
 Welcome to the Cycling Clinic and enjoy your cycling session!
 """
@@ -329,13 +329,18 @@ if not on:
                                     drive.put(name_picture, data=bytes_data)
                                     if membership == "ik heb een Stadspas":
                                         insert_period(name_picture,membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
+                                        st.markdown("https://www.ing.nl/payreq/m/?trxid=E9z1j5CtPzvaEY6gsUDwLCtGfhPxHK7T")
                                     else:
                                         insert_period(name_picture,membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
+                                        st.markdown("https://www.ing.nl/payreq/m/?trxid=nT6szaulTjl68azo82hIuQ1FjeJOS4VR")
+                                        
                                 except:
                                     if membership == "ik heb een Stadspas":
                                         insert_period(name_picture,membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
+                                        st.markdown("https://www.ing.nl/payreq/m/?trxid=E9z1j5CtPzvaEY6gsUDwLCtGfhPxHK7T")
                                     else:
                                         insert_period(name_picture,membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
+                                        st.markdown("https://www.ing.nl/payreq/m/?trxid=nT6szaulTjl68azo82hIuQ1FjeJOS4VR")
                                 st.success("🚲🚲 U heeft een afspraak gemaakt! 🚲🚲")
         
                         elif day == "Friday":
@@ -355,13 +360,17 @@ if not on:
                                     drive.put(name_picture, data=bytes_data)
                                     if membership == "ik heb een Stadspas":
                                         insert_period(name_picture,membership,str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
+                                        st.markdown("https://www.ing.nl/payreq/m/?trxid=E9z1j5CtPzvaEY6gsUDwLCtGfhPxHK7T")
                                     else:
                                         insert_period(name_picture,membership,str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
+                                        st.markdown("https://www.ing.nl/payreq/m/?trxid=nT6szaulTjl68azo82hIuQ1FjeJOS4VR")
                                 except:
                                     if membership == "ik heb een Stadspas":
                                         insert_period(name_picture, membership, str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
+                                        st.markdown("https://www.ing.nl/payreq/m/?trxid=E9z1j5CtPzvaEY6gsUDwLCtGfhPxHK7T")
                                     else:
                                         insert_period(name_picture, membership, str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
+                                        st.markdown("https://www.ing.nl/payreq/m/?trxid=nT6szaulTjl68azo82hIuQ1FjeJOS4VR")
                                 st.success("🚲🚲 U heeft een afspraak gemaakt! 🚲🚲")
                     except:
                         st.error("Vul alstublieft een juist telefoonnummer in")
@@ -520,6 +529,7 @@ else:
                                     else:
                                         insert_period(name_picture,membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
                                 st.success("🚲🚲 You have booked an appointment! 🚲🚲")
+                                st.markdown("https://www.ing.nl/payreq/m/?trxid=nT6szaulTjl68azo82hIuQ1FjeJOS4VR")
         
                         elif day == "Friday":
         
