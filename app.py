@@ -301,7 +301,7 @@ if not on:
         len_control = len(df_control)       
     
         # submit the data
-        submitted = st.button(":red[Gegevens opslaan]")
+        submitted = st.button("**:yellow[Gegevens opslaan]**")
         if submitted:
     
             if len(name) == 0 or len(e_mail)==0 or len(number)==0:
@@ -484,7 +484,7 @@ else:
         len_control = len(df_control)       
     
         # submit the data
-        submitted = st.button("Save data")
+        submitted = st.button("**:yellow[Save data]**")
         if submitted:
     
             if len(name) == 0 or len(e_mail)==0 or len(number)==0:
