@@ -56,6 +56,9 @@ time_shift_choice_cancel = ["11:00-13:00","13:30-15:30","15:30-17:30","18:00-20:
 
 name_picture = f"{random.randint(1,1000000000000)}.jpeg"
 
+PAYMENT_LINK_STADPASS = "https://www.ing.nl/payreq/m/?trxid=E9z1j5CtPzvaEY6gsUDwLCtGfhPxHK7T"
+PAYMENT_LINK_NO_STADPASS = "https://www.ing.nl/payreq/m/?trxid=nT6szaulTjl68azo82hIuQ1FjeJOS4VR"
+
 
 #_________vakantie_______
 holidays = {'Herfstvakantie' : pd.date_range(start="2024-10-26", end="2024-11-03"),
@@ -329,18 +332,18 @@ if not on:
                                     drive.put(name_picture, data=bytes_data)
                                     if membership == "ik heb een Stadspas":
                                         insert_period(name_picture,membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
-                                        st.markdown("https://www.ing.nl/payreq/m/?trxid=E9z1j5CtPzvaEY6gsUDwLCtGfhPxHK7T")
+                                        st.markdown(PAYMENT_LINK_STADPASS)
                                     else:
                                         insert_period(name_picture,membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
-                                        st.markdown("https://www.ing.nl/payreq/m/?trxid=nT6szaulTjl68azo82hIuQ1FjeJOS4VR")
+                                        st.markdown(PAYMENT_LINK_NO_STADPASS)
                                         
                                 except:
                                     if membership == "ik heb een Stadspas":
                                         insert_period(name_picture,membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
-                                        st.markdown("https://www.ing.nl/payreq/m/?trxid=E9z1j5CtPzvaEY6gsUDwLCtGfhPxHK7T")
+                                        st.markdown(PAYMENT_LINK_STADPASS)
                                     else:
                                         insert_period(name_picture,membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
-                                        st.markdown("https://www.ing.nl/payreq/m/?trxid=nT6szaulTjl68azo82hIuQ1FjeJOS4VR")
+                                        st.markdown(PAYMENT_LINK_NO_STADPASS)
                                 st.success("🚲🚲 U heeft een afspraak gemaakt! 🚲🚲")
         
                         elif day == "Friday":
@@ -360,17 +363,17 @@ if not on:
                                     drive.put(name_picture, data=bytes_data)
                                     if membership == "ik heb een Stadspas":
                                         insert_period(name_picture,membership,str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
-                                        st.markdown("https://www.ing.nl/payreq/m/?trxid=E9z1j5CtPzvaEY6gsUDwLCtGfhPxHK7T")
+                                        st.markdown(PAYMENT_LINK_STADPASS)
                                     else:
                                         insert_period(name_picture,membership,str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
-                                        st.markdown("https://www.ing.nl/payreq/m/?trxid=nT6szaulTjl68azo82hIuQ1FjeJOS4VR")
+                                        st.markdown(PAYMENT_LINK_NO_STADPASS)
                                 except:
                                     if membership == "ik heb een Stadspas":
                                         insert_period(name_picture, membership, str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
-                                        st.markdown("https://www.ing.nl/payreq/m/?trxid=E9z1j5CtPzvaEY6gsUDwLCtGfhPxHK7T")
+                                        st.markdown(PAYMENT_LINK_STADPASS)
                                     else:
                                         insert_period(name_picture, membership, str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
-                                        st.markdown("https://www.ing.nl/payreq/m/?trxid=nT6szaulTjl68azo82hIuQ1FjeJOS4VR")
+                                        st.markdown(PAYMENT_LINK_NO_STADPASS)
                                 st.success("🚲🚲 U heeft een afspraak gemaakt! 🚲🚲")
                     except:
                         st.error("Vul alstublieft een juist telefoonnummer in")
