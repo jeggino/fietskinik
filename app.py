@@ -484,7 +484,7 @@ else:
         len_control = len(df_control)       
     
         # submit the data
-        submitted = st.button("**:yellow[Save data]**")
+        submitted = st.button(":red[**Save data**]")
         if submitted:
     
             if len(name) == 0 or len(e_mail)==0 or len(number)==0:
