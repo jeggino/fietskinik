@@ -345,6 +345,7 @@ if not on:
                                         insert_period(name_picture,membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
                                         st.markdown(PAYMENT_LINK_NO_STADPASS)
                                 st.success("🚲🚲 U heeft een afspraak gemaakt! 🚲🚲")
+                                st.warning("Bij het maken van een afspraak dient u te betalen om uw reservering veilig te stellen")
         
                         elif day == "Friday":
         
@@ -375,6 +376,7 @@ if not on:
                                         insert_period(name_picture, membership, str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
                                         st.markdown(PAYMENT_LINK_NO_STADPASS)
                                 st.success("🚲🚲 U heeft een afspraak gemaakt! 🚲🚲")
+                                st.warning("Bij het maken van een afspraak dient u te betalen om uw reservering veilig te stellen")
                     except:
                         st.error("Vul alstublieft een juist telefoonnummer in")
     
@@ -536,6 +538,7 @@ else:
                                         insert_period(name_picture,membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
                                         st.markdown(PAYMENT_LINK_NO_STADPASS)
                                 st.success("🚲🚲 You have booked an appointment! 🚲🚲")
+                                st.warning("When making an appointment, payement has to be done to secure your reservation")
                     
         
                         elif day == "Friday":
@@ -567,6 +570,7 @@ else:
                                         insert_period(name_picture, membership, str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
                                         st.markdown(PAYMENT_LINK_NO_STADPASS)
                                 st.success("🚲🚲 You have booked an appointment! 🚲🚲")
+                                st.warning("When making an appointment, payement has to be done to secure your reservation")
                     except:
                         st.error("Please enter a correct phone number")
     
