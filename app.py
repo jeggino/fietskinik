@@ -143,6 +143,7 @@ Fietskliniek is een buurt-, sociaal betrokken fietswerkplaats. In de fietsenwerk
 - U kunt niet dezelfde dag reserveren waarop u langs wilt komen. 
 - Indien u een reservering heeft gemaakt en u kunt niet komen, kunt u deze gewoon annuleren via de knop hierboven, dit kan op dezelfde dag als de afspraak tot 12.00 uur.
 - Bij annulering tot 12.00 uur krijgt u uw geld terug minus € 4,- voor administratieve doeleinden. Bij no-show of no-cancelling krijgt u geen geld terug.
+- :yellow-background[Bij het maken van een afspraak dient u te betalen om uw reservering veilig te stellen.]
 
 Welkom bij de Fietskliniek en geniet van uw fietssessie!
 """
