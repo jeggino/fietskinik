@@ -244,7 +244,7 @@ if not on:
         
         membership = st.radio("Betaling", MEMBERSHIP_CHOICE, horizontal = False)
         if membership == "ik heb een Stadspas":
-            membership_number = st.text_input("Stadspasnummer overschrijven", placeholder="60643660",label_visibility="collapsed")
+            membership_number = st.text_input(" ",value="60643660", placeholder="Stadspasnummer overschrijven ...",label_visibility="collapsed")
             
             if  len(membership_number) == 0:
                 st.warning("Vul het Stadspasnummer in aub")
