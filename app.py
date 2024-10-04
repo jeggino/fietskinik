@@ -229,20 +229,22 @@ if not on:
 
 
         
-    image = Image.open('292366152_369803905279628_8461882568456452789_n.jpg')
-    st.image(image)
-        
-    # with right:
-    st.markdown(TEXT) 
+    
     
     "---"
     
     # --- INPUT & SAVE PERIODS ---
     if selected == "Maak een afspraak":       
+
+        image = Image.open('292366152_369803905279628_8461882568456452789_n.jpg')
+        st.image(image)
+            
+        # with right:
+        st.markdown(TEXT) 
         
         membership = st.radio("Betaling", MEMBERSHIP_CHOICE, horizontal = False)
         if membership == "ik heb een Stadspas":
-            membership_number = st.text_input("", placeholder="Stadspasnummer overschrijven ...",label_visibility="collapsed")
+            membership_number = st.text_input("Stadspasnummer overschrijven", placeholder="60643660",label_visibility="collapsed")
             
             if  len(membership_number) == 0:
                 st.warning("Vul het Stadspasnummer in aub")
