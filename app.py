@@ -391,6 +391,9 @@ if not on:
                
     ##### --- drop appointment ---
     if selected == "Afspraak afzeggen":
+        image = Image.open('292366152_369803905279628_8461882568456452789_n.jpg')
+        st.image(image)
+        
         with st.form("cancel_form", clear_on_submit=False):
     
             date = str(st.date_input("Datum"))
