@@ -832,16 +832,15 @@ if not on:
         orientation="horizontal",
     )
 
-    image = '292366152_369803905279628_8461882568456452789_n.jpg'
-    st.image(image)
+
     
     "---"
     
     # --- INPUT & SAVE PERIODS ---
     if selected == "Maak een afspraak":       
+        image = '292366152_369803905279628_8461882568456452789_n.jpg'
+        st.image(image)
 
-            
-        # with right:
         st.markdown(TEXT) 
         
         membership = st.radio("Betaling", MEMBERSHIP_CHOICE, horizontal = False)
