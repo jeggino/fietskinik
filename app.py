@@ -823,9 +823,6 @@ df_old = conn.read(ttl=0,worksheet="Data")
 #--APP---
 on = st.toggle("🇬🇧")
 
-image = '292366152_369803905279628_8461882568456452789_n.jpg'
-st.image(image)
-
 if not on:
     # --- NAVIGATION MENU ---
     selected = option_menu(
@@ -835,9 +832,8 @@ if not on:
         orientation="horizontal",
     )
 
-
-        
-    
+    image = '292366152_369803905279628_8461882568456452789_n.jpg'
+    st.image(image)
     
     "---"
     
@@ -989,7 +985,7 @@ if not on:
                
     ##### --- drop appointment ---
     if selected == "Afspraak afzeggen":
-        image = Image.open('292366152_369803905279628_8461882568456452789_n.jpg')
+        image = '292366152_369803905279628_8461882568456452789_n.jpg'
         st.image(image)
         
         with st.form("cancel_form", clear_on_submit=False):
@@ -1030,7 +1026,7 @@ else:
 
 
         
-    image = Image.open('292366152_369803905279628_8461882568456452789_n.jpg')
+    image = '292366152_369803905279628_8461882568456452789_n.jpg'
     st.image(image) 
     
     "---"
