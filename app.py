@@ -662,11 +662,12 @@ PAYMENT_LINK_NO_STADPASS = "https://www.ing.nl/payreq/m/?trxid=nT6szaulTjl68azo8
 
 
 #---HOLIDAYS---
-holidays = {'Herfstvakantie' : pd.date_range(start="2024-10-26", end="2024-11-03"),
+holidays = {
+    #'Herfstvakantie' : pd.date_range(start="2024-10-26", end="2024-11-03"),
 'Kerstvakantie' : pd.date_range(start="2024-12-21", end="2025-01-05"),
-'Voorjaarsvakantie' : pd.date_range(start="2025-02-15", end="2025-02-23"),
+#'Voorjaarsvakantie' : pd.date_range(start="2025-02-15", end="2025-02-23"),
 'Meivakantie' : pd.date_range(start="2025-04-26", end="2025-05-04"),
-'Zomervakantie' : pd.date_range(start="2025-07-12", end="2025-08-04"),
+'Zomervakantie' : pd.date_range(start="2025-08-01", end="2025-08-30"),
             'Vrije dag' : []
             }
 
