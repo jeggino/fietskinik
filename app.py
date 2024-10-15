@@ -823,7 +823,7 @@ df_old = conn.read(ttl=0,worksheet="Data")
 #--APP---
 on = st.toggle("🇬🇧")
 
-image = Image.open('292366152_369803905279628_8461882568456452789_n.jpg')
+image = '292366152_369803905279628_8461882568456452789_n.jpg'
 st.image(image)
 
 if not on:
