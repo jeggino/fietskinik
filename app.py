@@ -841,8 +841,8 @@ if not on:
     # --- INPUT & SAVE PERIODS ---
     if selected == "Maak een afspraak":       
 
-        image = Image.open('292366152_369803905279628_8461882568456452789_n.jpg')
-        st.image(image)
+        # image = Image.open('292366152_369803905279628_8461882568456452789_n.jpg')
+        # st.image(image)
             
         # with right:
         st.markdown(TEXT) 
