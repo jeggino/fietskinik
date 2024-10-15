@@ -1,7 +1,3 @@
 streamlit
-deta
-pandas
+st-gsheets-connection
 streamlit_option_menu
-streamlit_pandas_profiling
-altair
-pandas_profiling
