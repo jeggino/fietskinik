@@ -45,7 +45,7 @@ PAYMENT_LINK_STADPASS = "https://www.ing.nl/payreq/m/?trxid=E9z1j5CtPzvaEY6gsUDw
 PAYMENT_LINK_NO_STADPASS = "https://www.ing.nl/payreq/m/?trxid=nT6szaulTjl68azo82hIuQ1FjeJOS4VR"
 
 
-#---HOLIDAYS---
+#---COSTANTS---
 holidays = {
 'Kerstvakantie' : pd.date_range(start="2024-12-21", end="2025-01-05"),
 'Meivakantie' : pd.date_range(start="2025-04-26", end="2025-05-04"),
@@ -69,7 +69,7 @@ hol_dict['Vrije dag'].append(DAY_OFF)
 
 
 
-#---COSTANTS---
+
 buurt_choice = ['Bijlmer-West', 'Bijlmer-Centrum', 'Bijlmer-Oost', 'Bos en Lommer',
        'Oud-Zuid', 'Osdorp', 'Indische Buurt, Oostelijk Havengebied',
        'Centrum-West', 'Noord-West', 'Gaasperdam',
@@ -239,7 +239,6 @@ if not on:
         week = date.isocalendar()[1]
         
 
-        #_________vakantie_______
         res_holiday = fun(hol_dict, str(date))
 
         try:
@@ -248,7 +247,6 @@ if not on:
                 st.stop()
         except:
             pass
-        #_________vakantie_______
 
         
         if day not in ["Tuesday","Thursday","Friday"]:
