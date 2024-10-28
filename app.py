@@ -43,6 +43,7 @@ time_shift_choice_cancel = ["11:00-13:00","13:30-15:30","15:30-17:30","18:00-20:
 #---PAYMENT LINK---
 PAYMENT_LINK_STADPASS = "https://www.ing.nl/payreq/m/?trxid=E9z1j5CtPzvaEY6gsUDwLCtGfhPxHK7T"
 PAYMENT_LINK_NO_STADPASS = "https://www.ing.nl/payreq/m/?trxid=nT6szaulTjl68azo82hIuQ1FjeJOS4VR"
+PAYMENT_LINK_open = "https://www.ing.nl/payreq/m/?trxid=fjuDgJyqjT9ZPRryp5pSMunynvCmM6MH"
 
 
 #---COSTANTS---
