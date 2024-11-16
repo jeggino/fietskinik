@@ -334,20 +334,21 @@ if not on:
 
                                     if membership == "ik heb een Stadspas":
                                         insert_period(membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
-                                        st.markdown(PAYMENT_LINK_open)
                                     else:
                                         insert_period(membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
-                                        st.markdown(PAYMENT_LINK_open)
                                         
                                 except:
                                     if membership == "ik heb een Stadspas":
                                         insert_period(name_picture,membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
-                                        st.markdown(PAYMENT_LINK_open)
                                     else:
                                         insert_period(name_picture,membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
-                                        st.markdown(PAYMENT_LINK_open)
-                                st.success("🚲🚲 U heeft een afspraak gemaakt! 🚲🚲")
-                                st.warning("Bij het maken van een afspraak dient u te betalen om uw reservering veilig te stellen")
+                                if type_day == 'Vrije dag':
+                                    st.success("🏖️🏖️ Je hebt een dag vrij geboekt! 🏖️🏖️")
+                                else:
+                                    st.markdown(PAYMENT_LINK_open)
+                                    st.success("🚲🚲 U heeft een afspraak gemaakt! 🚲🚲")
+                                    st.warning("Bij het maken van een afspraak dient u te betalen om uw reservering veilig te stellen") 
+
         
                         elif day == "Friday":
         
@@ -364,20 +365,17 @@ if not on:
                                 try:
                                     if membership == "ik heb een Stadspas":
                                         insert_period(membership,str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
-                                        st.markdown(PAYMENT_LINK_open)
                                     else:
                                         insert_period(membership,str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
-                                        st.markdown(PAYMENT_LINK_open)
                                 except:
                                     if membership == "ik heb een Stadspas":
                                         insert_period( membership, str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
-                                        st.markdown(PAYMENT_LINK_open)
                                     else:
                                         insert_period(membership, str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
-                                        st.markdown(PAYMENT_LINK_open)
                                 if type_day == 'Vrije dag':
                                     st.success("🏖️🏖️ Je hebt een dag vrij geboekt! 🏖️🏖️")
                                 else:
+                                    st.markdown(PAYMENT_LINK_open)
                                     st.success("🚲🚲 U heeft een afspraak gemaakt! 🚲🚲")
                                     st.warning("Bij het maken van een afspraak dient u te betalen om uw reservering veilig te stellen")
                     except:
