@@ -270,6 +270,7 @@ if not on:
             materiaal = st.multiselect("Reparatie te doen (Meer opties mogelijk)", materiaal_choice)
             opmerking = st.text_input("", placeholder="Stuur een bericht, vraag, enz ...",label_visibility="collapsed")
         elif type_day == 'Vrije dag':
+            placeholder = st.empty()
             password = placeholder.text_input("Password", value=None, label_visibility= 'collapsed', placeholder = "schrijf hier uw wachtwoord ...",)
             if password == 'fietskliniek':
                 placeholder.empty()
