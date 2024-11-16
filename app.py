@@ -261,12 +261,32 @@ if not on:
             
         name = st.text_input("Naam*", placeholder="Vul hier uw naam in ...")
         e_mail = st.text_input("E-mail*", placeholder="Voer hier uw e-mailadres in ...")
-        number = st.text_input("Telefoonnummer*", placeholder="Voer hier uw nummer in ...")
-        buurt = st.selectbox("Uit welke buurt komt u? (voor statistieken doeleinden)", buurt_choice)
-        expertise = st.selectbox("Welke ervaring heeft u met fietsen?", expertise_choice )
-        type_bike = st.selectbox("Wat voor fiets wilt u repareren?", type_bikes)                
-        materiaal = st.multiselect("Reparatie te doen (Meer opties mogelijk)", materiaal_choice)
-        opmerking = st.text_input("", placeholder="Stuur een bericht, vraag, enz ...",label_visibility="collapsed")
+        type_day = st.selectbox("Dit veld is voor de vrijwilliger. Vul "afspraak" in als u een reservering wilt maken.", ['Afspraak', 'Vrije dag'])
+        if type_day == 'Afspraak':
+            number = st.text_input("Telefoonnummer*", placeholder="Voer hier uw nummer in ...")
+            buurt = st.selectbox("Uit welke buurt komt u? (voor statistieken doeleinden)", buurt_choice)
+            expertise = st.selectbox("Welke ervaring heeft u met fietsen?", expertise_choice )
+            type_bike = st.selectbox("Wat voor fiets wilt u repareren?", type_bikes)                
+            materiaal = st.multiselect("Reparatie te doen (Meer opties mogelijk)", materiaal_choice)
+            opmerking = st.text_input("", placeholder="Stuur een bericht, vraag, enz ...",label_visibility="collapsed")
+        elif type_day == 'Vrije dag':
+            password = placeholder.text_input("Password", value=None, label_visibility= 'collapsed', placeholder = "schrijf hier uw wachtwoord ...",)
+            if password == 'fietskliniek':
+                placeholder.empty()
+                number = "-"
+                buurt = "-"
+                expertise = "-"
+                type_bike = "-"                
+                materiaal = "-"
+                opmerking = type_day
+            
+            elif password == None:
+                st.stop()
+            
+            else:
+                st.error("Verkeerd wachtwoord ...")
+                st.stop()
+            
         
         """_*Verplichte velden_"""
         """:orange-background[_Persoonlijke data wordt niet opgeslagen, alleen gebruikt voor administratieve doeleinden van de gemaakte afspraak_]"""
