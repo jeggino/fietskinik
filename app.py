@@ -375,8 +375,11 @@ if not on:
                                     else:
                                         insert_period(membership, str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
                                         st.markdown(PAYMENT_LINK_open)
-                                st.success("🚲🚲 U heeft een afspraak gemaakt! 🚲🚲")
-                                st.warning("Bij het maken van een afspraak dient u te betalen om uw reservering veilig te stellen")
+                                if type_day == 'Vrije dag':
+                                    st.success("🏖️🏖️ Je hebt een dag vrij geboekt! 🏖️🏖️")
+                                else:
+                                    st.success("🚲🚲 U heeft een afspraak gemaakt! 🚲🚲")
+                                    st.warning("Bij het maken van een afspraak dient u te betalen om uw reservering veilig te stellen")
                     except:
                         st.error("Vul alstublieft een juist telefoonnummer in")
     
