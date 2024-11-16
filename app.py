@@ -261,7 +261,7 @@ if not on:
             
         name = st.text_input("Naam*", placeholder="Vul hier uw naam in ...")
         e_mail = st.text_input("E-mail*", placeholder="Voer hier uw e-mailadres in ...")
-        type_day = st.selectbox("Dit veld is voor de vrijwilliger. Vul "afspraak" in als u een reservering wilt maken.", ['Afspraak', 'Vrije dag'])
+        type_day = st.selectbox("Dit veld is voor de vrijwilliger. Vul 'afspraak' in als u een reservering wilt maken.", ['Afspraak', 'Vrije dag'])
         if type_day == 'Afspraak':
             number = st.text_input("Telefoonnummer*", placeholder="Voer hier uw nummer in ...")
             buurt = st.selectbox("Uit welke buurt komt u? (voor statistieken doeleinden)", buurt_choice)
