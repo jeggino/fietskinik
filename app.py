@@ -535,7 +535,7 @@ else:
                                         insert_period(membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
                                     else:
                                         insert_period(membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
-                                if membership == "ik heb een Stadspas":
+                                if membership == "I have a City Pass":
                                     st.markdown(PAYMENT_LINK_STADPASS)
 
                                 else:
@@ -559,16 +559,14 @@ else:
                                 try:
                                     if membership == "I have a City Pass":
                                         insert_period(membership,str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
-                                        st.markdown(PAYMENT_LINK_open)
                                     else:
                                         insert_period(membership,str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
-                                        st.markdown(PAYMENT_LINK_open)
                                 except:
                                     if membership == "I have a City Pass":
                                         insert_period(membership, str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
                                     else:
                                         insert_period(membership, str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
-                                if membership == "ik heb een Stadspas":
+                                if membership == "I have a City Pass":
                                     st.markdown(PAYMENT_LINK_STADPASS)
 
                                 else:
