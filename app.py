@@ -391,7 +391,7 @@ if not on:
                         st.error("Vul alstublieft een juist telefoonnummer in")
     
             else:
-                st.warning('Er is al een afspraak op deze datum en tijd met dezelfde naam', icon="⚠️") 
+                st.warning('Er is al een afspraak op deze datum en tijd met dezelfde email', icon="⚠️") 
     
             
                
@@ -577,7 +577,7 @@ else:
                         st.error("Please enter a correct phone number")
     
             else:
-                st.warning('There is already an appointment on this date and time with the same name', icon="⚠️") 
+                st.warning('There is already an appointment on this date and time with the same email', icon="⚠️") 
     
             
                
