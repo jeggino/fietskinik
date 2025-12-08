@@ -300,7 +300,7 @@ if not on:
             try:
                 df = df_old
                 df_filter = df[(df["Date"]==str(date)) & (df["Time shift"]==time_shift)]
-                df_control = df[(df["Date"]==str(date)) & (df["Time shift"]==time_shift) & (df["Name"]==name)]
+                df_control = df[(df["Date"]==str(date)) & (df["Time shift"]==time_shift) & (df["e_mail"]==e_mail)]
                 len_1 = len(df_filter)
                 len_control = len(df_control)
                 
@@ -495,7 +495,7 @@ else:
         # find if there are available shift in that data
         df = df_old
         df_filter = df[(df["Date"]==str(date)) & (df["Time shift"]==time_shift)]
-        df_control = df[(df["Date"]==str(date)) & (df["Time shift"]==time_shift) & (df["Name"]==name)]
+        df_control = df[(df["Date"]==str(date)) & (df["Time shift"]==time_shift) & (df["e_mail"]==e_mail)]
         len_1 = len(df_filter)
         len_control = len(df_control)       
     
