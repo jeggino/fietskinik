@@ -37,8 +37,8 @@ layout = "centered"
 
 # --- HERE THE CHANGE WITH THE SHIFT, 14-16 HAS BEEN DELETED ---
 time_shift_choice_dinsdag_donderdag = ["18:00-20:30"]
-time_shift_choice_vrijdag = ["11:00-13:00","13:30-15:30","15:30-17:30"]
-time_shift_choice_cancel = ["11:00-13:00","13:30-15:30","15:30-17:30","18:00-20:30"]
+time_shift_choice_vrijdag = ["11:00-13:00","13:00-15:00","13:00-16:00","15:00-17:00"]
+time_shift_choice_cancel = ["11:00-13:00","13:00-15:00","13:00-16:00","15:00-17:00","18:00-20:30"]
 
 #---PAYMENT LINK---
 PAYMENT_LINK_STADPASS = "https://payment-links.mollie.com/payment/QRHiqREMEec7PXeByiszR"
@@ -357,13 +357,16 @@ if not on:
         
                         elif day == "Friday":
         
-                            if time_shift=="11:00-13:00" and len_1 >= 1:
+                            if time_shift=="11:00-13:00" and len_1 >= 2:
                                 st.warning('Deze tijdsverschuiving is al vol. Kies een andere', icon="⚠️")
         
-                            elif time_shift=="13:30-15:30" and len_1 >= 1:
+                            elif time_shift=="13:00-15:00" and len_1 >= 1:
                                 st.warning('Deze tijdsverschuiving is al vol. Kies een andere', icon="⚠️")
         
-                            elif time_shift=="15:30-17:30" and len_1 >= 1:
+                            elif time_shift=="15:00-17:00" and len_1 >= 1:
+                                st.warning('Deze tijdsverschuiving is al vol. Kies een andere', icon="⚠️")
+
+                            elif time_shift=="13:00-16:00" and len_1 >= 1:
                                 st.warning('Deze tijdsverschuiving is al vol. Kies een andere', icon="⚠️")
         
                             else:
@@ -546,13 +549,16 @@ else:
         
                         elif day == "Friday":
         
-                            if time_shift=="11:00-13:00" and len_1 >= 1:
+                            if time_shift=="11:00-13:00" and len_1 >= 2:
                                 st.warning('Deze tijdsverschuiving is al vol. Kies een andere', icon="⚠️")
         
-                            elif time_shift=="13:30-15:30" and len_1 >= 1:
+                            elif time_shift=="13:00-15:00" and len_1 >= 1:
+                                st.warning('Deze tijdsverschuiving is al vol. Kies een andere', icon="⚠️")
+
+                            elif time_shift=="13:00-16:00" and len_1 >= 1:
                                 st.warning('Deze tijdsverschuiving is al vol. Kies een andere', icon="⚠️")
         
-                            elif time_shift=="15:30-17:30" and len_1 >= 1:
+                            elif time_shift=="15:00-17:00" and len_1 >= 1:
                                 st.warning('Deze tijdsverschuiving is al vol. Kies een andere', icon="⚠️")
         
                             else:
