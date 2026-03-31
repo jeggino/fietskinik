@@ -1,3 +1,5 @@
 streamlit
 st-gsheets-connection
 streamlit_option_menu
+sendgrid
+Pillow
