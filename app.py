@@ -45,6 +45,43 @@ PAYMENT_LINK_STADPASS = "https://payment-links.mollie.com/payment/QRHiqREMEec7PX
 PAYMENT_LINK_NO_STADPASS = "https://payment-links.mollie.com/payment/nrxyyvYYhHQP6t84dKynb"
 PAYMENT_LINK_open = "https://www.ing.nl/payreq/m/?trxid=fjuDgJyqjT9ZPRryp5pSMunynvCmM6MH"
 
+#---MAIL---
+def mail(email_receiver,name,date,time,link):
+    subject = "Fietsklieniek appointment"
+    body = f"""
+    Beste {name},
+    
+    U heeft een afspraak met Fietskliniek DIY op {date} om {time} uur.
+    Het adres is Pieter Nieuwlandstraat 95. 
+    Mocht U verhindert zijn en niet kunnen komen, vragen we u om de afspraak af te zeggen op onderstaande link:
+    https://fietskinik-afspraak.streamlit.app/
+    
+    Afspraak dient vooraf betaald te worden op onderstaande {link}
+    
+    Met vriendelijke groet,
+    
+    Fietskliniek Team
+    Pieter Nieuwlandstraat 95
+    1093XN Amsterdam (NL)
+    Tel +31 (6)127 116 08
+    FB: FietsKliniek
+    www.nieuwland.cc/fietskliniek
+    """  
+    
+    msg = MIMEText(body)
+    msg['From'] = st.secrets["EMAIL"]
+    msg['To'] = email_receiver
+    msg['Subject'] = subject
+
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.starttls()
+    server.login(st.secrets["EMAIL"], st.secrets["PASSWORD"])
+    resp = server.rcpt(email_receiver)
+    server.sendmail(st.secrets["EMAIL"], [email_receiver,'jeggino@gmail.com'], msg.as_string())
+    server.quit()
+    
+    # st.success('You have booked you appointment! Please check the email for the payment')
+
 
 #---COSTANTS---
 holidays = {
@@ -261,6 +298,12 @@ if not on:
             
         name = st.text_input("Naam*", placeholder="Vul hier uw naam in ...")
         e_mail = st.text_input("E-mail*", placeholder="Voer hier uw e-mailadres in ...")
+        email_receiver_test = st.text_input("E-mail-test*", placeholder="Herhaal uw e-mailadres ...")
+        
+        if e_mail != email_receiver_test:
+            st.write("UW E-MAILADRES KOMT NIET OVEREEN. CONTROLEER HET AUB!")
+            st.stop()
+            
         type_day = st.selectbox("Dit veld is voor de vrijwilliger. Vul 'afspraak' in als u een reservering wilt maken.", ['Afspraak', 'Vrije dag'])
         if type_day == 'Afspraak':
             number = st.text_input("Telefoonnummer*", placeholder="Voer hier uw nummer in ...")
@@ -334,8 +377,10 @@ if not on:
 
                                     if membership == "ik heb een Stadspas":
                                         insert_period(membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
+                                        mail(e_mail,name,str(date),time_shift,PAYMENT_LINK_STADPASS)
                                     else:
                                         insert_period(membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
+                                        mail(e_mail,name,str(date),time_shift,PAYMENT_LINK_NO_STADPASS)
                                         
                                 except:
                                     if membership == "ik heb een Stadspas":
@@ -345,14 +390,14 @@ if not on:
                                 if type_day == 'Vrije dag':
                                     st.success("🏖️🏖️ Je hebt een dag vrij geboekt! 🏖️🏖️")
                                 else:
-                                    if membership == "ik heb een Stadspas":
-                                        st.markdown(PAYMENT_LINK_STADPASS)
+                                    # if membership == "ik heb een Stadspas":
+                                    #     st.markdown(PAYMENT_LINK_STADPASS)
 
-                                    else:
-                                         st.markdown(PAYMENT_LINK_NO_STADPASS)
+                                    # else:
+                                    #      st.markdown(PAYMENT_LINK_NO_STADPASS)
                                         
-                                    st.success("🚲🚲 U heeft een afspraak gemaakt! 🚲🚲")
-                                    st.warning("Bij het maken van een afspraak dient u te betalen om uw reservering veilig te stellen") 
+                                    st.success("🚲🚲 Je hebt een afspraak gemaakt! Controleer je e-mail, daar vind je de link waarmee je kunt betalen en de reservering kunt voltooien 🚲🚲")
+                                    # st.warning("Bij het maken van een afspraak dient u te betalen om uw reservering veilig te stellen") 
 
         
                         elif day == "Friday":
@@ -373,8 +418,10 @@ if not on:
                                 try:
                                     if membership == "ik heb een Stadspas":
                                         insert_period(membership,str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
+                                        mail(e_mail,name,str(date),time_shift,PAYMENT_LINK_STADPASS)
                                     else:
                                         insert_period(membership,str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
+                                        mail(e_mail,name,str(date),time_shift,PAYMENT_LINK_NO_STADPASS)
                                 except:
                                     if membership == "ik heb een Stadspas":
                                         insert_period( membership, str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
@@ -383,13 +430,13 @@ if not on:
                                 if type_day == 'Vrije dag':
                                     st.success("🏖️🏖️ Je hebt een dag vrij geboekt! 🏖️🏖️")
                                 else:
-                                    if membership == "ik heb een Stadspas":
-                                        st.markdown(PAYMENT_LINK_STADPASS)
+                                    # if membership == "ik heb een Stadspas":
+                                    #     st.markdown(PAYMENT_LINK_STADPASS)
 
-                                    else:
-                                         st.markdown(PAYMENT_LINK_NO_STADPASS)
-                                    st.success("🚲🚲 U heeft een afspraak gemaakt! 🚲🚲")
-                                    st.warning("Bij het maken van een afspraak dient u te betalen om uw reservering veilig te stellen")
+                                    # else:
+                                    #      st.markdown(PAYMENT_LINK_NO_STADPASS)
+                                    st.success("🚲🚲 Je hebt een afspraak gemaakt! Controleer je e-mail, daar vind je de link waarmee je kunt betalen en de reservering kunt voltooien 🚲🚲")
+                                    # st.warning("Bij het maken van een afspraak dient u te betalen om uw reservering veilig te stellen")
                     except:
                         st.error("Vul alstublieft een juist telefoonnummer in")
     
