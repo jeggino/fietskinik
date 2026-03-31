@@ -6,7 +6,8 @@ from streamlit_option_menu import option_menu
 from datetime import datetime as dt
 import random
 from dateutil import parser
-
+import smtplib
+from email.mime.text import MIMEText
 
 
 
