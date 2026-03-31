@@ -77,7 +77,7 @@ def mail(email_receiver,name,date,time,link):
     server.starttls()
     server.login(st.secrets["EMAIL"], st.secrets["PASSWORD"])
     resp = server.rcpt(email_receiver)
-    server.sendmail(st.secrets["EMAIL"], [email_receiver,'jeggino@gmail.com'], msg.as_string())
+    server.sendmail(st.secrets["EMAIL"], [email_receiver,st.secrets["EMAIL"]], msg.as_string())
     server.quit()
     
     # st.success('You have booked you appointment! Please check the email for the payment')
