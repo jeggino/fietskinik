@@ -83,6 +83,46 @@ def mail(email_receiver,name,date,time,link):
     
     # st.success('You have booked you appointment! Please check the email for the payment')
 
+#---mail English---
+def mail_english(email_receiver,name,date,time,link):
+    subject = "Fietsklieniek appointment"
+    body = f"""
+    Dear {name},
+    
+    You have an appointment with Fietskliniek DIY on {date} at {time}.
+    
+    The address is Pieter Nieuwlandstraat 95.
+    
+    Should you be unable to attend, we ask you to cancel the appointment via the link below:
+    
+    https://fietskinik-afspraak.streamlit.app/
+    
+    The appointment must be paid for in advance via the {link} below.
+    
+    Kind regards,
+    
+    Fietskliniek Team
+    Pieter Nieuwlandstraat 95
+    1093XN Amsterdam (NL)
+    Tel +31 (6)127 116 08
+    FB: FietsKliniek
+    www.nieuwland.cc/fietskliniek
+    """  
+    
+    msg = MIMEText(body)
+    msg['From'] = st.secrets["EMAIL"]
+    msg['To'] = email_receiver
+    msg['Subject'] = subject
+
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.starttls()
+    server.login(st.secrets["EMAIL"], st.secrets["PASSWORD"])
+    resp = server.rcpt(email_receiver)
+    server.sendmail(st.secrets["EMAIL"], [email_receiver,st.secrets["EMAIL"]], msg.as_string())
+    server.quit()
+    
+    # st.success('You have booked you appointment! Please check the email for the payment')
+
 
 #---COSTANTS---
 holidays = {
@@ -584,15 +624,13 @@ else:
                                 except:
                                     if membership == "I have a City Pass":
                                         insert_period(membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
+                                        mail_english(e_mail,name,str(date),time_shift,PAYMENT_LINK_STADPASS)
                                     else:
                                         insert_period(membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
-                                if membership == "I have a City Pass":
-                                    st.markdown(PAYMENT_LINK_STADPASS)
+                                        mail_english(e_mail,name,str(date),time_shift,PAYMENT_LINK_NO_STADPASS)
 
-                                else:
-                                     st.markdown(PAYMENT_LINK_NO_STADPASS)
-                                st.success("🚲🚲 You have booked an appointment! 🚲🚲")
-                                st.warning("When making an appointment, payement has to be done to secure your reservation")
+                                st.success("🚲🚲 You have made an appointment! Check your email; there you will find the link to pay and complete the reservation 🚲🚲")
+
                     
         
                         elif day == "Friday":
@@ -613,20 +651,25 @@ else:
                                 try:
                                     if membership == "I have a City Pass":
                                         insert_period(membership,str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
+                                        mail_english(e_mail,name,str(date),time_shift,PAYMENT_LINK_STADPASS)
                                     else:
                                         insert_period(membership,str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
+                                        mail_english(e_mail,name,str(date),time_shift,PAYMENT_LINK_NO_STADPASS)
                                 except:
                                     if membership == "I have a City Pass":
                                         insert_period(membership, str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
+                                        mail_english(e_mail,name,str(date),time_shift,PAYMENT_LINK_STADPASS)
+                                        
                                     else:
                                         insert_period(membership, str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
-                                if membership == "I have a City Pass":
-                                    st.markdown(PAYMENT_LINK_STADPASS)
+                                        mail_english(e_mail,name,str(date),time_shift,PAYMENT_LINK_NO_STADPASS)
+                                # if membership == "I have a City Pass":
+                                #     st.markdown(PAYMENT_LINK_STADPASS)
 
-                                else:
-                                     st.markdown(PAYMENT_LINK_NO_STADPASS)
-                                st.success("🚲🚲 You have booked an appointment! 🚲🚲")
-                                st.warning("When making an appointment, payement has to be done to secure your reservation")
+                                # else:
+                                #      st.markdown(PAYMENT_LINK_NO_STADPASS)
+                                st.success("🚲🚲 You have made an appointment! Check your email; there you will find the link to pay and complete the reservation 🚲🚲")
+                                # st.warning("When making an appointment, payement has to be done to secure your reservation")
                     except:
                         st.error("Please enter a correct phone number")
     
