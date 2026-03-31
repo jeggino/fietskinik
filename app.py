@@ -571,6 +571,12 @@ else:
             
         name = st.text_input("Name*", placeholder="Enter your name here ...")
         e_mail = st.text_input("E-mail*", placeholder="Enter your email address here ...")
+        email_receiver_test = st.text_input("E-mail-test*", placeholder="Repeat your email address ...")
+        
+        if e_mail != email_receiver_test:
+            st.write("YOUR EMAIL ADDRESS DOES NOT MATCH. PLEASE CHECK!")
+            st.stop()
+            
         number = st.text_input("Phone number*", placeholder="Enter your number here ...")
         buurt = st.selectbox("What neighborhood are you from? (for statistics purposes)", buurt_choice)
         expertise = st.selectbox("What experience do you have with cycling?", expertise_choice_english )
