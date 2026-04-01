@@ -47,7 +47,7 @@ PAYMENT_LINK_NO_STADPASS = "https://payment-links.mollie.com/payment/nrxyyvYYhHQ
 PAYMENT_LINK_open = "https://www.ing.nl/payreq/m/?trxid=fjuDgJyqjT9ZPRryp5pSMunynvCmM6MH"
 
 #---MAIL---
-def mail(email_receiver,name,date,time,stadpas):
+def mail(email_receiver,name,date,time,link,stadpas):
     subject = "Fietsklieniek appointment"
     body = f"""
     Beste {name},
