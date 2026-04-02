@@ -87,11 +87,11 @@ def mail(email_receiver,name,date,time,link,stadpas):
 #---POPUP CANCEL---
 @st.dialog(" ")
 def cancelpop():
-    st.write(f"Uw afspraak is geannuleerd!")
+    st.success("Uw afspraak is geannuleerd!")
 
 @st.dialog(" ")
 def cancelpop_english():
-    st.write(f"Uw afspraak is geannuleerd!")
+    st.success("Your appointment has been cancelled!")
 
 #---mail English---
 def mail_english(email_receiver,name,date,time,link,stadpas):
@@ -717,7 +717,8 @@ else:
                 if e_mail:
                     if len(df_filter) > 0:
                         conn.update(worksheet='Data',data=df_drop)
-                        st.success("Your appointment has been cancelled!") 
+                        cancelpop_english()
+                        # st.success("Your appointment has been cancelled!") 
                         # st.rerun()
                     else:
                         st.warning('There is no appointment at this email address', icon="⚠️")
