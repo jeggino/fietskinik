@@ -85,11 +85,11 @@ def mail(email_receiver,name,date,time,link,stadpas):
     # st.success('You have booked you appointment! Please check the email for the payment')
 
 #---POPUP CANCEL---
-@st.dialog("")
+@st.dialog("2")
 def cancelpop():
     st.write(f"Why is your favorite?")
 
-@st.dialog("")
+@st.dialog("1")
 def cancelpop_english():
     st.write(f"Why is your favorite?")
 
