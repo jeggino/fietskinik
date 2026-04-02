@@ -85,13 +85,13 @@ def mail(email_receiver,name,date,time,link,stadpas):
     # st.success('You have booked you appointment! Please check the email for the payment')
 
 #---POPUP CANCEL---
-@st.dialog("2")
+@st.dialog(" ")
 def cancelpop():
-    st.write(f"Why is your favorite?")
+    st.write(f"Uw afspraak is geannuleerd!")
 
-@st.dialog("1")
+@st.dialog(" ")
 def cancelpop_english():
-    st.write(f"Why is your favorite?")
+    st.write(f"Uw afspraak is geannuleerd!")
 
 #---mail English---
 def mail_english(email_receiver,name,date,time,link,stadpas):
@@ -520,9 +520,9 @@ if not on:
                 if e_mail:
                     if len(df_filter) > 0:
                         conn.update(worksheet='Data',data=df_drop)
-                        st.success("Uw afspraak is geannuleerd!")
+                        # st.success("Uw afspraak is geannuleerd!")
                         cancelpop()
-                        st.rerun()
+                        # st.rerun()
                     else:
                         st.warning('Er is geen afspraak op dit e-mailadres', icon="⚠️")
     
@@ -718,7 +718,7 @@ else:
                     if len(df_filter) > 0:
                         conn.update(worksheet='Data',data=df_drop)
                         st.success("Your appointment has been cancelled!") 
-                        st.rerun()
+                        # st.rerun()
                     else:
                         st.warning('There is no appointment at this email address', icon="⚠️")
     
