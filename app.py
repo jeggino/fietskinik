@@ -10,6 +10,27 @@ import smtplib
 from email.mime.text import MIMEText
 
 
+text="""
+Vanaf 1 Augustus is niet meer mogelijk om een afsprakken te maken bij de Fietskliniek
+De werkplaats en het Doe-het- reparatie project gaat voorgoed dicht, er komt geen vervolg
+
+We bedankt jullie vertrouwen in ons.
+
+—————
+
+From August 1st, it will no longer be possible to make an appointment at theFietskliniek [Bike Clinic]. 
+The workshop and the DIY repair project are closing forever; 
+there will be no continuation. 
+
+We thank you for your trust in us."
+"""
+
+st.markdown(text)
+st.stop()
+
+
+
+
 
 # --- FUNCTIONS ---
 def insert_period(membership,date, day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number = None):
