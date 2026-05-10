@@ -10,15 +10,18 @@ import smtplib
 from email.mime.text import MIMEText
 
 
+
+st.image("292366152_369803905279628_8461882568456452789_n.jpg")
+
 text="""
-Vanaf 1 Augustus is niet meer mogelijk om een afsprakken te maken bij de Fietskliniek
+Vanaf 1 Augustus is niet meer mogelijk om een afspraak te maken bij de Fietskliniek.
 De werkplaats en het Doe-het- reparatie project gaat voorgoed dicht, er komt geen vervolg
 
 We bedankt jullie vertrouwen in ons.
 
 —————
 
-From August 1st, it will no longer be possible to make an appointment at theFietskliniek [Bike Clinic]. 
+From August 1st, it will no longer be possible to make an appointment at the Fietskliniek [Bike Clinic]. 
 The workshop and the DIY repair project are closing forever; 
 there will be no continuation. 
 
