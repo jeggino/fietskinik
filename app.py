@@ -11,7 +11,7 @@ from email.mime.text import MIMEText
 
 
 
-st.image("292366152_369803905279628_8461882568456452789_n.jpg")
+#st.image("292366152_369803905279628_8461882568456452789_n.jpg")
 
 text="""
 Vanaf 1 Augustus is niet meer mogelijk om een afspraak te maken bij de Fietskliniek.
@@ -28,8 +28,8 @@ there will be no continuation.
 We thank you for your trust in us."
 """
 
-st.markdown(text)
-st.stop()
+#st.markdown(text)
+#st.stop()
 
 
 
