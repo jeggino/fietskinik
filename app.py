@@ -28,7 +28,7 @@ there will be no continuation.
 We thank you for your trust in us."
 """
 
-#st.markdown(text)
+st.warning(text)
 #st.stop()
 
 
