@@ -17,6 +17,7 @@ text="""
 As of June 1st, it will no longer be possible to make an appointment at the Fietskliniek.The workspace and the DIY repair project will be moving out of the Nieuwland; as soon as the relocation is complete, we will open our doors again.We thank you for your trust in us.
 
 —————
+
 Vanaf 1 Juni is niet meer mogelijk om een afspraak te maken bij de Fietskliniek
 De werkplaats en het Doe-het- zelf reparatie project gaat verhuizen uit de Nieuwland zodra de verhuizing rond is, zullen we de deuren weer open doen.
 We bedankt jullie vertrouwen in ons.
