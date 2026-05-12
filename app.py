@@ -14,18 +14,12 @@ from email.mime.text import MIMEText
 #st.image("292366152_369803905279628_8461882568456452789_n.jpg")
 
 text="""
-Vanaf 1 Augustus is niet meer mogelijk om een afspraak te maken bij de Fietskliniek.
-De werkplaats en het Doe-het- reparatie project gaat voorgoed dicht, er komt geen vervolg
-
-We bedankt jullie vertrouwen in ons.
+As of June 1st, it will no longer be possible to make an appointment at the Fietskliniek.The workspace and the DIY repair project will be moving out of the Nieuwland; as soon as the relocation is complete, we will open our doors again.We thank you for your trust in us.
 
 —————
-
-From August 1st, it will no longer be possible to make an appointment at the Fietskliniek [Bike Clinic]. 
-The workshop and the DIY repair project are closing forever; 
-there will be no continuation. 
-
-We thank you for your trust in us."
+Vanaf 1 Juni is niet meer mogelijk om een afspraak te maken bij de Fietskliniek
+De werkplaats en het Doe-het- zelf reparatie project gaat verhuizen uit de Nieuwland zodra de verhuizing rond is, zullen we de deuren weer open doen.
+We bedankt jullie vertrouwen in ons.
 """
 
 st.warning(text)
