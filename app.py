@@ -17,7 +17,7 @@ from email.mime.text import MIMEText
 SCHEDULE = {
     "Monday": {
         "10:00-12:00": 2,
-        "13:00-15:00": 0
+        "13:00-15:00": 1
     },
     "Tuesday": {
         "10:00-12:00": 0,
