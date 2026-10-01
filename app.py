@@ -11,20 +11,7 @@ from email.mime.text import MIMEText
 
 
 
-#st.image("292366152_369803905279628_8461882568456452789_n.jpg")
 
-# text="""
-# As of June 1st, it will no longer be possible to make an appointment at the Fietskliniek.The workspace and the DIY repair project will be moving out of the Nieuwland; as soon as the relocation is complete, we will open our doors again.We thank you for your trust in us.
-
-# —————
-
-# Vanaf 1 Juni is niet meer mogelijk om een afspraak te maken bij de Fietskliniek
-# De werkplaats en het Doe-het- zelf reparatie project gaat verhuizen uit de Nieuwland zodra de verhuizing rond is, zullen we de deuren weer open doen.
-# We bedankt jullie vertrouwen in ons.
-# """
-
-# st.warning(text)
-#st.stop()
 
 # Maximum allowed bookings per day/time
 SCHEDULE = {
@@ -251,11 +238,6 @@ def mail_english(email_receiver,name,date,time,link,stadpas):
     server.sendmail(st.secrets["EMAIL"], [email_receiver,st.secrets["EMAIL"]], msg.as_string())
     server.quit()
     
-    # st.success('You have booked you appointment! Please check the email for the payment')
-
-
-
-
 
 
 
@@ -448,6 +430,7 @@ if not on:
         date = st.date_input("Datum")
         day_en = date.strftime("%A")
         day = DUTCH_DAYS[day_en]
+        day_for_schedule = day_en
         week = date.isocalendar()[1]
         
         # Holiday check
@@ -460,7 +443,7 @@ if not on:
             pass
         
         # Check if day is available
-        if day not in available_days:
+        if day_for_schedule  not in available_days:
             st.warning(f"Op {day} is het niet mogelijk een afspraak te maken.")
             st.stop()
         
