@@ -841,35 +841,78 @@ if not on:
             
                
     ##### --- drop appointment ---
-    if selected == "Afspraak afzeggen":
+    ##### --- drop appointment ---
+    if selected == "Afspraak afzeggen":
         image = '292366152_369803905279628_8461882568456452789_n.jpg'
         st.image(image)
-        
+    
         with st.form("cancel_form", clear_on_submit=False):
     
-            date = str(st.date_input("Datum"))
-            time_shift = st.selectbox("Tijdsverschuiving", time_shift_choice_cancel )
+            # Datum + dag
+            date_obj = st.date_input("Datum")
+            date = str(date_obj)
+            day_en = date_obj.strftime("%A")
+    
+            # Tijdverschuivingen uit SCHEDULE
+            available_shifts = SCHEDULE.get(day_en, {}).keys()
+            if not available_shifts:
+                st.warning("Op deze dag zijn geen afspraken geregistreerd of beschikbaar.")
+                st.stop()
+    
+            time_shift = st.selectbox("Tijdsverschuiving", list(available_shifts))
             e_mail = st.text_input("", placeholder="Voer hier uw e-mailadres in ...")
-            
+    
             "---"
-            
-
+    
             submitted = st.form_submit_button("Afspraak annuleren")
             if submitted:
-                df = conn.read(ttl=0,worksheet="Data")
-                df_filter = df[(df["Date"]==date) & (df["Time shift"]==time_shift) & (df.e_mail==e_mail)]
-                df_drop = df[~df.apply(tuple, axis=1).isin(df_filter.apply(tuple, axis=1))]
-                if e_mail:
-                    if len(df_filter) > 0:
-                        conn.update(worksheet='Data',data=df_drop)
-                        # st.success("Uw afspraak is geannuleerd!")
-                        cancelpop()
-                        # st.rerun()
-                    else:
-                        st.warning('Er is geen afspraak op dit e-mailadres', icon="⚠️")
+                if not e_mail:
+                    st.warning('Schrijf alstublieft uw e-mail', icon="⚠️")
+                    st.stop()
     
+                df = conn.read(ttl=0, worksheet="Data")
+                df_filter = df[
+                    (df["Date"] == date) &
+                    (df["Time shift"] == time_shift) &
+                    (df["e_mail"] == e_mail)
+                ]
+    
+                if len(df_filter) > 0:
+                    df_drop = df[~df.apply(tuple, axis=1).isin(df_filter.apply(tuple, axis=1))]
+                    conn.update(worksheet='Data', data=df_drop)
+                    cancelpop()
                 else:
-                    st.warning('schrijf alstublieft uw e-mail', icon="⚠️")
+                    st.warning('Er is geen afspraak op dit e-mailadres voor deze datum en tijd', icon="⚠️")
+
+    # if selected == "Afspraak afzeggen":
+    #     image = '292366152_369803905279628_8461882568456452789_n.jpg'
+    #     st.image(image)
+        
+    #     with st.form("cancel_form", clear_on_submit=False):
+    
+    #         date = str(st.date_input("Datum"))
+    #         time_shift = st.selectbox("Tijdsverschuiving", time_shift_choice_cancel )
+    #         e_mail = st.text_input("", placeholder="Voer hier uw e-mailadres in ...")
+            
+    #         "---"
+            
+
+    #         submitted = st.form_submit_button("Afspraak annuleren")
+    #         if submitted:
+    #             df = conn.read(ttl=0,worksheet="Data")
+    #             df_filter = df[(df["Date"]==date) & (df["Time shift"]==time_shift) & (df.e_mail==e_mail)]
+    #             df_drop = df[~df.apply(tuple, axis=1).isin(df_filter.apply(tuple, axis=1))]
+    #             if e_mail:
+    #                 if len(df_filter) > 0:
+    #                     conn.update(worksheet='Data',data=df_drop)
+    #                     # st.success("Uw afspraak is geannuleerd!")
+    #                     cancelpop()
+    #                     # st.rerun()
+    #                 else:
+    #                     st.warning('Er is geen afspraak op dit e-mailadres', icon="⚠️")
+    
+    #             else:
+    #                 st.warning('schrijf alstublieft uw e-mail', icon="⚠️")
 
 
 else:    
