@@ -13,24 +13,55 @@ from email.mime.text import MIMEText
 
 #st.image("292366152_369803905279628_8461882568456452789_n.jpg")
 
-text="""
-As of June 1st, it will no longer be possible to make an appointment at the Fietskliniek.The workspace and the DIY repair project will be moving out of the Nieuwland; as soon as the relocation is complete, we will open our doors again.We thank you for your trust in us.
+# text="""
+# As of June 1st, it will no longer be possible to make an appointment at the Fietskliniek.The workspace and the DIY repair project will be moving out of the Nieuwland; as soon as the relocation is complete, we will open our doors again.We thank you for your trust in us.
 
-—————
+# —————
 
-Vanaf 1 Juni is niet meer mogelijk om een afspraak te maken bij de Fietskliniek
-De werkplaats en het Doe-het- zelf reparatie project gaat verhuizen uit de Nieuwland zodra de verhuizing rond is, zullen we de deuren weer open doen.
-We bedankt jullie vertrouwen in ons.
-"""
+# Vanaf 1 Juni is niet meer mogelijk om een afspraak te maken bij de Fietskliniek
+# De werkplaats en het Doe-het- zelf reparatie project gaat verhuizen uit de Nieuwland zodra de verhuizing rond is, zullen we de deuren weer open doen.
+# We bedankt jullie vertrouwen in ons.
+# """
 
-st.warning(text)
+# st.warning(text)
 #st.stop()
 
+# Maximum allowed bookings per day/time
+SCHEDULE = {
+    "Monday": {
+        "10:00-12:00": 2,
+        "13:00-15:00": 1
+    },
+    "Tuesday": {
+        "10:00-12:00": 1,
+        "13:00-15:00": 5
+    },
+    "Thursday": {
+        "18:00-20:30": 3
+    },
+    "Friday": {
+        "11:00-13:00": 2,
+        "13:00-15:00": 1,
+        "15:00-17:00": 1,
+        "14:00-16:00": 1
+    }
+}
 
 
 
 
 # --- FUNCTIONS ---
+def is_slot_full(day, time_shift, current_count):
+    """Return True if the time slot is full based on SCHEDULE."""
+    if day not in SCHEDULE:
+        return False  # no limits for this day
+    
+    if time_shift not in SCHEDULE[day]:
+        return False  # no limits for this time shift
+    
+    max_allowed = SCHEDULE[day][time_shift]
+    return current_count >= max_allowed
+
 def insert_period(membership,date, day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number = None):
     """Returns the user on a successful user creation, otherwise raises and error"""
     data = [{"Membership":membership, "Membership_number":membership_number, "Date": date, "Day":day, "Week":week, "Time shift": time_shift, 
@@ -223,18 +254,35 @@ materiaal_choice = ['Ik weet niet precies',
 MEMBERSHIP_CHOICE = [ "ik heb geen Stadspas (€15 per 2 uur)", "ik heb een Stadspas"]
 
 TEXT = """
+
+"""
+
+
+
+TEXT = """
 Fietskliniek is een buurt-, sociaal betrokken fietswerkplaats. In de fietsenwerkplaats vind u alle gereedschappen en onderdelen (nieuw en tweedehands) die u nodig hebt om uw fiets te repareren en u krijgt begeleiding van een ervaren vrijwilliger fietsenmaker daarbij. Hierbij moet je rekening houden met de volgende regels:
 
-- Afspraak is max 2uur.
-- Als de fiets niet klaar is binnen 2 uur, dan moet er een nieuwe afspraak gemaakt worden.
-- Als u meerdere fietsen hebt om te repareren moeten er meerdere afspraken worden gemaakt.
-- Eenmalig gebruik van de werkplaats kost €15. Met Stadspas €4,00.
-- Onderdelen nodig voor de reparatie moeten apart worden betaald. We hebben nieuwe - en 2e hands onderdelen voor de halve prijs van een nieuwe.
-- Vul onderstaand formulier in om te reserveren. Zodra u op Gegevens opslaan klikt, is uw reservering voltooid! U krijgt geen bevestiging.
-- U kunt niet dezelfde dag reserveren waarop u langs wilt komen. 
-- Indien u een reservering heeft gemaakt en u kunt niet komen, kunt u deze gewoon annuleren via de knop hierboven, dit kan op dezelfde dag als de afspraak tot 12.00 uur.
-- Bij annulering tot 12.00 uur krijgt u uw geld terug minus € 4,- voor administratieve doeleinden. Bij no-show of no-cancelling krijgt u geen geld terug.
-- :orange-background[Bij het maken van een afspraak dient u te betalen om uw reservering veilig te stellen.]
+• Afspraak duur is max 2uur.
+• Eenmalig gebruik van de werkplaats kost €20. Met Stadspas €4,00.
+• Als de fiets niet klaar is binnen 2 uur, dan moet er een nieuwe afspraak gemaakt worden.
+• Als u meerdere fietsen hebt om te repareren moeten er meerdere afspraken worden gemaakt.
+• Klein probleem? Kom gewoon langs, zonder afspraak
+Onderdelen
+• Onderdelen nodig voor de reparatie moeten apart worden betaald.
+• We hebben nieuwe - en 2e hands onderdelen voor de halve prijs van een nieuwe.
+• Je mag je eigen onderdelen niet meenemen of gebruiken, tenzij anders afgesprokken
+• We begrijpen dat materiaal elders goedkoper zou zijn, maar anders kunnen we dit project
+niet blijven runnen.
+• We kiezen voor de voordeligste prijs-kwaliteit verhouding voor onze onderdelen
+Afspraak maken/annuleren
+• Vul onderstaand formulier in om te reserveren. Zodra u op Gegevens opslaan klikt, is uw
+reservering voltooid! U krijgt een bevestiging per mail
+• U kunt niet dezelfde dag reserveren waarop u langs wilt komen.
+• Indien u een reservering heeft gemaakt en u kunt niet komen, kunt u deze gewoon annuleren
+via de knop hierboven, dit kan de daag ervoor tot 12 uur
+• Bij annulering tot 12.00 uur krijgt u uw geld terug minus € 4,- voor administratieve
+doeleinden. Bij no-show of no-cancelling krijgt u geen geld terug.
+• Bij het maken van een afspraak dient u te betalen om uw reservering veilig te stellen.
 
 Welkom bij de Fietskliniek en geniet van uw fietssessie!
 """
@@ -411,109 +459,168 @@ if not on:
     
         # submit the data
         submitted = st.button(":red[**Gegevens opslaan**]")
+
         if submitted:
-            try:
-                df = df_old
-                df_filter = df[(df["Date"]==str(date)) & (df["Time shift"]==time_shift)]
-                df_control = df[(df["Date"]==str(date)) & (df["Time shift"]==time_shift) & (df["e_mail"]==e_mail)]
-                len_1 = len(df_filter)
-                len_control = len(df_control)
-                
-            except:
-                df = df_old
-                df_filter = df
-                df_control = df
-                len_1 = 0
-                len_control = 0
-                   
-            if len(name) == 0 or len(e_mail)==0 or len(number)==0:
-                st.warning('Vul de verplichte velden in', icon="⚠️")
+            df = df_old
+        
+            # Filter existing bookings
+            df_filter = df[(df["Date"] == str(date)) & (df["Time shift"] == time_shift)]
+            df_control = df[(df["Date"] == str(date)) & 
+                            (df["Time shift"] == time_shift) & 
+                            (df["e_mail"] == e_mail)]
+        
+            len_1 = len(df_filter)
+            len_control = len(df_control)
+        
+            # Required fields
+            if not name or not e_mail or not number:
+                st.warning("Vul de verplichte velden in", icon="⚠️")
                 st.stop()
-                
-            if len_control == 0:
-                res = ((dt.strptime(str(date), "%Y-%m-%d").date() - dt.today().date()).days)
-                if res == 0: 
-                    st.warning('Helaas kunt u geen afspraak op dezelfde dag boeken', icon="⚠️")
-                    st.stop()
+        
+            # Prevent booking same day
+            days_diff = (dt.strptime(str(date), "%Y-%m-%d").date() - dt.today().date()).days
+            if days_diff == 0:
+                st.warning("Helaas kunt u geen afspraak op dezelfde dag boeken", icon="⚠️")
+                st.stop()
+        
+            # Prevent duplicate booking with same email
+            if len_control > 0:
+                st.warning("Er is al een afspraak op deze datum en tijd met dezelfde email", icon="⚠️")
+                st.stop()
+        
+            # Determine weekday
+            day = parser.parse(str(date)).strftime("%A")
+        
+            # Check capacity using dictionary
+            if is_slot_full(day, time_shift, len_1):
+                st.warning("Deze tijdsverschuiving is al vol. Kies een andere", icon="⚠️")
+                st.stop()
+        
+            # Insert booking
+            try:
+                if membership == "ik heb een Stadspas":
+                    insert_period(membership, str(date), day, week, time_shift, name, e_mail, number,
+                                  buurt, expertise, type_bike, materiaal, opmerking, membership_number)
+                    mail(e_mail, name, str(date), time_shift, PAYMENT_LINK_STADPASS, membership_number)
                 else:
-                    day = parser.parse(str(date)).strftime("%A")
-                    try:
-                        # int(number)
-                        if day in ["Thursday","Tuesday"]:
+                    insert_period(membership, str(date), day, week, time_shift, name, e_mail, number,
+                                  buurt, expertise, type_bike, materiaal, opmerking)
+                    mail(e_mail, name, str(date), time_shift, PAYMENT_LINK_NO_STADPASS, membership_number)
         
-                            if time_shift=="18:00-20:30" and len_1 >= 3:
-                                st.warning('Deze tijdsverschuiving is al vol. Kies een andere', icon="⚠️")
+            except:
+                st.error("Er ging iets mis bij het opslaan van de afspraak.")
+                st.stop()
         
-                            else:
-                                try:
-
-                                    if membership == "ik heb een Stadspas":
-                                        insert_period(membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
-                                        mail(e_mail,name,str(date),time_shift,PAYMENT_LINK_STADPASS,membership_number)
-                                    else:
-                                        insert_period(membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
-                                        mail(e_mail,name,str(date),time_shift,PAYMENT_LINK_NO_STADPASS,membership_number)
-                                        
-                                except:
-                                    if membership == "ik heb een Stadspas":
-                                        insert_period(name_picture,membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
-                                    else:
-                                        insert_period(name_picture,membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
-                                if type_day == 'Vrije dag':
-                                    st.success("🏖️🏖️ Je hebt een dag vrij geboekt! 🏖️🏖️")
-                                else:
-                                    # if membership == "ik heb een Stadspas":
-                                    #     st.markdown(PAYMENT_LINK_STADPASS)
-
-                                    # else:
-                                    #      st.markdown(PAYMENT_LINK_NO_STADPASS)
-                                        
-                                    st.success("🚲🚲 Je hebt een afspraak gemaakt! Controleer je e-mail, daar vind je de link waarmee je kunt betalen en de reservering kunt voltooien 🚲🚲")
-                                    # st.warning("Bij het maken van een afspraak dient u te betalen om uw reservering veilig te stellen") 
-
-        
-                        elif day == "Friday":
-        
-                            if time_shift=="11:00-13:00" and len_1 >= 2:
-                                st.warning('Deze tijdsverschuiving is al vol. Kies een andere', icon="⚠️")
-        
-                            elif time_shift=="13:00-15:00" and len_1 >= 1:
-                                st.warning('Deze tijdsverschuiving is al vol. Kies een andere', icon="⚠️")
-        
-                            elif time_shift=="15:00-17:00" and len_1 >= 1:
-                                st.warning('Deze tijdsverschuiving is al vol. Kies een andere', icon="⚠️")
-
-                            elif time_shift=="14:00-16:00" and len_1 >= 1:
-                                st.warning('Deze tijdsverschuiving is al vol. Kies een andere', icon="⚠️")
-        
-                            else:
-                                try:
-                                    if membership == "ik heb een Stadspas":
-                                        insert_period(membership,str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
-                                        mail(e_mail,name,str(date),time_shift,PAYMENT_LINK_STADPASS,membership_number)
-                                    else:
-                                        insert_period(membership,str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
-                                        mail(e_mail,name,str(date),time_shift,PAYMENT_LINK_NO_STADPASS,membership_number)
-                                except:
-                                    if membership == "ik heb een Stadspas":
-                                        insert_period( membership, str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
-                                    else:
-                                        insert_period(membership, str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
-                                if type_day == 'Vrije dag':
-                                    st.success("🏖️🏖️ Je hebt een dag vrij geboekt! 🏖️🏖️")
-                                else:
-                                    # if membership == "ik heb een Stadspas":
-                                    #     st.markdown(PAYMENT_LINK_STADPASS)
-
-                                    # else:
-                                    #      st.markdown(PAYMENT_LINK_NO_STADPASS)
-                                    st.success("🚲🚲 Je hebt een afspraak gemaakt! Controleer je e-mail, daar vind je de link waarmee je kunt betalen en de reservering kunt voltooien 🚲🚲")
-                                    # st.warning("Bij het maken van een afspraak dient u te betalen om uw reservering veilig te stellen")
-                    except:
-                        st.error("Vul alstublieft een juist telefoonnummer in")
-    
+            # Success message
+            if type_day == "Vrije dag":
+                st.success("🏖️🏖️ Je hebt een dag vrij geboekt! 🏖️🏖️")
             else:
-                st.warning('Er is al een afspraak op deze datum en tijd met dezelfde email', icon="⚠️") 
+                st.success("🚲🚲 Je hebt een afspraak gemaakt! Controleer je e-mail voor de betalingslink 🚲🚲")
+
+    
+        # if submitted:
+        #     try:
+        #         df = df_old
+        #         df_filter = df[(df["Date"]==str(date)) & (df["Time shift"]==time_shift)]
+        #         df_control = df[(df["Date"]==str(date)) & (df["Time shift"]==time_shift) & (df["e_mail"]==e_mail)]
+        #         len_1 = len(df_filter)
+        #         len_control = len(df_control)
+                
+        #     except:
+        #         df = df_old
+        #         df_filter = df
+        #         df_control = df
+        #         len_1 = 0
+        #         len_control = 0
+                   
+        #     if len(name) == 0 or len(e_mail)==0 or len(number)==0:
+        #         st.warning('Vul de verplichte velden in', icon="⚠️")
+        #         st.stop()
+                
+        #     if len_control == 0:
+        #         res = ((dt.strptime(str(date), "%Y-%m-%d").date() - dt.today().date()).days)
+        #         if res == 0: 
+        #             st.warning('Helaas kunt u geen afspraak op dezelfde dag boeken', icon="⚠️")
+        #             st.stop()
+        #         else:
+        #             day = parser.parse(str(date)).strftime("%A")
+        #             try:
+        #                 # int(number)
+        #                 if day in ["Thursday","Tuesday"]:
+        
+        #                     if time_shift=="18:00-20:30" and len_1 >= 3:
+        #                         st.warning('Deze tijdsverschuiving is al vol. Kies een andere', icon="⚠️")
+        
+        #                     else:
+        #                         try:
+
+        #                             if membership == "ik heb een Stadspas":
+        #                                 insert_period(membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
+        #                                 mail(e_mail,name,str(date),time_shift,PAYMENT_LINK_STADPASS,membership_number)
+        #                             else:
+        #                                 insert_period(membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
+        #                                 mail(e_mail,name,str(date),time_shift,PAYMENT_LINK_NO_STADPASS,membership_number)
+                                        
+        #                         except:
+        #                             if membership == "ik heb een Stadspas":
+        #                                 insert_period(name_picture,membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
+        #                             else:
+        #                                 insert_period(name_picture,membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
+        #                         if type_day == 'Vrije dag':
+        #                             st.success("🏖️🏖️ Je hebt een dag vrij geboekt! 🏖️🏖️")
+        #                         else:
+        #                             # if membership == "ik heb een Stadspas":
+        #                             #     st.markdown(PAYMENT_LINK_STADPASS)
+
+        #                             # else:
+        #                             #      st.markdown(PAYMENT_LINK_NO_STADPASS)
+                                        
+        #                             st.success("🚲🚲 Je hebt een afspraak gemaakt! Controleer je e-mail, daar vind je de link waarmee je kunt betalen en de reservering kunt voltooien 🚲🚲")
+        #                             # st.warning("Bij het maken van een afspraak dient u te betalen om uw reservering veilig te stellen") 
+
+        
+        #                 elif day == "Friday":
+        
+        #                     if time_shift=="11:00-13:00" and len_1 >= 2:
+        #                         st.warning('Deze tijdsverschuiving is al vol. Kies een andere', icon="⚠️")
+        
+        #                     elif time_shift=="13:00-15:00" and len_1 >= 1:
+        #                         st.warning('Deze tijdsverschuiving is al vol. Kies een andere', icon="⚠️")
+        
+        #                     elif time_shift=="15:00-17:00" and len_1 >= 1:
+        #                         st.warning('Deze tijdsverschuiving is al vol. Kies een andere', icon="⚠️")
+
+        #                     elif time_shift=="14:00-16:00" and len_1 >= 1:
+        #                         st.warning('Deze tijdsverschuiving is al vol. Kies een andere', icon="⚠️")
+        
+        #                     else:
+        #                         try:
+        #                             if membership == "ik heb een Stadspas":
+        #                                 insert_period(membership,str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
+        #                                 mail(e_mail,name,str(date),time_shift,PAYMENT_LINK_STADPASS,membership_number)
+        #                             else:
+        #                                 insert_period(membership,str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
+        #                                 mail(e_mail,name,str(date),time_shift,PAYMENT_LINK_NO_STADPASS,membership_number)
+        #                         except:
+        #                             if membership == "ik heb een Stadspas":
+        #                                 insert_period( membership, str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
+        #                             else:
+        #                                 insert_period(membership, str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
+        #                         if type_day == 'Vrije dag':
+        #                             st.success("🏖️🏖️ Je hebt een dag vrij geboekt! 🏖️🏖️")
+        #                         else:
+        #                             # if membership == "ik heb een Stadspas":
+        #                             #     st.markdown(PAYMENT_LINK_STADPASS)
+
+        #                             # else:
+        #                             #      st.markdown(PAYMENT_LINK_NO_STADPASS)
+        #                             st.success("🚲🚲 Je hebt een afspraak gemaakt! Controleer je e-mail, daar vind je de link waarmee je kunt betalen en de reservering kunt voltooien 🚲🚲")
+        #                             # st.warning("Bij het maken van een afspraak dient u te betalen om uw reservering veilig te stellen")
+        #             except:
+        #                 st.error("Vul alstublieft een juist telefoonnummer in")
+    
+        #     else:
+        #         st.warning('Er is al een afspraak op deze datum en tijd met dezelfde email', icon="⚠️") 
     
             
                
