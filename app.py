@@ -12,28 +12,12 @@ df = conn.read(ttl=0, worksheet="Data")
 def password_gate():
     st.title("🔐 Fietskliniek Dashboard")
     pw = st.text_input("Voer het wachtwoord in om verder te gaan:", type="password")
-    if pw != "fietskliniek-dashboard":
+    if pw != "fietskliniek":
         st.stop()
 
 password_gate()
 
 
-# Convert date column to datetime
-df["Date"] = pd.to_datetime(df["Date"], errors="coerce")
-
-# Sort by date + time
-df = df.sort_values(["Date", "Time shift"])
-
-# Dutch day names
-DUTCH_DAYS = {
-    "Monday": "Maandag",
-    "Tuesday": "Dinsdag",
-    "Wednesday": "Woensdag",
-    "Thursday": "Donderdag",
-    "Friday": "Vrijdag",
-    "Saturday": "Zaterdag",
-    "Sunday": "Zondag"
-}
 
 st.title("📅 Agenda Fietskliniek")
 
@@ -54,7 +38,8 @@ st.markdown(
 view_mode = st.radio(
     "Kies een periode:",
     ["Verleden", "Vandaag", "Toekomst"],
-    horizontal=True
+    horizontal=True,
+    index=1
 )
 
 today = pd.Timestamp.today().date()
