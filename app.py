@@ -138,7 +138,7 @@ for time_shift, group in df_day.groupby("Time shift"):
                     df_drop = df_full[~df_full.apply(tuple, axis=1).isin(df_filter.apply(tuple, axis=1))]
                     conn.update(worksheet="Data", data=df_drop)
                     st.success(f"De afspraak van **{row['Name']}** is verwijderd.")
-                    st.experimental_rerun()
+                    st.rerun()
                 else:
                     st.warning("Kon de afspraak niet vinden in het systeem.", icon="⚠️")
     
@@ -182,45 +182,45 @@ for time_shift, group in df_day.groupby("Time shift"):
     
             #     st.rerun()
 
-        delete_label = f"❌ Afspraak verwijderen ({row['Name']})"
-        if st.button(delete_label, key=f"delete_{idx}"):
+        # delete_label = f"❌ Afspraak verwijderen ({row['Name']})"
+        # if st.button(delete_label, key=f"delete_{idx}"):
         
-            df_current = conn.read(ttl=0, worksheet="Data")
+        #     df_current = conn.read(ttl=0, worksheet="Data")
         
-            # Convert all to string for safe comparison
-            df_current["Date"] = df_current["Date"].astype(str)
-            df_current["Time shift"] = df_current["Time shift"].astype(str)
-            df_current["e_mail"] = df_current["e_mail"].astype(str)
+        #     # Convert all to string for safe comparison
+        #     df_current["Date"] = df_current["Date"].astype(str)
+        #     df_current["Time shift"] = df_current["Time shift"].astype(str)
+        #     df_current["e_mail"] = df_current["e_mail"].astype(str)
         
-            row_date = str(row["Date"])
-            row_shift = str(row["Time shift"])
-            row_email = str(row["e_mail"])
+        #     row_date = str(row["Date"])
+        #     row_shift = str(row["Time shift"])
+        #     row_email = str(row["e_mail"])
         
-            # Identify row by unique fields
-            mask = (
-                (df_current["Date"] == row_date) &
-                (df_current["Time shift"] == row_shift) &
-                (df_current["e_mail"] == row_email)
-            )
+        #     # Identify row by unique fields
+        #     mask = (
+        #         (df_current["Date"] == row_date) &
+        #         (df_current["Time shift"] == row_shift) &
+        #         (df_current["e_mail"] == row_email)
+        #     )
 
-            st.write(mask)
-            st.write(mask.sum())
-            if mask.sum() == 0:
-                st.error("Kon de afspraak niet vinden in het systeem.")
-                st.stop()
+        #     st.write(mask)
+        #     st.write(mask.sum())
+        #     if mask.sum() == 0:
+        #         st.error("Kon de afspraak niet vinden in het systeem.")
+        #         st.stop()
         
-            # Drop the row
-            df_drop = df_current[~mask]
+        #     # Drop the row
+        #     df_drop = df_current[~mask]
         
-            # Update sheet
-            conn.update(worksheet="Data", data=df_drop)
+        #     # Update sheet
+        #     conn.update(worksheet="Data", data=df_drop)
         
-            st.success(f"De afspraak van **{row['Name']}** is verwijderd.")
-            st.rerun()
+        #     st.success(f"De afspraak van **{row['Name']}** is verwijderd.")
+        #     st.rerun()
 
 
     
-            st.markdown("---")
+        #     st.markdown("---")
 
 
 
