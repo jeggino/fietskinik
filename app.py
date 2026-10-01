@@ -153,42 +153,6 @@ PAYMENT_LINK_STADPASS = "https://payment-links.mollie.com/payment/QRHiqREMEec7PX
 PAYMENT_LINK_NO_STADPASS = "https://payment-links.mollie.com/payment/nrxyyvYYhHQP6t84dKynb"
 PAYMENT_LINK_open = "https://www.ing.nl/payreq/m/?trxid=fjuDgJyqjT9ZPRryp5pSMunynvCmM6MH"
 
-#---MAIL---
-# def mail(email_receiver,name,date,time,link,stadpas):
-#     subject = "Fietsklieniek appointment"
-#     body = f"""
-#     Beste {name},
-    
-#     U heeft een afspraak met Fietskliniek DIY op {date} om {time} uur.
-#     (stadpas nummer: {stadpas})
-#     Het adres is Pieter Nieuwlandstraat 95. 
-#     Mocht U verhindert zijn en niet kunnen komen, vragen we u om de afspraak af te zeggen op onderstaande link:
-#     https://fietskinik-afspraak.streamlit.app/
-    
-#     Afspraak dient vooraf betaald te worden op onderstaande {link}
-    
-#     Met vriendelijke groet,
-    
-#     Fietskliniek Team
-#     Pieter Nieuwlandstraat 95
-#     1093XN Amsterdam (NL)
-#     Tel +31 (6)127 116 08
-#     FB: FietsKliniek
-#     www.nieuwland.cc/fietskliniek
-#     """  
-    
-#     msg = MIMEText(body)
-#     msg['From'] = st.secrets["EMAIL"]
-#     msg['To'] = email_receiver
-#     msg['Subject'] = subject
-
-#     server = smtplib.SMTP('smtp.gmail.com', 587)
-#     server.starttls()
-#     server.login(st.secrets["EMAIL"], st.secrets["PASSWORD"])
-#     resp = server.rcpt(email_receiver)
-#     server.sendmail(st.secrets["EMAIL"], [email_receiver,st.secrets["EMAIL"]], msg.as_string())
-#     server.quit()
-
 def mail(email_receiver, name, date, time, link, stadpas):
     subject = "Fietsklieniek appointment"
     body = f"""
@@ -250,7 +214,6 @@ def mail(email_receiver, name, date, time, link, stadpas):
 
 
     
-    # st.success('You have booked you appointment! Please check the email for the payment')
 
 #---POPUP CANCEL---
 @st.dialog(" ")
@@ -376,56 +339,7 @@ via de knop hierboven, dit kan de daag ervoor tot 12 uur
 Welkom bij de Fietskliniek en geniet van uw fietssessie!
 """
 
-#---COSTANTS IN ENGLISH---
-expertise_choice_english = ['None', 'Low', 'Average', 'Experienced']
 
-type_bikes_english = ["Coaster brake", "Racing bike","Outside gears","Inside gears","Folding bike","Children's bike", "Tricycle","Cargo bike - Please send a photo","E-bike - Please send a photo","my bike is not listed"]
-
-
-materiaal_choice_english = ['I dont know exactly',
-'New outer tire front or rear',
-'Chain',
-'Chain case',
-'Derailleur',
-'Cassette',
-'Sprocket',
-'Brake cable',
-'Brake shoe',
-'Coaster brake problem',
-'Gear internals problem',
-'Gear cassette problem',
-'Gear cable',
-'Front axle',
-'Rear wheel play',
-'Spokes',
-'Bottom bracket',
-'Left or right sprocket',
-'Pedals',
-'Front fork',
-'Handlebars, handlebars pin',
-'Saddle, seat post',
-'Lighting',
-'Remove lock',
-'New lock',
-'Rear, Front rack']
-
-MEMBERSHIP_CHOICE_english = ["I don't have a City Pass (€15 per 2 hours)", "I have a City Pass"]
-
-TEXT_english = """
-Fietskliniek is a neighbourhood, socially involved bicycle workshop. In the bicycle workshop you will find all the tools and parts (new and second-hand) that you need to repair your bicycle and you will be guided by an experienced volunteer bicycle mechanic. You must take the following rules into account:
-
-- Appointment is max 2 hours.
-- If the bicycle is not ready within 2 hours, a new appointment must be made.
-- If you have multiple bicycles to repair, multiple appointments must be made.
-- One-time use of the workshop costs €15. With City Pass €4.00.
-- Parts needed for the repair must be paid for separately. We have new - and second-hand parts for half the price of a new one.
-- Fill in the form below to make a reservation. As soon as you click on Save data, your reservation is complete! You will not receive a confirmation.
-- You cannot make a reservation on the same day that you want to come by. If you have made a reservation and you cannot come, you can simply cancel it via the button above, this can be done on the same day as the appointment until 12:00.
-- If you cancel until 12:00, you will receive your money back minus €4,- for administrative purposes. In case of no-show or no-cancellation, you will not receive any money back.
-- :orange-background[When making an appointment, payement has to be done to secure your reservation.]
-
-Welcome to the Cycling Clinic and enjoy your cycling session!
-"""
 
 
 
@@ -448,21 +362,6 @@ st.markdown(hide_st_style, unsafe_allow_html=True)
 conn = st.connection("gsheets", type=GSheetsConnection)
 df_old = conn.read(ttl=0,worksheet="Data")
 
-#--APP---
-# on = st.toggle("🇬🇧")
-
-# if not on:
-#     # --- NAVIGATION MENU ---
-#     selected = option_menu(
-#         menu_title=None,
-#         options=["Maak een afspraak", "Afspraak afzeggen"],
-#         icons=["bi-journal-check", "bi-x-octagon-fill"],
-#         orientation="horizontal",
-#     )
-
-
-    
-"---"
 
 
 # --- NAVIGATION MENU ---
@@ -473,7 +372,7 @@ selected = option_menu(
     orientation="horizontal",
 )
 
-
+"---"
 # --- INPUT & SAVE PERIODS ---
 if selected == "Maak een afspraak":       
 
@@ -641,19 +540,6 @@ if selected == "Maak een afspraak":
             )
 
 
-            # if membership == "ik heb een Stadspas":
-            #     insert_period(
-            #         membership, str(date), day_en, week, time_shift, name, e_mail, number,
-            #         buurt, expertise, type_bike, materiaal, opmerking, membership_number
-            #     )
-            #     mail(e_mail, name, str(date), time_shift, PAYMENT_LINK_STADPASS, membership_number)
-            # else:
-            #     insert_period(
-            #         membership, str(date), day_en, week, time_shift, name, e_mail, number,
-            #         buurt, expertise, type_bike, materiaal, opmerking
-            #     )
-            #     mail(e_mail, name, str(date), time_shift, PAYMENT_LINK_NO_STADPASS, membership_number)
-
         except Exception:
             st.error("Er ging iets mis bij het opslaan van de afspraak.")
             st.stop()
@@ -671,8 +557,6 @@ if selected == "Maak een afspraak":
 
 
 
-        
-           
 ##### --- drop appointment ---
 if selected == "Afspraak afzeggen":
     image = '292366152_369803905279628_8461882568456452789_n.jpg'
@@ -716,35 +600,6 @@ if selected == "Afspraak afzeggen":
             else:
                 st.warning('Er is geen afspraak op dit e-mailadres voor deze datum en tijd', icon="⚠️")
 
-# if selected == "Afspraak afzeggen":
-#     image = '292366152_369803905279628_8461882568456452789_n.jpg'
-#     st.image(image)
-    
-#     with st.form("cancel_form", clear_on_submit=False):
-
-#         date = str(st.date_input("Datum"))
-#         time_shift = st.selectbox("Tijdsverschuiving", time_shift_choice_cancel )
-#         e_mail = st.text_input("", placeholder="Voer hier uw e-mailadres in ...")
-        
-#         "---"
-        
-
-#         submitted = st.form_submit_button("Afspraak annuleren")
-#         if submitted:
-#             df = conn.read(ttl=0,worksheet="Data")
-#             df_filter = df[(df["Date"]==date) & (df["Time shift"]==time_shift) & (df.e_mail==e_mail)]
-#             df_drop = df[~df.apply(tuple, axis=1).isin(df_filter.apply(tuple, axis=1))]
-#             if e_mail:
-#                 if len(df_filter) > 0:
-#                     conn.update(worksheet='Data',data=df_drop)
-#                     # st.success("Uw afspraak is geannuleerd!")
-#                     cancelpop()
-#                     # st.rerun()
-#                 else:
-#                     st.warning('Er is geen afspraak op dit e-mailadres', icon="⚠️")
-
-#             else:
-#                 st.warning('schrijf alstublieft uw e-mail', icon="⚠️")
 
 
   
