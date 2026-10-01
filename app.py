@@ -94,7 +94,25 @@ if df_day.empty:
 for time_shift, group in df_day.groupby("Time shift"):
     st.markdown(f"### 🕒 {time_shift}")
 
-    for _, row in group.iterrows():
+    # for _, row in group.iterrows():
+    #     with st.container():
+    #         st.markdown(
+    #             f"""
+    #             **Naam:** {row['Name']}  
+    #             **E-mail:** {row['e_mail']}  
+    #             **Telefoon:** {row['Phone number']}  
+    #             **Membership:** {row['Membership']}  
+    #             **Stadspasnummer:** {row['Membership_number']}  
+    #             **Buurt:** {row['Neighborhood']}  
+    #             **Ervaring:** {row['Expertise']}  
+    #             **Type fiets:** {row['Type of bike']}  
+    #             **Reparatie(s):** {row['Type of reparation']}  
+    #             **Opmerking:** {row['Remarks']}  
+    #             """
+    #         )
+    #         st.markdown("---")
+
+    for idx, row in group.iterrows():
         with st.container():
             st.markdown(
                 f"""
@@ -110,7 +128,28 @@ for time_shift, group in df_day.groupby("Time shift"):
                 **Opmerking:** {row['Remarks']}  
                 """
             )
+    
+            # Delete button
+            delete_label = f"❌ Afspraak verwijderen ({row['Name']})"
+            if st.button(delete_label, key=f"delete_{idx}"):
+    
+                # Load fresh data
+                df_current = conn.read(ttl=0, worksheet="Data")
+    
+                # Identify the exact row to drop
+                row_tuple = tuple(row)
+                df_drop = df_current[~df_current.apply(tuple, axis=1).isin([row_tuple])]
+    
+                # Update sheet
+                conn.update(worksheet="Data", data=df_drop)
+    
+                # Confirmation dialog
+                st.success(f"De afspraak van **{row['Name']}** is verwijderd.")
+    
+                st.experimental_rerun()
+    
             st.markdown("---")
+
 
 
 
