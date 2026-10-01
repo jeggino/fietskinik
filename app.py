@@ -72,6 +72,27 @@ DUTCH_DAYS = {
     "Sunday": "Zondag"
 }
 
+holidays = {
+'Kerstvakantie' : pd.date_range(start="2024-12-21", end="2025-01-05"),
+'Meivakantie' : pd.date_range(start="2025-04-26", end="2025-05-04"),
+'Zomervakantie' : pd.date_range(start="2025-08-01", end="2025-08-30"),
+            'Vrije dag' : []
+            }
+
+DAY_OFF = None
+hol_dict = {}
+
+for holiday in holidays.keys():
+    
+    list_holidays = []
+    
+    for date in holidays[holiday]:
+        list_holidays.append(str(date.date()))
+        
+    hol_dict[holiday] = list_holidays
+
+hol_dict['Vrije dag'].append(DAY_OFF)
+
 
 
 # --- FUNCTIONS ---
@@ -139,10 +160,6 @@ page_title = None
 page_icon = " :bike: "  # emojis: https://www.webfx.com/tools/emoji-cheat-sheet/
 layout = "centered"
 
-# --- HERE THE CHANGE WITH THE SHIFT, 14-16 HAS BEEN DELETED ---
-time_shift_choice_dinsdag_donderdag = ["18:00-20:30"]
-time_shift_choice_vrijdag = ["11:00-13:00","13:00-15:00","14:00-16:00","15:00-17:00"]
-time_shift_choice_cancel = ["11:00-13:00","13:00-15:00","14:00-16:00","15:00-17:00","18:00-20:30"]
 
 #---PAYMENT LINK---
 PAYMENT_LINK_STADPASS = "https://payment-links.mollie.com/payment/QRHiqREMEec7PXeByiszR"
@@ -237,27 +254,7 @@ def mail_english(email_receiver,name,date,time,link,stadpas):
     # st.success('You have booked you appointment! Please check the email for the payment')
 
 
-#---COSTANTS---
-holidays = {
-'Kerstvakantie' : pd.date_range(start="2024-12-21", end="2025-01-05"),
-'Meivakantie' : pd.date_range(start="2025-04-26", end="2025-05-04"),
-'Zomervakantie' : pd.date_range(start="2025-08-01", end="2025-08-30"),
-            'Vrije dag' : []
-            }
 
-DAY_OFF = None
-hol_dict = {}
-
-for holiday in holidays.keys():
-    
-    list_holidays = []
-    
-    for date in holidays[holiday]:
-        list_holidays.append(str(date.date()))
-        
-    hol_dict[holiday] = list_holidays
-
-hol_dict['Vrije dag'].append(DAY_OFF)
 
 
 
