@@ -28,33 +28,33 @@ from email.mime.text import MIMEText
 
 # Maximum allowed bookings per day/time
 SCHEDULE = {
-    "Maandag": {
+    "Monday": {
         "10:00-12:00": 2,
         "13:00-15:00": 1
     },
-    "Dinsdag": {
+    "Tuesday": {
         "10:00-12:00": 0,
         "13:00-15:00": 0
     },
-    "Woensdag": {
+    "Wednesday": {
         "18:00-20:30": 0
     },
-    "Donderdag": {
+    "Thursday": {
         "18:00-20:30": 0
     },
-    "Vrijdag": {
+    "Friday": {
         "11:00-13:00": 0,
         "13:00-15:00": 0,
         "15:00-17:00": 0,
         "14:00-16:00": 0
     },
-    "Zaterdag": {
+    "Saturday": {
         "11:00-13:00": 0,
         "13:00-15:00": 0,
         "15:00-17:00": 0,
         "14:00-16:00": 0
     },
-    "Zondag": {
+    "Sunday": {
         "11:00-13:00": 0,
         "13:00-15:00": 0,
         "15:00-17:00": 0,
@@ -62,6 +62,15 @@ SCHEDULE = {
     },
 }
 
+DUTCH_DAYS = {
+    "Monday": "Maandag",
+    "Tuesday": "Dinsdag",
+    "Wednesday": "Woensdag",
+    "Thursday": "Donderdag",
+    "Friday": "Vrijdag",
+    "Saturday": "Zaterdag",
+    "Sunday": "Zondag"
+}
 
 
 
@@ -440,7 +449,8 @@ if not on:
         available_days = get_available_days(SCHEDULE)
         
         date = st.date_input("Datum")
-        day = DUTCH_DAYS[date.strftime("%A")]
+        day_en = date.strftime("%A")
+        day = DUTCH_DAYS[day_en]
         week = date.isocalendar()[1]
         
         # Holiday check
