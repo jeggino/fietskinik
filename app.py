@@ -4,9 +4,13 @@ from streamlit_gsheets import GSheetsConnection
 import pandas as pd
 import streamlit as st
 
-# Load data
+#---LOAD DATASETS---
 conn = st.connection("gsheets", type=GSheetsConnection)
 df = conn.read(ttl=0, worksheet="Data")
+
+# 🔥 FIX: Convert Date column to datetime BEFORE using .dt
+df["Date"] = pd.to_datetime(df["Date"], errors="coerce")
+
 
 # --- PASSWORD GATE ---
 def password_gate():
