@@ -94,7 +94,6 @@ if df_day.empty:
 for time_shift, group in df_day.groupby("Time shift"):
     st.markdown(f"### 🕒 {time_shift}")
 
-
     for idx, row in group.iterrows():
         with st.container():
             st.markdown(
@@ -111,6 +110,58 @@ for time_shift, group in df_day.groupby("Time shift"):
                 **Opmerking:** {row['Remarks']}  
                 """
             )
+    
+            delete_label = f"❌ Afspraak verwijderen ({row['Name']})"
+            if st.button(delete_label, key=f"delete_{idx}"):
+    
+                # Read fresh data from Google Sheet
+                df_full = conn.read(ttl=0, worksheet="Data")
+    
+                # Date in sheet is string like '2026-10-12'
+                # row['Date'] in agenda is Timestamp → convert
+                if isinstance(row["Date"], pd.Timestamp):
+                    date_str = row["Date"].strftime("%Y-%m-%d")
+                else:
+                    date_str = str(row["Date"])
+    
+                time_shift = row["Time shift"]
+                e_mail = row["e_mail"]
+    
+                # Find matching rows exactly like your cancel logic
+                df_filter = df_full[
+                    (df_full["Date"] == date_str) &
+                    (df_full["Time shift"] == time_shift) &
+                    (df_full["e_mail"] == e_mail)
+                ]
+    
+                if len(df_filter) > 0:
+                    df_drop = df_full[~df_full.apply(tuple, axis=1).isin(df_filter.apply(tuple, axis=1))]
+                    conn.update(worksheet="Data", data=df_drop)
+                    st.success(f"De afspraak van **{row['Name']}** is verwijderd.")
+                    st.experimental_rerun()
+                else:
+                    st.warning("Kon de afspraak niet vinden in het systeem.", icon="⚠️")
+    
+            st.markdown("---")
+
+
+
+    # for idx, row in group.iterrows():
+    #     with st.container():
+    #         st.markdown(
+    #             f"""
+    #             **Naam:** {row['Name']}  
+    #             **E-mail:** {row['e_mail']}  
+    #             **Telefoon:** {row['Phone number']}  
+    #             **Membership:** {row['Membership']}  
+    #             **Stadspasnummer:** {row['Membership_number']}  
+    #             **Buurt:** {row['Neighborhood']}  
+    #             **Ervaring:** {row['Expertise']}  
+    #             **Type fiets:** {row['Type of bike']}  
+    #             **Reparatie(s):** {row['Type of reparation']}  
+    #             **Opmerking:** {row['Remarks']}  
+    #             """
+    #         )
     
             # Delete button
             # delete_label = f"❌ Afspraak verwijderen ({row['Name']})"
