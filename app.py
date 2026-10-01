@@ -22,7 +22,6 @@ password_gate()
 
 
 
-st.title("📅 Agenda Fietskliniek")
 
 st.markdown("### Overzicht van alle afspraken")
 
