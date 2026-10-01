@@ -191,13 +191,13 @@ PAYMENT_LINK_NO_STADPASS = "https://payment-links.mollie.com/payment/nrxyyvYYhHQ
 PAYMENT_LINK_open = "https://www.ing.nl/payreq/m/?trxid=fjuDgJyqjT9ZPRryp5pSMunynvCmM6MH"
 
 def mail(email_receiver, name, date, time, link, stadpas):
-    subject = "Fietsklieniek appointment"
+    subject = "Fietsklieniek afspraak"
     body = f"""
     Beste {name},
 
     U heeft een afspraak met Fietskliniek DIY op {date} om {time} uur.
     (stadpas nummer: {stadpas})
-    Het adres is Pieter Nieuwlandstraat 95.
+    Het adres is Dapperstraat 76.
     Mocht U verhindert zijn en niet kunnen komen, vragen we u om de afspraak af te zeggen op onderstaande link:
     https://fietskinik-afspraak.streamlit.app/
 
@@ -205,12 +205,11 @@ def mail(email_receiver, name, date, time, link, stadpas):
 
     Met vriendelijke groet,
 
-    Fietskliniek Team
-    Pieter Nieuwlandstraat 95
-    1093XN Amsterdam (NL)
+    Fietskliniek
+    Dapperstraat 76,
+    1093BX Amsterdam (NL)
     Tel +31 (6)127 116 08
-    FB: FietsKliniek
-    www.nieuwland.cc/fietskliniek
+    https://sites.google.com/view/fietskliniek
     """
 
     msg = MIMEText(body)
