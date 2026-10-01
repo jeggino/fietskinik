@@ -146,7 +146,7 @@ for time_shift, group in df_day.groupby("Time shift"):
                 # Confirmation dialog
                 st.success(f"De afspraak van **{row['Name']}** is verwijderd.")
     
-                st.experimental_rerun()
+                st.rerun()
     
             st.markdown("---")
 
