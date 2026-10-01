@@ -315,34 +315,16 @@ buurt_choice = ['Bijlmer-West', 'Bijlmer-Centrum', 'Bijlmer-Oost', 'Bos en Lomme
 expertise_choice = ['Geen','Laag','Gemiddeld','Ervaren']
 
 type_bikes = ["Terugtraprem", "Racefiets","Versnellingen buiten","Versnellingen binnen","Vouwfiets","Kinderfiets",
-             "Driewieler","Backfiets - Stuur een foto aub","E-bike - Stuur een foto aub","mijn fiets staat er niet op"]
+             "Driewieler","Backfiets","E-bike","mijn fiets staat er niet op"]
 
 materiaal_choice = ['Ik weet niet precies', 
-'Nieuw buitenband voor of achter',
+'Tire/tube',
 'Ketting',
-'Kettingkast',
-'Derailleur' ,
-'Cassette',
-'Tandwiel',
-'Remkabel',
-'Remschoen',
-'Terugtraprem probleem',
-'Versnellings probleem binnenwerk',
-'Versnellingsprobleem cassette',
-'Versnellingskabel',
-'Vooras',
-'Achterwiel speling',
-'Spaken',
-'Trapas',
-'Kettingwiel links of rechts',
-'Pedalen',
-'Voorvork',
-'Stuur, stuurprn/Handlebars, handlebars pen',
-'Zadel, zadelpen',
-'Verlichting',
-'Slot verwijderen',
-'Nieuw lock',
-'Achter, Voor rek']
+'Remmen',
+'Versnellingen' ,
+'Wiel recht zetten',
+'Wiel vlechten',
+]
 
 MEMBERSHIP_CHOICE = [ "ik heb geen Stadspas (€20 per 2 uur)", "ik heb een Stadspas"]
 
