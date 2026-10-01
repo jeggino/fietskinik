@@ -8,6 +8,16 @@ import streamlit as st
 conn = st.connection("gsheets", type=GSheetsConnection)
 df = conn.read(ttl=0, worksheet="Data")
 
+# --- PASSWORD GATE ---
+def password_gate():
+    st.title("🔐 Fietskliniek Dashboard")
+    pw = st.text_input("Voer het wachtwoord in om verder te gaan:", type="password")
+    if pw != "fietskliniek-dashboard":
+        st.stop()
+
+password_gate()
+
+
 # Convert date column to datetime
 df["Date"] = pd.to_datetime(df["Date"], errors="coerce")
 
@@ -29,22 +39,67 @@ st.title("📅 Agenda Fietskliniek")
 
 st.markdown("### Overzicht van alle afspraken")
 
+st.markdown(
+    """
+    📄 **Agenda gegevens worden geladen uit Google Sheets.**  
+    👉 U kunt de data ook hier bekijken:  
+    **https://docs.google.com/spreadsheets/d/1mkF1s_hsoX7GfCdbb_RtaxssqYfLO-kpsJncbqc5Wpw/edit?gid=2007222776#gid=2007222776**
+
+    ⚠️ *Verplaats geen kolommen in het Google Sheet — dit kan de app laten crashen.*
+    """
+)
+
+
 # Date selector
-unique_dates = df["Date"].dropna().dt.date.unique()
-selected_date = st.selectbox("Kies een datum", unique_dates)
+view_mode = st.radio(
+    "Kies een periode:",
+    ["Verleden", "Vandaag", "Toekomst"],
+    horizontal=True
+)
+
+today = pd.Timestamp.today().date()
+
+if view_mode == "Verleden":
+    selectable_dates = df[df["Date"].dt.date < today]["Date"].dt.date.unique()
+
+elif view_mode == "Vandaag":
+    selectable_dates = df[df["Date"].dt.date == today]["Date"].dt.date.unique()
+
+else:  # Toekomst
+    selectable_dates = df[df["Date"].dt.date > today]["Date"].dt.date.unique()
+
+if len(selectable_dates) == 0:
+    st.info("Geen afspraken in deze periode.")
+    st.stop()
+
+selected_date = st.selectbox("Kies een datum", selectable_dates)
+
+
+# Convert date column to datetime
+df["Date"] = pd.to_datetime(df["Date"], errors="coerce")
 
 # Filter by selected date
 df_day = df[df["Date"].dt.date == selected_date]
 
-if df_day.empty:
-    st.info("Geen afspraken op deze dag.")
-    st.stop()
+# Dutch day names
+DUTCH_DAYS = {
+    "Monday": "Maandag",
+    "Tuesday": "Dinsdag",
+    "Wednesday": "Woensdag",
+    "Thursday": "Donderdag",
+    "Friday": "Vrijdag",
+    "Saturday": "Zaterdag",
+    "Sunday": "Zondag"
+}
 
-# Determine Dutch day name
 day_en = selected_date.strftime("%A")
 day_nl = DUTCH_DAYS.get(day_en, day_en)
 
-st.markdown(f"## {day_nl} — {selected_date.strftime('%d-%m-%Y')}")
+st.markdown(f"## 📅 {day_nl} — {selected_date.strftime('%d-%m-%Y')}")
+
+if df_day.empty:
+    st.info("Geen afspraken op deze dag.")
+    st.stop()
 
 # Group by time shift
 for time_shift, group in df_day.groupby("Time shift"):
@@ -67,6 +122,7 @@ for time_shift, group in df_day.groupby("Time shift"):
                 """
             )
             st.markdown("---")
+
 
 
 
