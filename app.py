@@ -464,6 +464,16 @@ df_old = conn.read(ttl=0,worksheet="Data")
     
 "---"
 
+
+# --- NAVIGATION MENU ---
+selected = option_menu(
+    menu_title=None,
+    options=["Maak een afspraak", "Afspraak afzeggen"],
+    icons=["bi-journal-check", "bi-x-octagon-fill"],
+    orientation="horizontal",
+)
+
+
 # --- INPUT & SAVE PERIODS ---
 if selected == "Maak een afspraak":       
 
