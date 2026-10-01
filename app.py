@@ -154,7 +154,42 @@ PAYMENT_LINK_NO_STADPASS = "https://payment-links.mollie.com/payment/nrxyyvYYhHQ
 PAYMENT_LINK_open = "https://www.ing.nl/payreq/m/?trxid=fjuDgJyqjT9ZPRryp5pSMunynvCmM6MH"
 
 #---MAIL---
-def mail(email_receiver,name,date,time,link,stadpas):
+# def mail(email_receiver,name,date,time,link,stadpas):
+#     subject = "Fietsklieniek appointment"
+#     body = f"""
+#     Beste {name},
+    
+#     U heeft een afspraak met Fietskliniek DIY op {date} om {time} uur.
+#     (stadpas nummer: {stadpas})
+#     Het adres is Pieter Nieuwlandstraat 95. 
+#     Mocht U verhindert zijn en niet kunnen komen, vragen we u om de afspraak af te zeggen op onderstaande link:
+#     https://fietskinik-afspraak.streamlit.app/
+    
+#     Afspraak dient vooraf betaald te worden op onderstaande {link}
+    
+#     Met vriendelijke groet,
+    
+#     Fietskliniek Team
+#     Pieter Nieuwlandstraat 95
+#     1093XN Amsterdam (NL)
+#     Tel +31 (6)127 116 08
+#     FB: FietsKliniek
+#     www.nieuwland.cc/fietskliniek
+#     """  
+    
+#     msg = MIMEText(body)
+#     msg['From'] = st.secrets["EMAIL"]
+#     msg['To'] = email_receiver
+#     msg['Subject'] = subject
+
+#     server = smtplib.SMTP('smtp.gmail.com', 587)
+#     server.starttls()
+#     server.login(st.secrets["EMAIL"], st.secrets["PASSWORD"])
+#     resp = server.rcpt(email_receiver)
+#     server.sendmail(st.secrets["EMAIL"], [email_receiver,st.secrets["EMAIL"]], msg.as_string())
+#     server.quit()
+
+def mail(email_receiver, name, date, time, link, stadpas):
     subject = "Fietsklieniek appointment"
     body = f"""
     Beste {name},
@@ -176,18 +211,32 @@ def mail(email_receiver,name,date,time,link,stadpas):
     FB: FietsKliniek
     www.nieuwland.cc/fietskliniek
     """  
-    
+
     msg = MIMEText(body)
     msg['From'] = st.secrets["EMAIL"]
     msg['To'] = email_receiver
     msg['Subject'] = subject
 
-    server = smtplib.SMTP('smtp.gmail.com', 587)
-    server.starttls()
-    server.login(st.secrets["EMAIL"], st.secrets["PASSWORD"])
-    resp = server.rcpt(email_receiver)
-    server.sendmail(st.secrets["EMAIL"], [email_receiver,st.secrets["EMAIL"]], msg.as_string())
-    server.quit()
+    try:
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.starttls()
+        server.login(st.secrets["EMAIL"], st.secrets["PASSWORD"])
+
+        # Check if email exists
+        code, response = server.rcpt(email_receiver)
+
+        if code != 250:   # 250 = OK
+            server.quit()
+            return False   # email invalid → do NOT send
+
+        # Email is valid → send it
+        server.sendmail(st.secrets["EMAIL"], [email_receiver, st.secrets["EMAIL"]], msg.as_string())
+        server.quit()
+        return True
+
+    except Exception:
+        return False
+
     
     # st.success('You have booked you appointment! Please check the email for the payment')
 
@@ -551,18 +600,36 @@ if not on:
             # SAVE BOOKING
             # -----------------------------
             try:
+                email_sent = False
+                
                 if membership == "ik heb een Stadspas":
-                    insert_period(
-                        membership, str(date), day_en, week, time_shift, name, e_mail, number,
-                        buurt, expertise, type_bike, materiaal, opmerking, membership_number
-                    )
-                    mail(e_mail, name, str(date), time_shift, PAYMENT_LINK_STADPASS, membership_number)
+                    email_sent = mail(e_mail, name, str(date), time_shift, PAYMENT_LINK_STADPASS, membership_number)
                 else:
-                    insert_period(
-                        membership, str(date), day_en, week, time_shift, name, e_mail, number,
-                        buurt, expertise, type_bike, materiaal, opmerking
-                    )
-                    mail(e_mail, name, str(date), time_shift, PAYMENT_LINK_NO_STADPASS, membership_number)
+                    email_sent = mail(e_mail, name, str(date), time_shift, PAYMENT_LINK_NO_STADPASS, membership_number)
+                
+                if not email_sent:
+                    st.error("Het e-mailadres bestaat niet of kan geen mail ontvangen. Controleer het e-mailadres.")
+                    st.stop()
+                
+                # Email was sent → now save the booking
+                insert_period(
+                    membership, str(date), day_en, week, time_shift, name, e_mail, number,
+                    buurt, expertise, type_bike, materiaal, opmerking,
+                    membership_number if membership == "ik heb een Stadspas" else None
+                )
+
+                # if membership == "ik heb een Stadspas":
+                #     insert_period(
+                #         membership, str(date), day_en, week, time_shift, name, e_mail, number,
+                #         buurt, expertise, type_bike, materiaal, opmerking, membership_number
+                #     )
+                #     mail(e_mail, name, str(date), time_shift, PAYMENT_LINK_STADPASS, membership_number)
+                # else:
+                #     insert_period(
+                #         membership, str(date), day_en, week, time_shift, name, e_mail, number,
+                #         buurt, expertise, type_bike, materiaal, opmerking
+                #     )
+                #     mail(e_mail, name, str(date), time_shift, PAYMENT_LINK_NO_STADPASS, membership_number)
     
             except Exception:
                 st.error("Er ging iets mis bij het opslaan van de afspraak.")
