@@ -14,7 +14,6 @@ df["Date"] = pd.to_datetime(df["Date"], errors="coerce")
 
 # --- PASSWORD GATE ---
 def password_gate():
-    st.title("🔐 Fietskliniek Dashboard")
     pw = st.text_input("Voer het wachtwoord in om verder te gaan:", type="password")
     if pw != "fietskliniek":
         st.stop()
