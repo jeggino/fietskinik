@@ -151,7 +151,9 @@ for time_shift, group in df_day.groupby("Time shift"):
                 (df_current["Time shift"] == row_shift) &
                 (df_current["e_mail"] == row_email)
             )
-        
+
+            st.write(mask)
+            st.write(mask.sum())
             if mask.sum() == 0:
                 st.error("Kon de afspraak niet vinden in het systeem.")
                 st.stop()
