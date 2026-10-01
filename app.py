@@ -193,24 +193,24 @@ def mail(email_receiver, name, date, time, link, stadpas):
     subject = "Fietsklieniek appointment"
     body = f"""
     Beste {name},
-    
+
     U heeft een afspraak met Fietskliniek DIY op {date} om {time} uur.
     (stadpas nummer: {stadpas})
-    Het adres is Pieter Nieuwlandstraat 95. 
+    Het adres is Pieter Nieuwlandstraat 95.
     Mocht U verhindert zijn en niet kunnen komen, vragen we u om de afspraak af te zeggen op onderstaande link:
     https://fietskinik-afspraak.streamlit.app/
-    
+
     Afspraak dient vooraf betaald te worden op onderstaande {link}
-    
+
     Met vriendelijke groet,
-    
+
     Fietskliniek Team
     Pieter Nieuwlandstraat 95
     1093XN Amsterdam (NL)
     Tel +31 (6)127 116 08
     FB: FietsKliniek
     www.nieuwland.cc/fietskliniek
-    """  
+    """
 
     msg = MIMEText(body)
     msg['From'] = st.secrets["EMAIL"]
@@ -222,20 +222,32 @@ def mail(email_receiver, name, date, time, link, stadpas):
         server.starttls()
         server.login(st.secrets["EMAIL"], st.secrets["PASSWORD"])
 
-        # Check if email exists
-        code, response = server.rcpt(email_receiver)
+        # Try sending the email
+        server.sendmail(
+            st.secrets["EMAIL"],
+            [email_receiver, st.secrets["EMAIL"]],
+            msg.as_string()
+        )
 
-        if code != 250:   # 250 = OK
-            server.quit()
-            return False   # email invalid → do NOT send
-
-        # Email is valid → send it
-        server.sendmail(st.secrets["EMAIL"], [email_receiver, st.secrets["EMAIL"]], msg.as_string())
         server.quit()
-        return True
+        return True  # email successfully sent
+
+    except smtplib.SMTPRecipientsRefused:
+        server.quit()
+        return False
+
+    except smtplib.SMTPDataError:
+        server.quit()
+        return False
+
+    except smtplib.SMTPResponseException:
+        server.quit()
+        return False
 
     except Exception:
+        server.quit()
         return False
+
 
     
     # st.success('You have booked you appointment! Please check the email for the payment')
@@ -617,6 +629,7 @@ if not on:
                     buurt, expertise, type_bike, materiaal, opmerking,
                     membership_number if membership == "ik heb een Stadspas" else None
                 )
+
 
                 # if membership == "ik heb een Stadspas":
                 #     insert_period(
