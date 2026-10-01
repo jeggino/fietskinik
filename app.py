@@ -448,7 +448,7 @@ if not on:
             st.stop()
         
         # Determine available time shifts dynamically
-        available_shifts = get_available_time_shifts(SCHEDULE, day)
+        available_shifts = get_available_time_shifts(SCHEDULE, day_for_schedule )
         
         if len(available_shifts) == 0:
             st.warning(f"Op {day} zijn geen tijdsverschuivingen beschikbaar.")
