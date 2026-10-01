@@ -83,6 +83,40 @@ hol_dict['Vrije dag'].append(DAY_OFF)
 
 
 # --- FUNCTIONS ---
+@st.dialog("📅 Afspraak bevestigd")
+def appointment_dialog(
+    membership, date, day, week, time_shift, name, e_mail, number,
+    buurt, expertise, type_bike, materiaal, opmerking, membership_number
+):
+    st.markdown("### ✔ Je afspraak is succesvol geboekt!")
+
+    st.write("Hier zijn de details van je reservering:")
+
+    st.markdown(f"""
+    **Naam:** {name}  
+    **E-mail:** {e_mail}  
+    **Telefoonnummer:** {number}  
+    **Datum:** {date}  
+    **Dag:** {day}  
+    **Weeknummer:** {week}  
+    **Tijdsverschuiving:** {time_shift}  
+    **Membership:** {membership}  
+    **Stadspasnummer:** {membership_number}  
+    **Buurt:** {buurt}  
+    **Ervaring:** {expertise}  
+    **Type fiets:** {type_bike}  
+    **Reparatie(s):** {materiaal}  
+    **Opmerking:** {opmerking}
+    """)
+
+    st.markdown("---")
+
+    st.markdown(
+        "🚲 **Controleer je e-mail — daar vind je de link om de betaling te voltooien en je reservering veilig te stellen.**"
+    )
+
+    st.success("Bedankt voor je reservering!")
+
 def is_slot_full(day, time_shift, current_count):
     """Return True if the time slot is full based on SCHEDULE."""
     if day not in SCHEDULE:
@@ -547,13 +581,22 @@ if selected == "Maak een afspraak":
         # -----------------------------
         # SUCCESS MESSAGE
         # -----------------------------
+        # if type_day == "Vrije dag":
+        #     st.success("🏖️🏖️ Je hebt een dag vrij geboekt! 🏖️🏖️")
+        # else:
+        #     st.success(
+        #         "🚲 Je afspraak is ontvangen! "
+        #         "Controleer je e-mail — daar vind je de link om de betaling te voltooien en je reservering veilig te stellen. 🚲"
+        #     )
+
         if type_day == "Vrije dag":
             st.success("🏖️🏖️ Je hebt een dag vrij geboekt! 🏖️🏖️")
         else:
-            st.success(
-                "🚲 Je afspraak is ontvangen! "
-                "Controleer je e-mail — daar vind je de link om de betaling te voltooien en je reservering veilig te stellen. 🚲"
+            appointment_dialog(
+                membership, str(date), day_en, week, time_shift, name, e_mail, number,
+                buurt, expertise, type_bike, materiaal, opmerking, membership_number
             )
+
 
 
 
