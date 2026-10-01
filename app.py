@@ -287,7 +287,6 @@ MEMBERSHIP_CHOICE = [ "ik heb geen Stadspas (€20 per 2 uur)", "ik heb een Stad
 
 
 
-
 TEXT = """
 Fietskliniek is een buurt-, sociaal betrokken fietswerkplaats. In de fietsenwerkplaats vind u alle gereedschappen en onderdelen (nieuw en tweedehands) die u nodig hebt om uw fiets te repareren en u krijgt begeleiding van een ervaren vrijwilliger fietsenmaker daarbij. Hierbij moet je rekening houden met de volgende regels:
 
@@ -403,73 +402,74 @@ if not on:
 
     
     "---"
-    
+
     # --- INPUT & SAVE PERIODS ---
     if selected == "Maak een afspraak":       
-        image = '292366152_369803905279628_8461882568456452789_n.jpg'
-        st.image(image)
-        
+    
+        st.image('292366152_369803905279628_8461882568456452789_n.jpg')
         st.markdown(TEXT)
-        
+    
+        # -----------------------------
+        # MEMBERSHIP
+        # -----------------------------
         membership = st.radio("Betaling", MEMBERSHIP_CHOICE)
-        
-        if membership == "ik heb een Stadspas":
-            membership_number = st.text_input(
-                " ", value="", placeholder="Stadspasnummer overschrijven ...",
-                label_visibility="collapsed"
-            )
-            if len(membership_number) == 0:
-                st.warning("Vul het Stadspasnummer in aub")
-                st.stop()
-        else:
-            membership_number = "-"
-        
-        # Determine available days dynamically
-        available_days = get_available_days(SCHEDULE)
-        
+        membership_number = (
+            st.text_input(" ", "", placeholder="Stadspasnummer overschrijven ...", label_visibility="collapsed")
+            if membership == "ik heb een Stadspas" else "-"
+        )
+    
+        if membership == "ik heb een Stadspas" and not membership_number:
+            st.warning("Vul het Stadspasnummer in aub")
+            st.stop()
+    
+        # -----------------------------
+        # DATE SELECTION
+        # -----------------------------
         date = st.date_input("Datum")
         day_en = date.strftime("%A")
-        day = DUTCH_DAYS[day_en]
-        day_for_schedule = day_en
+        day_nl = DUTCH_DAYS[day_en]
         week = date.isocalendar()[1]
-        
+    
         # Holiday check
         res_holiday = fun(hol_dict, str(date))
-        try:
-            if res_holiday[0] is True:
-                st.warning(f"Het is {res_holiday[1]}! Excuus, de Fietskliniek is gesloten.")
-                st.stop()
-        except:
-            pass
-        
-        # Check if day is available
-        if day_for_schedule  not in available_days:
-            st.warning(f"Op {day} is het niet mogelijk een afspraak te maken.")
+        if isinstance(res_holiday, (list, tuple)) and res_holiday[0]:
+            st.warning(f"Het is {res_holiday[1]}! Excuus, de Fietskliniek is gesloten.")
             st.stop()
-        
-        # Determine available time shifts dynamically
-        available_shifts = get_available_time_shifts(SCHEDULE, day_for_schedule )
-        
-        if len(available_shifts) == 0:
-            st.warning(f"Op {day} zijn geen tijdsverschuivingen beschikbaar.")
+    
+        # Day availability
+        if day_en not in get_available_days(SCHEDULE):
+            st.warning(f"Op {day_nl} is het niet mogelijk een afspraak te maken.")
             st.stop()
-        
+    
+        # -----------------------------
+        # TIME SHIFT SELECTION
+        # -----------------------------
+        available_shifts = get_available_time_shifts(SCHEDULE, day_en)
+        if not available_shifts:
+            st.warning(f"Op {day_nl} zijn geen tijdsverschuivingen beschikbaar.")
+            st.stop()
+    
         time_shift = st.radio("Tijdsverschuiving", available_shifts)
-        
-        # Personal data
+    
+        # -----------------------------
+        # PERSONAL DATA
+        # -----------------------------
         name = st.text_input("Naam*", placeholder="Vul hier uw naam in ...")
         e_mail = st.text_input("E-mail*", placeholder="Voer hier uw e-mailadres in ...")
         email_receiver_test = st.text_input("E-mail-test*", placeholder="Herhaal uw e-mailadres ...")
-        
+    
         if e_mail != email_receiver_test:
             st.write("UW E-MAILADRES KOMT NIET OVEREEN. CONTROLEER HET AUB!")
             st.stop()
-        
+    
+        # -----------------------------
+        # TYPE OF DAY (APPOINTMENT / FREE DAY)
+        # -----------------------------
         type_day = st.selectbox(
             "Dit veld is voor de vrijwilliger. Vul 'afspraak' in als u een reservering wilt maken.",
             ['Afspraak', 'Vrije dag']
         )
-        
+    
         if type_day == 'Afspraak':
             number = st.text_input("Telefoonnummer*", placeholder="Voer hier uw nummer in ...")
             buurt = st.selectbox("Uit welke buurt komt u? (voor statistieken doeleinden)", buurt_choice)
@@ -477,180 +477,100 @@ if not on:
             type_bike = st.selectbox("Wat voor fiets wilt u repareren?", type_bikes)
             materiaal = st.multiselect("Reparatie te doen (Meer opties mogelijk)", materiaal_choice)
             opmerking = st.text_input("", placeholder="Stuur een bericht, vraag, enz ...", label_visibility="collapsed")
-        
-        elif type_day == 'Vrije dag':
+    
+        else:  # Vrije dag
             placeholder = st.empty()
             password = placeholder.text_input(
-                "Password", value=None, label_visibility='collapsed',
+                "Password", None, label_visibility='collapsed',
                 placeholder="schrijf hier uw wachtwoord ..."
             )
-        
+    
             if password == 'fietskliniek':
                 placeholder.empty()
-                number = "-"
-                buurt = "-"
-                expertise = "-"
-                type_bike = "-"
+                number = buurt = expertise = type_bike = "-"
                 materiaal = "-"
                 opmerking = type_day
-            elif password is None:
-                st.stop()
             else:
                 st.error("Verkeerd wachtwoord ...")
                 st.stop()
-        
+    
+        # -----------------------------
+        # FOOTNOTE
+        # -----------------------------
         st.markdown("_*Verplichte velden_*")
         st.markdown(":orange-background[_Persoonlijke data wordt niet opgeslagen, alleen gebruikt voor administratieve doeleinden van de gemaakte afspraak_]")
-
-        # image = '292366152_369803905279628_8461882568456452789_n.jpg'
-        # st.image(image)
-
-        # st.markdown(TEXT) 
-        
-        # membership = st.radio("Betaling", MEMBERSHIP_CHOICE, horizontal = False)
-        # if membership == "ik heb een Stadspas":
-        #     membership_number = st.text_input(" ",value="", placeholder="Stadspasnummer overschrijven ...",label_visibility="collapsed")
-            
-        #     if  len(membership_number) == 0:
-        #         st.warning("Vul het Stadspasnummer in aub")
-        #         st.stop()
-        # else:
-        #     membership_number = "-"
     
-        # date = st.date_input("Datum (alleen Dinsdag, Donderdag, of Vrijdag)")
-        # day = date.strftime("%A")
-        # week = date.isocalendar()[1]
-        
-
-        # res_holiday = fun(hol_dict, str(date))
-
-        # try:
-        #     if res_holiday[0]==True:
-        #         st.warning(f"Het is {res_holiday[1]}! Excuus, de Fietskliniek is gesloten.")
-        #         st.stop()
-        # except:
-        #     pass
-
-        
-        # if day not in ["Tuesday","Thursday","Friday"]:
-        #     st.warning("U kunt alleen een afspraak maken op dinsdag, donderdag of vrijdag")
-        #     st.stop()
-            
-        # if day=="Friday":
-        #     time_shift = st.radio("Tijdsverschuiving", time_shift_choice_vrijdag, horizontal = True)
-        # else:
-        #     time_shift = st.radio("Tijdsverschuiving", time_shift_choice_dinsdag_donderdag, horizontal = True)
-            
-        # name = st.text_input("Naam*", placeholder="Vul hier uw naam in ...")
-        # e_mail = st.text_input("E-mail*", placeholder="Voer hier uw e-mailadres in ...")
-        # email_receiver_test = st.text_input("E-mail-test*", placeholder="Herhaal uw e-mailadres ...")
-        
-        # if e_mail != email_receiver_test:
-        #     st.write("UW E-MAILADRES KOMT NIET OVEREEN. CONTROLEER HET AUB!")
-        #     st.stop()
-            
-        # type_day = st.selectbox("Dit veld is voor de vrijwilliger. Vul 'afspraak' in als u een reservering wilt maken.", ['Afspraak', 'Vrije dag'])
-        # if type_day == 'Afspraak':
-        #     number = st.text_input("Telefoonnummer*", placeholder="Voer hier uw nummer in ...")
-        #     buurt = st.selectbox("Uit welke buurt komt u? (voor statistieken doeleinden)", buurt_choice)
-        #     expertise = st.selectbox("Welke ervaring heeft u met fietsen?", expertise_choice )
-        #     type_bike = st.selectbox("Wat voor fiets wilt u repareren?", type_bikes)                
-        #     materiaal = st.multiselect("Reparatie te doen (Meer opties mogelijk)", materiaal_choice)
-        #     opmerking = st.text_input("", placeholder="Stuur een bericht, vraag, enz ...",label_visibility="collapsed")
-        # elif type_day == 'Vrije dag':
-        #     placeholder = st.empty()
-        #     password = placeholder.text_input("Password", value=None, label_visibility= 'collapsed', placeholder = "schrijf hier uw wachtwoord ...",)
-        #     if password == 'fietskliniek':
-        #         placeholder.empty()
-        #         number = "-"
-        #         buurt = "-"
-        #         expertise = "-"
-        #         type_bike = "-"                
-        #         materiaal = "-"
-        #         opmerking = type_day
-            
-        #     elif password == None:
-        #         st.stop()
-            
-        #     else:
-        #         st.error("Verkeerd wachtwoord ...")
-        #         st.stop()
-            
-        
-        # """_*Verplichte velden_"""
-        # """:orange-background[_Persoonlijke data wordt niet opgeslagen, alleen gebruikt voor administratieve doeleinden van de gemaakte afspraak_]"""
-        
         "---"
     
-        # submit the data
+        # -----------------------------
+        # SUBMIT BUTTON
+        # -----------------------------
         submitted = st.button(":red[**Gegevens opslaan**]")
-
+    
         if submitted:
             df = df_old
-        
+    
             # Existing bookings
             df_filter = df[(df["Date"] == str(date)) & (df["Time shift"] == time_shift)]
             df_control = df[(df["Date"] == str(date)) &
                             (df["Time shift"] == time_shift) &
                             (df["e_mail"] == e_mail)]
-        
+    
             len_1 = len(df_filter)
             len_control = len(df_control)
-        
+    
             # Required fields
             if not name or not e_mail or not number:
                 st.warning("Vul de verplichte velden in", icon="⚠️")
                 st.stop()
-        
+    
             # Prevent same-day booking
-            days_diff = (dt.strptime(str(date), "%Y-%m-%d").date() - dt.today().date()).days
-            if days_diff == 0:
+            if (dt.strptime(str(date), "%Y-%m-%d").date() - dt.today().date()).days == 0:
                 st.warning("Helaas kunt u geen afspraak op dezelfde dag boeken", icon="⚠️")
                 st.stop()
-        
-            # Prevent duplicate booking with same email
+    
+            # Prevent duplicate booking
             if len_control > 0:
                 st.warning("Er is al een afspraak op deze datum en tijd met dezelfde email", icon="⚠️")
                 st.stop()
-        
-            # Determine weekday
-            day = parser.parse(str(date)).strftime("%A")
-        
-            # Check if day is available
-            if not is_day_available(day):
-                st.warning(f"Op {day} is het niet mogelijk een afspraak te maken.", icon="⚠️")
+    
+            # Availability checks
+            if not is_day_available(day_en):
+                st.warning(f"Op {day_nl} is het niet mogelijk een afspraak te maken.", icon="⚠️")
                 st.stop()
-        
-            # Check if time shift is available
-            if not is_time_available(day, time_shift):
+    
+            if not is_time_available(day_en, time_shift):
                 st.warning("Deze tijdsverschuiving is niet beschikbaar op deze dag.", icon="⚠️")
                 st.stop()
-        
-            # Check capacity
-            if is_slot_full(day, time_shift, len_1):
+    
+            if is_slot_full(day_en, time_shift, len_1):
                 st.warning("Deze tijdsverschuiving is al vol. Kies een andere.", icon="⚠️")
                 st.stop()
-        
-            # Insert booking
+    
+            # -----------------------------
+            # SAVE BOOKING
+            # -----------------------------
             try:
                 if membership == "ik heb een Stadspas":
                     insert_period(
-                        membership, str(date), day, week, time_shift, name, e_mail, number,
+                        membership, str(date), day_en, week, time_shift, name, e_mail, number,
                         buurt, expertise, type_bike, materiaal, opmerking, membership_number
                     )
                     mail(e_mail, name, str(date), time_shift, PAYMENT_LINK_STADPASS, membership_number)
                 else:
                     insert_period(
-                        membership, str(date), day, week, time_shift, name, e_mail, number,
+                        membership, str(date), day_en, week, time_shift, name, e_mail, number,
                         buurt, expertise, type_bike, materiaal, opmerking
                     )
                     mail(e_mail, name, str(date), time_shift, PAYMENT_LINK_NO_STADPASS, membership_number)
-        
+    
             except Exception:
                 st.error("Er ging iets mis bij het opslaan van de afspraak.")
                 st.stop()
-        
-            # Success messages
+    
+            # -----------------------------
+            # SUCCESS MESSAGE
+            # -----------------------------
             if type_day == "Vrije dag":
                 st.success("🏖️🏖️ Je hebt een dag vrij geboekt! 🏖️🏖️")
             else:
@@ -659,169 +579,185 @@ if not on:
                     "Controleer je e-mail — daar vind je de link om de betaling te voltooien en je reservering veilig te stellen. 🚲"
                 )
 
-
-        # if submitted:
-        #     df = df_old
-        
-        #     # Filter existing bookings
-        #     df_filter = df[(df["Date"] == str(date)) & (df["Time shift"] == time_shift)]
-        #     df_control = df[(df["Date"] == str(date)) & 
-        #                     (df["Time shift"] == time_shift) & 
-        #                     (df["e_mail"] == e_mail)]
-        
-        #     len_1 = len(df_filter)
-        #     len_control = len(df_control)
-        
-        #     # Required fields
-        #     if not name or not e_mail or not number:
-        #         st.warning("Vul de verplichte velden in", icon="⚠️")
-        #         st.stop()
-        
-        #     # Prevent booking same day
-        #     days_diff = (dt.strptime(str(date), "%Y-%m-%d").date() - dt.today().date()).days
-        #     if days_diff == 0:
-        #         st.warning("Helaas kunt u geen afspraak op dezelfde dag boeken", icon="⚠️")
-        #         st.stop()
-        
-        #     # Prevent duplicate booking with same email
-        #     if len_control > 0:
-        #         st.warning("Er is al een afspraak op deze datum en tijd met dezelfde email", icon="⚠️")
-        #         st.stop()
-        
-        #     # Determine weekday
-        #     day = parser.parse(str(date)).strftime("%A")
-        
-        #     # Check capacity using dictionary
-        #     if is_slot_full(day, time_shift, len_1):
-        #         st.warning("Deze tijdsverschuiving is al vol. Kies een andere", icon="⚠️")
-        #         st.stop()
-        
-        #     # Insert booking
-        #     try:
-        #         if membership == "ik heb een Stadspas":
-        #             insert_period(membership, str(date), day, week, time_shift, name, e_mail, number,
-        #                           buurt, expertise, type_bike, materiaal, opmerking, membership_number)
-        #             mail(e_mail, name, str(date), time_shift, PAYMENT_LINK_STADPASS, membership_number)
-        #         else:
-        #             insert_period(membership, str(date), day, week, time_shift, name, e_mail, number,
-        #                           buurt, expertise, type_bike, materiaal, opmerking)
-        #             mail(e_mail, name, str(date), time_shift, PAYMENT_LINK_NO_STADPASS, membership_number)
-        
-        #     except:
-        #         st.error("Er ging iets mis bij het opslaan van de afspraak.")
-        #         st.stop()
-        
-        #     # Success message
-        #     if type_day == "Vrije dag":
-        #         st.success("🏖️🏖️ Je hebt een dag vrij geboekt! 🏖️🏖️")
-        #     else:
-        #         st.success("🚲🚲 Je hebt een afspraak gemaakt! Controleer je e-mail voor de betalingslink 🚲🚲")
-
     
-        # if submitted:
-        #     try:
-        #         df = df_old
-        #         df_filter = df[(df["Date"]==str(date)) & (df["Time shift"]==time_shift)]
-        #         df_control = df[(df["Date"]==str(date)) & (df["Time shift"]==time_shift) & (df["e_mail"]==e_mail)]
-        #         len_1 = len(df_filter)
-        #         len_control = len(df_control)
-                
-        #     except:
-        #         df = df_old
-        #         df_filter = df
-        #         df_control = df
-        #         len_1 = 0
-        #         len_control = 0
-                   
-        #     if len(name) == 0 or len(e_mail)==0 or len(number)==0:
-        #         st.warning('Vul de verplichte velden in', icon="⚠️")
-        #         st.stop()
-                
-        #     if len_control == 0:
-        #         res = ((dt.strptime(str(date), "%Y-%m-%d").date() - dt.today().date()).days)
-        #         if res == 0: 
-        #             st.warning('Helaas kunt u geen afspraak op dezelfde dag boeken', icon="⚠️")
-        #             st.stop()
-        #         else:
-        #             day = parser.parse(str(date)).strftime("%A")
-        #             try:
-        #                 # int(number)
-        #                 if day in ["Thursday","Tuesday"]:
+    # # --- INPUT & SAVE PERIODS ---
+    # if selected == "Maak een afspraak":       
+    #     image = '292366152_369803905279628_8461882568456452789_n.jpg'
+    #     st.image(image)
         
-        #                     if time_shift=="18:00-20:30" and len_1 >= 3:
-        #                         st.warning('Deze tijdsverschuiving is al vol. Kies een andere', icon="⚠️")
+    #     st.markdown(TEXT)
         
-        #                     else:
-        #                         try:
-
-        #                             if membership == "ik heb een Stadspas":
-        #                                 insert_period(membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
-        #                                 mail(e_mail,name,str(date),time_shift,PAYMENT_LINK_STADPASS,membership_number)
-        #                             else:
-        #                                 insert_period(membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
-        #                                 mail(e_mail,name,str(date),time_shift,PAYMENT_LINK_NO_STADPASS,membership_number)
-                                        
-        #                         except:
-        #                             if membership == "ik heb een Stadspas":
-        #                                 insert_period(name_picture,membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
-        #                             else:
-        #                                 insert_period(name_picture,membership,  str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
-        #                         if type_day == 'Vrije dag':
-        #                             st.success("🏖️🏖️ Je hebt een dag vrij geboekt! 🏖️🏖️")
-        #                         else:
-        #                             # if membership == "ik heb een Stadspas":
-        #                             #     st.markdown(PAYMENT_LINK_STADPASS)
-
-        #                             # else:
-        #                             #      st.markdown(PAYMENT_LINK_NO_STADPASS)
-                                        
-        #                             st.success("🚲🚲 Je hebt een afspraak gemaakt! Controleer je e-mail, daar vind je de link waarmee je kunt betalen en de reservering kunt voltooien 🚲🚲")
-        #                             # st.warning("Bij het maken van een afspraak dient u te betalen om uw reservering veilig te stellen") 
-
+    #     membership = st.radio("Betaling", MEMBERSHIP_CHOICE)
         
-        #                 elif day == "Friday":
+    #     if membership == "ik heb een Stadspas":
+    #         membership_number = st.text_input(
+    #             " ", value="", placeholder="Stadspasnummer overschrijven ...",
+    #             label_visibility="collapsed"
+    #         )
+    #         if len(membership_number) == 0:
+    #             st.warning("Vul het Stadspasnummer in aub")
+    #             st.stop()
+    #     else:
+    #         membership_number = "-"
         
-        #                     if time_shift=="11:00-13:00" and len_1 >= 2:
-        #                         st.warning('Deze tijdsverschuiving is al vol. Kies een andere', icon="⚠️")
+    #     # Determine available days dynamically
+    #     available_days = get_available_days(SCHEDULE)
         
-        #                     elif time_shift=="13:00-15:00" and len_1 >= 1:
-        #                         st.warning('Deze tijdsverschuiving is al vol. Kies een andere', icon="⚠️")
+    #     date = st.date_input("Datum")
+    #     day_en = date.strftime("%A")
+    #     day = DUTCH_DAYS[day_en]
+    #     day_for_schedule = day_en
+    #     week = date.isocalendar()[1]
         
-        #                     elif time_shift=="15:00-17:00" and len_1 >= 1:
-        #                         st.warning('Deze tijdsverschuiving is al vol. Kies een andere', icon="⚠️")
-
-        #                     elif time_shift=="14:00-16:00" and len_1 >= 1:
-        #                         st.warning('Deze tijdsverschuiving is al vol. Kies een andere', icon="⚠️")
+    #     # Holiday check
+    #     res_holiday = fun(hol_dict, str(date))
+    #     try:
+    #         if res_holiday[0] is True:
+    #             st.warning(f"Het is {res_holiday[1]}! Excuus, de Fietskliniek is gesloten.")
+    #             st.stop()
+    #     except:
+    #         pass
         
-        #                     else:
-        #                         try:
-        #                             if membership == "ik heb een Stadspas":
-        #                                 insert_period(membership,str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
-        #                                 mail(e_mail,name,str(date),time_shift,PAYMENT_LINK_STADPASS,membership_number)
-        #                             else:
-        #                                 insert_period(membership,str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
-        #                                 mail(e_mail,name,str(date),time_shift,PAYMENT_LINK_NO_STADPASS,membership_number)
-        #                         except:
-        #                             if membership == "ik heb een Stadspas":
-        #                                 insert_period( membership, str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking,membership_number)
-        #                             else:
-        #                                 insert_period(membership, str(date), day, week, time_shift, name, e_mail, number, buurt, expertise, type_bike, materiaal, opmerking)
-        #                         if type_day == 'Vrije dag':
-        #                             st.success("🏖️🏖️ Je hebt een dag vrij geboekt! 🏖️🏖️")
-        #                         else:
-        #                             # if membership == "ik heb een Stadspas":
-        #                             #     st.markdown(PAYMENT_LINK_STADPASS)
-
-        #                             # else:
-        #                             #      st.markdown(PAYMENT_LINK_NO_STADPASS)
-        #                             st.success("🚲🚲 Je hebt een afspraak gemaakt! Controleer je e-mail, daar vind je de link waarmee je kunt betalen en de reservering kunt voltooien 🚲🚲")
-        #                             # st.warning("Bij het maken van een afspraak dient u te betalen om uw reservering veilig te stellen")
-        #             except:
-        #                 st.error("Vul alstublieft een juist telefoonnummer in")
+    #     # Check if day is available
+    #     if day_for_schedule  not in available_days:
+    #         st.warning(f"Op {day} is het niet mogelijk een afspraak te maken.")
+    #         st.stop()
+        
+    #     # Determine available time shifts dynamically
+    #     available_shifts = get_available_time_shifts(SCHEDULE, day_for_schedule )
+        
+    #     if len(available_shifts) == 0:
+    #         st.warning(f"Op {day} zijn geen tijdsverschuivingen beschikbaar.")
+    #         st.stop()
+        
+    #     time_shift = st.radio("Tijdsverschuiving", available_shifts)
+        
+    #     # Personal data
+    #     name = st.text_input("Naam*", placeholder="Vul hier uw naam in ...")
+    #     e_mail = st.text_input("E-mail*", placeholder="Voer hier uw e-mailadres in ...")
+    #     email_receiver_test = st.text_input("E-mail-test*", placeholder="Herhaal uw e-mailadres ...")
+        
+    #     if e_mail != email_receiver_test:
+    #         st.write("UW E-MAILADRES KOMT NIET OVEREEN. CONTROLEER HET AUB!")
+    #         st.stop()
+        
+    #     type_day = st.selectbox(
+    #         "Dit veld is voor de vrijwilliger. Vul 'afspraak' in als u een reservering wilt maken.",
+    #         ['Afspraak', 'Vrije dag']
+    #     )
+        
+    #     if type_day == 'Afspraak':
+    #         number = st.text_input("Telefoonnummer*", placeholder="Voer hier uw nummer in ...")
+    #         buurt = st.selectbox("Uit welke buurt komt u? (voor statistieken doeleinden)", buurt_choice)
+    #         expertise = st.selectbox("Welke ervaring heeft u met fietsen?", expertise_choice)
+    #         type_bike = st.selectbox("Wat voor fiets wilt u repareren?", type_bikes)
+    #         materiaal = st.multiselect("Reparatie te doen (Meer opties mogelijk)", materiaal_choice)
+    #         opmerking = st.text_input("", placeholder="Stuur een bericht, vraag, enz ...", label_visibility="collapsed")
+        
+    #     elif type_day == 'Vrije dag':
+    #         placeholder = st.empty()
+    #         password = placeholder.text_input(
+    #             "Password", value=None, label_visibility='collapsed',
+    #             placeholder="schrijf hier uw wachtwoord ..."
+    #         )
+        
+    #         if password == 'fietskliniek':
+    #             placeholder.empty()
+    #             number = "-"
+    #             buurt = "-"
+    #             expertise = "-"
+    #             type_bike = "-"
+    #             materiaal = "-"
+    #             opmerking = type_day
+    #         elif password is None:
+    #             st.stop()
+    #         else:
+    #             st.error("Verkeerd wachtwoord ...")
+    #             st.stop()
+        
+    #     st.markdown("_*Verplichte velden_*")
+    #     st.markdown(":orange-background[_Persoonlijke data wordt niet opgeslagen, alleen gebruikt voor administratieve doeleinden van de gemaakte afspraak_]")
+        
+    #     "---"
     
-        #     else:
-        #         st.warning('Er is al een afspraak op deze datum en tijd met dezelfde email', icon="⚠️") 
-    
+    #     # submit the data
+    #     submitted = st.button(":red[**Gegevens opslaan**]")
+
+    #     if submitted:
+    #         df = df_old
+        
+    #         # Existing bookings
+    #         df_filter = df[(df["Date"] == str(date)) & (df["Time shift"] == time_shift)]
+    #         df_control = df[(df["Date"] == str(date)) &
+    #                         (df["Time shift"] == time_shift) &
+    #                         (df["e_mail"] == e_mail)]
+        
+    #         len_1 = len(df_filter)
+    #         len_control = len(df_control)
+        
+    #         # Required fields
+    #         if not name or not e_mail or not number:
+    #             st.warning("Vul de verplichte velden in", icon="⚠️")
+    #             st.stop()
+        
+    #         # Prevent same-day booking
+    #         days_diff = (dt.strptime(str(date), "%Y-%m-%d").date() - dt.today().date()).days
+    #         if days_diff == 0:
+    #             st.warning("Helaas kunt u geen afspraak op dezelfde dag boeken", icon="⚠️")
+    #             st.stop()
+        
+    #         # Prevent duplicate booking with same email
+    #         if len_control > 0:
+    #             st.warning("Er is al een afspraak op deze datum en tijd met dezelfde email", icon="⚠️")
+    #             st.stop()
+        
+    #         # Determine weekday
+    #         day = parser.parse(str(date)).strftime("%A")
+        
+    #         # Check if day is available
+    #         if not is_day_available(day):
+    #             st.warning(f"Op {day} is het niet mogelijk een afspraak te maken.", icon="⚠️")
+    #             st.stop()
+        
+    #         # Check if time shift is available
+    #         if not is_time_available(day, time_shift):
+    #             st.warning("Deze tijdsverschuiving is niet beschikbaar op deze dag.", icon="⚠️")
+    #             st.stop()
+        
+    #         # Check capacity
+    #         if is_slot_full(day, time_shift, len_1):
+    #             st.warning("Deze tijdsverschuiving is al vol. Kies een andere.", icon="⚠️")
+    #             st.stop()
+        
+    #         # Insert booking
+    #         try:
+    #             if membership == "ik heb een Stadspas":
+    #                 insert_period(
+    #                     membership, str(date), day, week, time_shift, name, e_mail, number,
+    #                     buurt, expertise, type_bike, materiaal, opmerking, membership_number
+    #                 )
+    #                 mail(e_mail, name, str(date), time_shift, PAYMENT_LINK_STADPASS, membership_number)
+    #             else:
+    #                 insert_period(
+    #                     membership, str(date), day, week, time_shift, name, e_mail, number,
+    #                     buurt, expertise, type_bike, materiaal, opmerking
+    #                 )
+    #                 mail(e_mail, name, str(date), time_shift, PAYMENT_LINK_NO_STADPASS, membership_number)
+        
+    #         except Exception:
+    #             st.error("Er ging iets mis bij het opslaan van de afspraak.")
+    #             st.stop()
+        
+    #         # Success messages
+    #         if type_day == "Vrije dag":
+    #             st.success("🏖️🏖️ Je hebt een dag vrij geboekt! 🏖️🏖️")
+    #         else:
+    #             st.success(
+    #                 "🚲 Je afspraak is ontvangen! "
+    #                 "Controleer je e-mail — daar vind je de link om de betaling te voltooien en je reservering veilig te stellen. 🚲"
+    #             )
+
+
             
                
     ##### --- drop appointment ---
