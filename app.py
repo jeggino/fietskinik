@@ -338,14 +338,14 @@ Fietskliniek is een buurt-, sociaal betrokken fietswerkplaats. In de fietsenwerk
 - Als u meerdere fietsen hebt om te repareren moeten er meerdere afspraken worden gemaakt.
 - Klein probleem? Kom gewoon langs, zonder afspraak
 
-Onderdelen
+**Onderdelen**
 - Onderdelen nodig voor de reparatie moeten apart worden betaald.
 - We hebben nieuwe - en 2e hands onderdelen voor de halve prijs van een nieuwe.
 - Je mag je eigen onderdelen niet meenemen of gebruiken, tenzij anders afgesprokken
 - We begrijpen dat materiaal elders goedkoper zou zijn, maar anders kunnen we dit project niet blijven runnen.
 - We kiezen voor de voordeligste prijs-kwaliteit verhouding voor onze onderdelen
 
-Afspraak maken/annuleren
+**Afspraak maken/annuleren**
 - Vul onderstaand formulier in om te reserveren. Zodra u op Gegevens opslaan klikt, is uw
 reservering voltooid! U krijgt een bevestiging per mail
 - U kunt niet dezelfde dag reserveren waarop u langs wilt komen.
